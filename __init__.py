@@ -12,11 +12,11 @@ DESCRIPTION
 
 VERSION
 
-    2.9.4
+    2.10.0
 
 LATEST UPDATE
 
-    2018.11.7
+    2018.11.23
 
 '''
 
@@ -37,7 +37,7 @@ else:
     from .StructClass import C_ProteinStruct, C_ChainStruct, C_ResidueStruct, C_AtomStruct
 
 # Const
-from .StructConst import RES_NAME_THREE_TO_ONE_DICT, RES_NAME_ONE_TO_THREE_DICT
+from .StructConst import RESIDUE_NAME_THREE_TO_ONE_DICT, RESIDUE_NAME_ONE_TO_THREE_DICT
 
 # Struct Util
 from .StructUtil import Dumpl

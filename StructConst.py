@@ -11,7 +11,7 @@
 # Dict: Transform Residue Name From 3 Words => 1 Word
 ################################################################################
 
-RES_NAME_THREE_TO_ONE_DICT = {
+RESIDUE_NAME_THREE_TO_ONE_DICT = {
     'ALA': 'A',
     'ARG': 'R',
     'ASN': 'N',
@@ -39,7 +39,7 @@ RES_NAME_THREE_TO_ONE_DICT = {
 # Dict: Transform Residue Name From 1 Word => 3 Words
 ################################################################################
 
-RES_NAME_ONE_TO_THREE_DICT = {
+RESIDUE_NAME_ONE_TO_THREE_DICT = {
     'A': 'ALA',
     'R': 'ARG',
     'N': 'ASN',

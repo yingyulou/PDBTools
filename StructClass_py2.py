@@ -14,7 +14,7 @@ import logging
 
 # Import PDBTools
 from .MathUtil import Dis, CalcRotationMatrix, CalcDihedralAngle
-from .StructConst import RES_NAME_THREE_TO_ONE_DICT
+from .StructConst import RESIDUE_NAME_THREE_TO_ONE_DICT
 
 ################################################################################
 # Struct Class Base
@@ -26,6 +26,12 @@ class __C_StructBase(object):
 
     @abstractmethod
     def Copy(self):
+
+        raise NotImplementedError
+
+
+    @abstractmethod
+    def Dumps(self):
 
         raise NotImplementedError
 
@@ -46,6 +52,30 @@ class __C_StructBase(object):
 ################################################################################
 
 class __C_NotAtomStructBase(__C_StructBase):
+
+    @abstractmethod
+    def GetResidues(self):
+
+        raise NotImplementedError
+
+
+    @abstractmethod
+    def GetAtoms(self):
+
+        raise NotImplementedError
+
+
+    @abstractmethod
+    def IGetResidues(self):
+
+        raise NotImplementedError
+
+
+    @abstractmethod
+    def IGetAtoms(self):
+
+        raise NotImplementedError
+
 
     def __iter__(self):
 
@@ -76,7 +106,7 @@ class __C_NotAtomStructBase(__C_StructBase):
     @property
     def seq(self):
 
-        return ''.join([RES_NAME_THREE_TO_ONE_DICT[resObj.name] for resObj in self.IGetResidues()])
+        return ''.join([RESIDUE_NAME_THREE_TO_ONE_DICT[resObj.name] for resObj in self.IGetResidues()])
 
 
     def Append(self, *addObjTuple):
@@ -318,12 +348,6 @@ class C_ResidueStruct(__C_NotAtomStructBase, __C_NotProteinStructBase):
         self.num, self.ins = completeNumList
 
 
-    @property
-    def seq(self):
-
-        return RES_NAME_THREE_TO_ONE_DICT[self.name]
-
-
     def Copy(self):
 
         copyResObj = C_ResidueStruct(self.name, self.num, self.ins)
@@ -336,9 +360,19 @@ class C_ResidueStruct(__C_NotAtomStructBase, __C_NotProteinStructBase):
         return copyResObj
 
 
+    def GetResidues(self):
+
+        return [self]
+
+
     def GetAtoms(self):
 
         return list(self.sub)
+
+
+    def IGetResidues(self):
+
+        yield self
 
 
     def IGetAtoms(self):
