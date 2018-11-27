@@ -288,8 +288,8 @@ Atom：每检测到一个新的ATOM行都会创建一个Atom对象
 
 * 三字符、一字符氨基酸名的相互转换
 StructConst中定义了两个哈希表常量，其键值对相反。分别对应于20种α-氨基酸的三字符
-与一字符名称，可用于两种名称之间的相互转换。这两个全局变量可通过PDBTools.RES_NAME_THREE_TO_ONE_DICT
-与PDBTools.RES_NAME_ONE_TO_THREE_DICT访问到。
+与一字符名称，可用于两种名称之间的相互转换。这两个全局变量可通过PDBTools.RESIDUE_NAME_THREE_TO_ONE_DICT
+与PDBTools.RESIDUE_NAME_ONE_TO_THREE_DICT
 
 * MODEL关键词
 解析时不会关注含有多个MODEL的PDB。除ATOM以外的任何关键词都将被忽略。
