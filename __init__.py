@@ -12,11 +12,11 @@ DESCRIPTION
 
 VERSION
 
-    2.10.0
+    2.12.0
 
 LATEST UPDATE
 
-    2018.11.23
+    2018.12.19
 
 '''
 
@@ -24,7 +24,7 @@ LATEST UPDATE
 import six
 
 # Parser API
-from .PDBParser import Load
+from .PDBParser import Load, LoadModel
 
 # Math Util
 from .MathUtil import Dis, Norm, CalcVectorAngle, CalcRotationMatrix, \
