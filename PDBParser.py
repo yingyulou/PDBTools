@@ -8,16 +8,12 @@
 '''
 
 # Import Python Lib
-import six
 from os.path import splitext, basename
 from re import compile
 from numpy import array
 
 # Import PDBTools
-if six.PY2:
-    from .StructClass_py2 import C_ProteinStruct, C_ChainStruct, C_ResidueStruct, C_AtomStruct
-else:
-    from .StructClass import C_ProteinStruct, C_ChainStruct, C_ResidueStruct, C_AtomStruct
+from .StructClass import C_ProteinStruct, C_ChainStruct, C_ResidueStruct, C_AtomStruct
 
 # Global Variable Define
 CONST_H_RE = compile(r'\d*H')
@@ -48,6 +44,7 @@ def Load(pdbFileName, parseHBool = False):
                 continue
 
             atomNum           = int(line[6:11])
+            atomInsertChar    = line[16].strip()
             residueName       = line[17:20].strip()
             chainName         = line[21].strip()
             residueNum        = int(line[22:26])
@@ -65,7 +62,7 @@ def Load(pdbFileName, parseHBool = False):
                 lastResNum, lastResName, lastResInsertChar = residueNum, residueName, residueInsertChar
                 residueStructObj = C_ResidueStruct(residueName, residueNum, residueInsertChar, chainStructObj)
 
-            C_AtomStruct(atomName, atomNum, atomCoordArray, atomFollowingInfo, residueStructObj)
+            C_AtomStruct(atomName, atomNum, atomCoordArray, atomInsertChar, atomFollowingInfo, residueStructObj)
 
     return proteinStructObj
 
@@ -104,6 +101,7 @@ def LoadModel(pdbFileName, parseHBool = False):
                 continue
 
             atomNum           = int(line[6:11])
+            atomInsertChar    = line[16].strip()
             residueName       = line[17:20].strip()
             chainName         = line[21].strip()
             residueNum        = int(line[22:26])
@@ -121,6 +119,6 @@ def LoadModel(pdbFileName, parseHBool = False):
                 lastResNum, lastResName, lastResInsertChar = residueNum, residueName, residueInsertChar
                 residueStructObj = C_ResidueStruct(residueName, residueNum, residueInsertChar, chainStructObj)
 
-            C_AtomStruct(atomName, atomNum, atomCoordArray, atomFollowingInfo, residueStructObj)
+            C_AtomStruct(atomName, atomNum, atomCoordArray, atomInsertChar, atomFollowingInfo, residueStructObj)
 
     return proteinStructObjList

@@ -12,16 +12,13 @@ DESCRIPTION
 
 VERSION
 
-    2.12.0
+    2.12.4
 
 LATEST UPDATE
 
-    2018.12.19
+    2019.1.4
 
 '''
-
-# Six
-import six
 
 # Parser API
 from .PDBParser import Load, LoadModel
@@ -31,13 +28,10 @@ from .MathUtil import Dis, Norm, CalcVectorAngle, CalcRotationMatrix, \
     CalcRotationMatrixByTwoVector, CalcDihedralAngle, CalcSuperimposeRotationMatrix
 
 # Struct Class
-if six.PY2:
-    from .StructClass_py2 import C_ProteinStruct, C_ChainStruct, C_ResidueStruct, C_AtomStruct
-else:
-    from .StructClass import C_ProteinStruct, C_ChainStruct, C_ResidueStruct, C_AtomStruct
+from .StructClass import C_ProteinStruct, C_ChainStruct, C_ResidueStruct, C_AtomStruct
 
 # Const
 from .StructConst import RESIDUE_NAME_THREE_TO_ONE_DICT, RESIDUE_NAME_ONE_TO_THREE_DICT
 
 # Struct Util
-from .StructUtil import Dumpl
+from .StructUtil import Dumpl, DumpFastal

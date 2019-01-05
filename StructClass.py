@@ -4,46 +4,23 @@
 '''
     StructClass
     ===========
-        Four struct class (Protein, Chain, Residue, Atom) define in Python 3.
+        Four struct class (Protein, Chain, Residue, Atom) define.
 '''
 
 # Import Python Lib
-from abc import ABC, abstractmethod
+import six
+from abc import abstractmethod
 from numpy import array
 import logging
 
 # Import PDBTools
+if six.PY2:
+    from .StructBaseClass_py2 import __C_StructBase
+else:
+    from .StructBaseClass_py3 import __C_StructBase
+
 from .MathUtil import Dis, CalcRotationMatrix, CalcDihedralAngle
 from .StructConst import RESIDUE_NAME_THREE_TO_ONE_DICT
-
-################################################################################
-# Struct Class Base
-################################################################################
-
-class __C_StructBase(ABC):
-
-    @abstractmethod
-    def Copy(self):
-
-        raise NotImplementedError
-
-
-    @abstractmethod
-    def Dumps(self):
-
-        raise NotImplementedError
-
-
-    def __bool__(self):
-
-        return True
-
-
-    def Dump(self, dumpFileName, fileMode = 'w'):
-
-        with open(dumpFileName, fileMode) as fo:
-            fo.write(self.Dumps())
-
 
 ################################################################################
 # Not Atom Struct Class Base
@@ -58,13 +35,13 @@ class __C_NotAtomStructBase(__C_StructBase):
 
 
     @abstractmethod
-    def GetAtoms(self):
+    def IGetResidues(self):
 
         raise NotImplementedError
 
 
     @abstractmethod
-    def IGetResidues(self):
+    def GetAtoms(self):
 
         raise NotImplementedError
 
@@ -98,13 +75,58 @@ class __C_NotAtomStructBase(__C_StructBase):
     @property
     def center(self):
 
-        return array([atomObj.coord for atomObj in self.IGetAtoms()]).mean(0)
+        return self.GetAtomsCoord().mean(0)
 
 
     @property
     def seq(self):
 
         return ''.join([RESIDUE_NAME_THREE_TO_ONE_DICT[resObj.name] for resObj in self.IGetResidues()])
+
+
+    @property
+    def fasta(self):
+
+        return '>%s\n%s\n' % (self.name, self.seq)
+
+
+    def Dumps(self):
+
+        return ''.join([atomObj.Dumps() for atomObj in self.IGetAtoms()])
+
+
+    def DumpFasta(self, fastaFileName, fileMode = 'w'):
+
+        with open(fastaFileName, fileMode) as fo:
+            fo.write(self.fasta)
+
+
+    def MoveCenter(self):
+
+        centerCoord = self.center
+
+        for atomObj in self.IGetAtoms():
+            atomObj.coord -= centerCoord
+
+        return self
+
+
+    def RenumResidues(self, startNum = 1):
+
+        for residueObj in self.IGetResidues():
+            residueObj.compNum = (startNum, '')
+            startNum += 1
+
+        return self
+
+
+    def RenumAtoms(self, startNum = 1):
+
+        for atomObj in self.IGetAtoms():
+            atomObj.num = startNum
+            startNum += 1
+
+        return self
 
 
     def Append(self, *addObjTuple):
@@ -156,21 +178,6 @@ class __C_NotAtomStructBase(__C_StructBase):
             if atomObj.name in atomNameList])
 
 
-    def Dumps(self):
-
-        return ''.join([subStructObj.Dumps() for subStructObj in self.sub])
-
-
-    def MoveCenter(self):
-
-        centerCoord = array([atomObj.coord for atomObj in self.IGetAtoms()]).mean(0)
-
-        for atomObj in self.IGetAtoms():
-            atomObj.coord -= centerCoord
-
-        return self
-
-
 ################################################################################
 # Not Protein Struct Class Base
 ################################################################################
@@ -199,7 +206,7 @@ class C_ProteinStruct(__C_NotAtomStructBase):
     def __init__(self, proteinID = ''):
 
         self.name = proteinID
-        self.sub = []
+        self.sub  = []
 
 
     def __repr__(self):
@@ -257,9 +264,9 @@ class C_ChainStruct(__C_NotAtomStructBase, __C_NotProteinStructBase):
 
     def __init__(self, chainName = '', owner = None):
 
-        self.name = chainName
+        self.name  = chainName
         self.owner = owner
-        self.sub = []
+        self.sub   = []
 
         if owner:
             owner.sub.append(self)
@@ -317,11 +324,11 @@ class C_ResidueStruct(__C_NotAtomStructBase, __C_NotProteinStructBase):
 
     def __init__(self, residueName = '', residueNum = 0, residueInsertChar = '', owner = None):
 
-        self.name = residueName
-        self.num = residueNum
-        self.ins = residueInsertChar
+        self.name  = residueName
+        self.num   = residueNum
+        self.ins   = residueInsertChar
         self.owner = owner
-        self.sub = []
+        self.sub   = []
 
         if owner:
             owner.sub.append(self)
@@ -505,16 +512,17 @@ class C_ResidueStruct(__C_NotAtomStructBase, __C_NotProteinStructBase):
 
 class C_AtomStruct(__C_NotProteinStructBase):
 
-    __slots__ = ('name', 'num', 'coord', 'following', 'owner')
+    __slots__ = ('name', 'num', 'coord', 'ins', 'following', 'owner')
 
     def __init__(self, atomName = '', atomNum = 0, atomCoordArray = array([0., 0., 0.]),
-        atomFollowingInfo = '', owner = None):
+        atomInsertChar = '', atomFollowingInfo = '', owner = None):
 
-        self.name = atomName
-        self.num = atomNum
-        self.coord = atomCoordArray
+        self.name      = atomName
+        self.num       = atomNum
+        self.coord     = atomCoordArray
+        self.ins       = atomInsertChar
         self.following = atomFollowingInfo
-        self.owner = owner
+        self.owner     = owner
 
         if owner:
             owner.sub.append(self)
@@ -522,8 +530,8 @@ class C_AtomStruct(__C_NotProteinStructBase):
 
     def __repr__(self):
 
-        return '<Atom object: %d %s %s, at 0x%X>' % (
-            self.num, self.name, str(self.coord), id(self))
+        return '<Atom object: %d %s %s %s, at 0x%X>' % (
+            self.num, self.name, self.ins, str(self.coord), id(self))
 
     __str__ = __repr__
 
@@ -535,7 +543,7 @@ class C_AtomStruct(__C_NotProteinStructBase):
 
     def Copy(self):
 
-        return C_AtomStruct(self.name, self.num, self.coord.copy(), self.following)
+        return C_AtomStruct(self.name, self.num, self.coord.copy(), self.ins, self.following)
 
 
     def Dumps(self):
@@ -559,7 +567,7 @@ class C_AtomStruct(__C_NotProteinStructBase):
         else:
             atomName = ' %-3s' % self.name
 
-        return 'ATOM  %5d %s %3s %1s%4d%1s   %8.3f%8.3f%8.3f%-26s\n' % (
-            self.num, atomName, residueName, chainName, residueNum, residueInsertChar,
+        return 'ATOM  %5d %s%1s%3s %1s%4d%1s   %8.3f%8.3f%8.3f%-26s\n' % (
+            self.num, atomName, self.ins, residueName, chainName, residueNum, residueInsertChar,
             self.coord[0], self.coord[1], self.coord[2],
             self.following.rstrip('\n'))

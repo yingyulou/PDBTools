@@ -1,0 +1,36 @@
+PDBTools更新日志
+
+2018.12.23, version 2.12.0
+==========================
+1. 重构StructClass与StructClass_py2，将抽象基类__C_StructBase的定义模块单独分离
+为StructBaseClass_py2与StructBaseClass_py3，其他继承类定义统一归入StructClass文件
+
+2. [PDBParser] 增加LoadModel解析器函数，用于解析含有多个MODEL的PDB
+
+3. [README] 增加README中对上述修改的描述
+
+
+2018.12.29, version 2.12.2
+==========================
+1. [StructClass] 为C_ResidueStruct类增加fasta属性，用于生成默认格式的fasta文件
+样式字符串（readonly property属性）
+
+2. [StructClass] 为__C_NotAtomStructBase非原子抽象基类增加DumpFasta方法，用于fasta
+文件的输出
+
+3. [StructUtil] 增加DumpFastal函数，用于将包含多个结构对象的list输出成一个fasta
+文件
+
+4. [README] 增加README中对上述修改的描述
+
+
+2019.1.4, version 2.12.4
+========================
+1. [StructClass, PDBParser] 为C_AtomStruct类增加了ins属性，用于存储转变位置指示符。
+同时修改了C_AtomStruct类的__slots__、__init__、__repr__、__str__、Copy、Dumps方法，
+以及PDBParser中的Load、LoadModel函数，以支持该属性
+
+2. [StructClass] 为__C_NotAtomStructBase类增加RenumResidues与RenumAtoms方法，分别
+用于对残基和原子进行重编号
+
+3. [README] 增加README中对上述修改的描述

@@ -16,3 +16,14 @@ def Dumpl(structObjList, dumpFileName, fileMode = 'w'):
     with open(dumpFileName, fileMode) as fo:
         for structObj in structObjList:
             fo.write(structObj.Dumps())
+
+
+################################################################################
+# Dump Struct Object List To Fasta File
+################################################################################
+
+def DumpFastal(structObjList, dumpFileName, fileMode = 'w'):
+
+    with open(dumpFileName, fileMode) as fo:
+        for structObj in structObjList:
+            fo.write(structObj.fasta)
