@@ -191,7 +191,7 @@ C_AtomStruct实例化得到。四个类在实例化时的所有参数均可选�
 PDBTools.C_ProteinStruct(proteinID = '')
 PDBTools.C_ChainStruct(chainName = '', owner = None)
 PDBTools.C_ResidueStruct(residueName = '', residueNum = 0, residueInsertChar = '', owner = None)
-PDBTools.C_AtomStruct(atomName = '', atomNum = 0, atomCoordArray = np.array([0., 0., 0.]), atomFollowingInfo = '', owner = None)
+PDBTools.C_AtomStruct(atomName = '', atomNum = 0, atomCoordArray = np.array([0., 0., 0.]), atomInsertChar = '', atomFollowingInfo = '', owner = None)
 
 除Protein层级外，其余层级的最后一个参数均可指定为一个当前层级的owner对象，如果
 这样做，则当前实例化得到的新对象将自动与其owner产生关联（当前对象加入owner对象
