@@ -11,7 +11,7 @@
 from abc import ABC, abstractmethod
 
 ################################################################################
-# Struct Class Base
+# Struct Class Base (Python 3)
 ################################################################################
 
 class __C_StructBase(ABC):
