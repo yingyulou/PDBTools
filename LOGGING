@@ -1,7 +1,7 @@
 PDBTools更新日志
 
-2018.12.23, version 2.12.0
-==========================
+version 2.12.0
+==============
 1. 重构StructClass与StructClass_py2，将抽象基类__C_StructBase的定义模块单独分离
 为StructBaseClass_py2与StructBaseClass_py3，其他继承类定义统一归入StructClass文件
 
@@ -10,8 +10,8 @@ PDBTools更新日志
 3. [README] 增加README中对上述修改的描述
 
 
-2018.12.29, version 2.12.2
-==========================
+version 2.12.2
+==============
 1. [StructClass] 为C_ResidueStruct类增加fasta属性，用于生成默认格式的fasta文件
 样式字符串（readonly property属性）
 
@@ -24,8 +24,8 @@ PDBTools更新日志
 4. [README] 增加README中对上述修改的描述
 
 
-2019.1.4, version 2.12.4
-========================
+version 2.12.4
+==============
 1. [StructClass, PDBParser] 为C_AtomStruct类增加了ins属性，用于存储转变位置指示符。
 同时修改了C_AtomStruct类的__slots__、__init__、__repr__、__str__、Copy、Dumps方法，
 以及PDBParser中的Load、LoadModel函数，以支持该属性
@@ -34,3 +34,31 @@ PDBTools更新日志
 用于对残基和原子进行重编号
 
 3. [README] 增加README中对上述修改的描述
+
+
+version 2.14.0
+==============
+1. [StructClass, StructConst] 为C_ResidueStruct类增加方法：CalcSCDihedralAngle，
+CalcSCRotationMatrixByDeltaAngle，CalcSCRotationMatrixByTargetAngle，
+GetSCRotationAtomObj，RotateSCDihedralAngleByDeltaAngle，RotateSCDihedralAngleByTargetAngle，
+同时，为StructConst增加常量_RESIDUE_SIDECHAIN_ROTATION_ATOMS_NAME_DICT，用于残基
+侧链的旋转调整
+
+2. [StructClass] C_ResidueStruct类的CalcBBRotationMatrix，GetRotationAtomObj，
+ModifyBBDihedralAngleByDeltaAngle，ModifyBBDihedralAngle方法，
+分别更名为：CalcBBRotationMatrixByTargetAngle，GetBBRotationAtomObj，
+ModifyBBDihedralAngleByDeltaAngle，RotateBBDihedralAngleByTargetAngle
+
+3. [StructClass, StructBaseClass] 类：__C_StructBase，__C_NotAtomStructBase，
+__C_NotProteinStructBase，C_ProteinStruct, C_ChainStruct, C_ResidueStruct,
+C_AtomStruct分别更名为：__StructBase，__NotAtomStructBase，__NotProteinStructBase，
+Protein，Chain，Residue，Atom
+
+4. [README] 增加README中对上述修改的描述
+
+
+version 2.14.2
+==============
+1. [StructClass] 将Atom类的following属性拆分为四个属性：occ，tempF，ele，e
+
+2. [README] 增加README中对上述修改的描述

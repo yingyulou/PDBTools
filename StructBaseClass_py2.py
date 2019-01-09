@@ -14,7 +14,7 @@ from abc import ABCMeta, abstractmethod
 # Struct Class Base (Python 2)
 ################################################################################
 
-class __C_StructBase(object):
+class __StructBase(object):
 
     __metaclass__ = ABCMeta
 

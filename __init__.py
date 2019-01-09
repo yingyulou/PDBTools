@@ -12,15 +12,15 @@ DESCRIPTION
 
 VERSION
 
-    2.12.4
+    2.14.2
 
 LATEST UPDATE
 
-    2019.1.4
+    2019.1.9
 
 '''
 
-# Parser API
+# Parser
 from .PDBParser import Load, LoadModel
 
 # Math Util
@@ -28,7 +28,7 @@ from .MathUtil import Dis, Norm, CalcVectorAngle, CalcRotationMatrix, \
     CalcRotationMatrixByTwoVector, CalcDihedralAngle, CalcSuperimposeRotationMatrix
 
 # Struct Class
-from .StructClass import C_ProteinStruct, C_ChainStruct, C_ResidueStruct, C_AtomStruct
+from .StructClass import Protein, Chain, Residue, Atom
 
 # Const
 from .StructConst import RESIDUE_NAME_THREE_TO_ONE_DICT, RESIDUE_NAME_ONE_TO_THREE_DICT

@@ -14,7 +14,7 @@ from abc import ABC, abstractmethod
 # Struct Class Base (Python 3)
 ################################################################################
 
-class __C_StructBase(ABC):
+class __StructBase(ABC):
 
     @abstractmethod
     def Copy(self):

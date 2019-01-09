@@ -15,18 +15,18 @@ import logging
 
 # Import PDBTools
 if six.PY2:
-    from .StructBaseClass_py2 import __C_StructBase
+    from .StructBaseClass_py2 import __StructBase
 else:
-    from .StructBaseClass_py3 import __C_StructBase
+    from .StructBaseClass_py3 import __StructBase
 
 from .MathUtil import Dis, CalcRotationMatrix, CalcDihedralAngle
-from .StructConst import RESIDUE_NAME_THREE_TO_ONE_DICT
+from .StructConst import RESIDUE_NAME_THREE_TO_ONE_DICT, _RESIDUE_SIDECHAIN_ROTATION_ATOMS_NAME_DICT
 
 ################################################################################
 # Not Atom Struct Class Base
 ################################################################################
 
-class __C_NotAtomStructBase(__C_StructBase):
+class __NotAtomStructBase(__StructBase):
 
     @abstractmethod
     def GetResidues(self):
@@ -95,9 +95,9 @@ class __C_NotAtomStructBase(__C_StructBase):
         return ''.join([atomObj.Dumps() for atomObj in self.IGetAtoms()])
 
 
-    def DumpFasta(self, fastaFileName, fileMode = 'w'):
+    def DumpFasta(self, dumpFileName, fileMode = 'w'):
 
-        with open(fastaFileName, fileMode) as fo:
+        with open(dumpFileName, fileMode) as fo:
             fo.write(self.fasta)
 
 
@@ -129,12 +129,12 @@ class __C_NotAtomStructBase(__C_StructBase):
         return self
 
 
-    def Append(self, *addObjTuple):
+    def Append(self, *appendObjTuple):
 
-        for addObj in addObjTuple:
-            copyAddObj = addObj.Copy()
-            copyAddObj.owner = self
-            self.sub.append(copyAddObj)
+        for appendObj in appendObjTuple:
+            copyAppendObj = appendObj.Copy()
+            copyAppendObj.owner = self
+            self.sub.append(copyAppendObj)
 
 
     def Insert(self, idxNum, *insertObjTuple):
@@ -182,7 +182,7 @@ class __C_NotAtomStructBase(__C_StructBase):
 # Not Protein Struct Class Base
 ################################################################################
 
-class __C_NotProteinStructBase(__C_StructBase):
+class __NotProteinStructBase(__StructBase):
 
     @property
     def idx(self):
@@ -199,7 +199,7 @@ class __C_NotProteinStructBase(__C_StructBase):
 # Protein Struct Class
 ################################################################################
 
-class C_ProteinStruct(__C_NotAtomStructBase):
+class Protein(__NotAtomStructBase):
 
     __slots__ = ('name', 'sub')
 
@@ -218,14 +218,14 @@ class C_ProteinStruct(__C_NotAtomStructBase):
 
     def Copy(self):
 
-        copyProteinObj = C_ProteinStruct(self.name)
+        copyProObj = Protein(self.name)
 
         for chainObj in self.sub:
             copyChainObj = chainObj.Copy()
-            copyChainObj.owner = copyProteinObj
-            copyProteinObj.sub.append(copyChainObj)
+            copyChainObj.owner = copyProObj
+            copyProObj.sub.append(copyChainObj)
 
-        return copyProteinObj
+        return copyProObj
 
 
     def GetResidues(self):
@@ -258,7 +258,7 @@ class C_ProteinStruct(__C_NotAtomStructBase):
 # Chain Struct Class
 ################################################################################
 
-class C_ChainStruct(__C_NotAtomStructBase, __C_NotProteinStructBase):
+class Chain(__NotAtomStructBase, __NotProteinStructBase):
 
     __slots__ = ('name', 'owner', 'sub')
 
@@ -281,7 +281,7 @@ class C_ChainStruct(__C_NotAtomStructBase, __C_NotProteinStructBase):
 
     def Copy(self):
 
-        copyChainObj = C_ChainStruct(self.name)
+        copyChainObj = Chain(self.name)
 
         for resObj in self.sub:
             copyResObj = resObj.Copy()
@@ -318,15 +318,15 @@ class C_ChainStruct(__C_NotAtomStructBase, __C_NotProteinStructBase):
 # Residue Struct Class
 ################################################################################
 
-class C_ResidueStruct(__C_NotAtomStructBase, __C_NotProteinStructBase):
+class Residue(__NotAtomStructBase, __NotProteinStructBase):
 
     __slots__ = ('name', 'num', 'ins', 'owner', 'sub')
 
-    def __init__(self, residueName = '', residueNum = 0, residueInsertChar = '', owner = None):
+    def __init__(self, resName = '', resNum = 0, resIns = '', owner = None):
 
-        self.name  = residueName
-        self.num   = residueNum
-        self.ins   = residueInsertChar
+        self.name  = resName
+        self.num   = resNum
+        self.ins   = resIns
         self.owner = owner
         self.sub   = []
 
@@ -355,7 +355,7 @@ class C_ResidueStruct(__C_NotAtomStructBase, __C_NotProteinStructBase):
 
     def Copy(self):
 
-        copyResObj = C_ResidueStruct(self.name, self.num, self.ins)
+        copyResObj = Residue(self.name, self.num, self.ins)
 
         for atomObj in self.sub:
             copyAtomObj = atomObj.Copy()
@@ -390,7 +390,7 @@ class C_ResidueStruct(__C_NotAtomStructBase, __C_NotProteinStructBase):
 
         ownerChainObj = self.owner
         indexInOwner = ownerChainObj.sub.index(self)
-        resCoordDict = {atomObj.name: atomObj.coord for atomObj in self}
+        atomObjDict = {atomObj.name: atomObj for atomObj in self}
 
         if dihedralSideStr.lower() in ['l', 'phi']:
 
@@ -403,7 +403,8 @@ class C_ResidueStruct(__C_NotAtomStructBase, __C_NotProteinStructBase):
                     leftCCoord = atomObj.coord
                     break
 
-            return CalcDihedralAngle(leftCCoord, resCoordDict['N'], resCoordDict['CA'], resCoordDict['C'])
+            bbDihedralAngle = CalcDihedralAngle(
+                leftCCoord, atomObjDict['N'].coord, atomObjDict['CA'].coord, atomObjDict['C'].coord)
 
         else:
 
@@ -416,29 +417,32 @@ class C_ResidueStruct(__C_NotAtomStructBase, __C_NotProteinStructBase):
                     rightNCoord = atomObj.coord
                     break
 
-            return CalcDihedralAngle(resCoordDict['N'], resCoordDict['CA'], resCoordDict['C'], rightNCoord)
+            bbDihedralAngle = CalcDihedralAngle(
+                atomObjDict['N'].coord, atomObjDict['CA'].coord, atomObjDict['C'].coord, rightNCoord)
+
+        return bbDihedralAngle
 
 
-    def CalcBBRotationMatrixByDeltaAngle(self, dihedralSideStr, modifySideStr, rotationAngle):
+    def CalcBBRotationMatrixByDeltaAngle(self, dihedralSideStr, modifySideStr, deltaAngle):
 
-        atomCoordDict = {atomObj.name: atomObj.coord for atomObj in self}
+        atomObjDict = {atomObj.name: atomObj for atomObj in self}
 
         if dihedralSideStr.lower() in ['l', 'phi']:
-            moveCoord    = atomCoordDict['N']
-            rotationAxis = atomCoordDict['CA'] - moveCoord
+            moveCoord    = atomObjDict['N'].coord
+            rotationAxis = atomObjDict['CA'].coord - moveCoord
         else:
-            moveCoord    = atomCoordDict['CA']
-            rotationAxis = atomCoordDict['C'] - moveCoord
+            moveCoord    = atomObjDict['CA'].coord
+            rotationAxis = atomObjDict['C'].coord - moveCoord
 
         if modifySideStr.lower() in ['l', 'n']:
-            rotationAngle = -rotationAngle
+            deltaAngle = -deltaAngle
 
-        rotationMatrix = CalcRotationMatrix(rotationAxis, rotationAngle)
+        rotationMatrix = CalcRotationMatrix(rotationAxis, deltaAngle)
 
         return moveCoord, rotationMatrix
 
 
-    def CalcBBRotationMatrix(self, dihedralSideStr, modifySideStr, targetAngle):
+    def CalcBBRotationMatrixByTargetAngle(self, dihedralSideStr, modifySideStr, targetAngle):
 
         sourceAngle = self.CalcBBDihedralAngle(dihedralSideStr)
 
@@ -454,7 +458,7 @@ class C_ResidueStruct(__C_NotAtomStructBase, __C_NotProteinStructBase):
         return moveCoord, rotationMatrix
 
 
-    def GetRotationAtomObj(self, dihedralSideStr, modifySideStr):
+    def GetBBRotationAtomObj(self, dihedralSideStr, modifySideStr):
 
         rotationAtomObjList = []
         ownerChainObj = self.owner
@@ -484,23 +488,85 @@ class C_ResidueStruct(__C_NotAtomStructBase, __C_NotProteinStructBase):
         return rotationAtomObjList
 
 
-    def ModifyBBDihedralAngleByDeltaAngle(self, dihedralSideStr, modifySideStr, rotationAngle):
+    def RotateBBDihedralAngleByDeltaAngle(self, dihedralSideStr, modifySideStr, deltaAngle):
 
         moveCoord, rotationMatrix = self.CalcBBRotationMatrixByDeltaAngle(
-            dihedralSideStr, modifySideStr, rotationAngle)
+            dihedralSideStr, modifySideStr, deltaAngle)
 
-        rotationAtomObjList = self.GetRotationAtomObj(dihedralSideStr, modifySideStr)
+        rotationAtomObjList = self.GetBBRotationAtomObj(dihedralSideStr, modifySideStr)
 
         for atomObj in rotationAtomObjList:
             atomObj.coord = (atomObj.coord - moveCoord).dot(rotationMatrix) + moveCoord
 
 
-    def ModifyBBDihedralAngle(self, dihedralSideStr, modifySideStr, targetAngle):
+    def RotateBBDihedralAngleByTargetAngle(self, dihedralSideStr, modifySideStr, targetAngle):
 
-        moveCoord, rotationMatrix = self.CalcBBRotationMatrix(
+        moveCoord, rotationMatrix = self.CalcBBRotationMatrixByTargetAngle(
             dihedralSideStr, modifySideStr, targetAngle)
 
-        rotationAtomObjList = self.GetRotationAtomObj(dihedralSideStr, modifySideStr)
+        rotationAtomObjList = self.GetBBRotationAtomObj(dihedralSideStr, modifySideStr)
+
+        for atomObj in rotationAtomObjList:
+            atomObj.coord = (atomObj.coord - moveCoord).dot(rotationMatrix) + moveCoord
+
+
+    def CalcSCDihedralAngle(self, dihedralIdx):
+
+        atomObjDict = {atomObj.name: atomObj for atomObj in self.sub}
+        atomNameA, atomNameB, atomNameC, atomNameD = \
+            _RESIDUE_SIDECHAIN_ROTATION_ATOMS_NAME_DICT[self.name][dihedralIdx][:4]
+
+        scDihedralAngle = CalcDihedralAngle(
+            atomObjDict[atomNameA].coord, atomObjDict[atomNameB].coord,
+            atomObjDict[atomNameC].coord, atomObjDict[atomNameD].coord,
+        )
+
+        return scDihedralAngle
+
+
+    def CalcSCRotationMatrixByDeltaAngle(self, dihedralIdx, deltaAngle):
+
+        atomObjDict = {atomObj.name: atomObj for atomObj in self.sub}
+        atomNameA, atomNameB = \
+            _RESIDUE_SIDECHAIN_ROTATION_ATOMS_NAME_DICT[self.name][dihedralIdx][1:3]
+
+        moveCoord = atomObjDict[atomNameA].coord
+        rotationAxis = atomObjDict[atomNameB].coord - atomObjDict[atomNameA].coord
+
+        rotationMatrix = CalcRotationMatrix(rotationAxis, deltaAngle)
+
+        return moveCoord, rotationMatrix
+
+
+    def CalcSCRotationMatrixByTargetAngle(self, dihedralIdx, targetAngle):
+
+        moveCoord, rotationMatrix = self.CalcSCRotationMatrixByDeltaAngle(
+            dihedralIdx, targetAngle - self.CalcSCDihedralAngle(dihedralIdx))
+
+        return moveCoord, rotationMatrix
+
+
+    def GetSCRotationAtomObj(self, dihedralIdx):
+
+        rotationAtomNameSet = set(_RESIDUE_SIDECHAIN_ROTATION_ATOMS_NAME_DICT[self.name][dihedralIdx][3:])
+        rotationAtomObjList = [atomObj for atomObj in self.sub if atomObj.name in rotationAtomNameSet]
+
+        return rotationAtomObjList
+
+
+    def RotateSCDihedralAngleByDeltaAngle(self, dihedralIdx, deltaAngle):
+
+        moveCoord, rotationMatrix = self.CalcSCRotationMatrixByDeltaAngle(dihedralIdx, deltaAngle)
+        rotationAtomObjList = self.GetSCRotationAtomObj(dihedralIdx)
+
+        for atomObj in rotationAtomObjList:
+            atomObj.coord = (atomObj.coord - moveCoord).dot(rotationMatrix) + moveCoord
+
+
+    def RotateSCDihedralAngleByTargetAngle(self, dihedralIdx, targetAngle):
+
+        moveCoord, rotationMatrix = self.CalcSCRotationMatrixByTargetAngle(dihedralIdx, targetAngle)
+        rotationAtomObjList = self.GetSCRotationAtomObj(dihedralIdx)
 
         for atomObj in rotationAtomObjList:
             atomObj.coord = (atomObj.coord - moveCoord).dot(rotationMatrix) + moveCoord
@@ -510,19 +576,23 @@ class C_ResidueStruct(__C_NotAtomStructBase, __C_NotProteinStructBase):
 # Atom Struct Class
 ################################################################################
 
-class C_AtomStruct(__C_NotProteinStructBase):
+class Atom(__NotProteinStructBase):
 
-    __slots__ = ('name', 'num', 'coord', 'ins', 'following', 'owner')
+    __slots__ = ('name', 'num', 'coord', 'ins', 'occ', 'tempF', 'ele', 'e', 'owner')
 
-    def __init__(self, atomName = '', atomNum = 0, atomCoordArray = array([0., 0., 0.]),
-        atomInsertChar = '', atomFollowingInfo = '', owner = None):
+    def __init__(self, atomName = '', atomNum = 0, atomCoord = array([0., 0., 0.]),
+        atomIns = '', atomOccupancy = 1., atomTempFactor = 0., atomElement = '',
+        atomCharge = '', owner = None):
 
-        self.name      = atomName
-        self.num       = atomNum
-        self.coord     = atomCoordArray
-        self.ins       = atomInsertChar
-        self.following = atomFollowingInfo
-        self.owner     = owner
+        self.name  = atomName
+        self.num   = atomNum
+        self.coord = atomCoord
+        self.ins   = atomIns
+        self.occ   = atomOccupancy
+        self.tempF = atomTempFactor
+        self.ele   = atomElement
+        self.e     = atomCharge
+        self.owner = owner
 
         if owner:
             owner.sub.append(self)
@@ -543,31 +613,32 @@ class C_AtomStruct(__C_NotProteinStructBase):
 
     def Copy(self):
 
-        return C_AtomStruct(self.name, self.num, self.coord.copy(), self.ins, self.following)
+        return Atom(self.name, self.num, self.coord.copy(), self.ins, self.occ,
+            self.tempF, self.ele, self.e)
 
 
     def Dumps(self):
 
-        ownerResidueObj = self.owner
+        ownerResObj = self.owner
 
-        if ownerResidueObj:
+        if ownerResObj:
 
-            residueName = ownerResidueObj.name
-            residueNum  = ownerResidueObj.num
-            residueInsertChar = ownerResidueObj.ins
+            resName = ownerResObj.name
+            resNum  = ownerResObj.num
+            resIns  = ownerResObj.ins
 
-            ownerChainObj = ownerResidueObj.owner
+            ownerChainObj = ownerResObj.owner
             chainName = ownerChainObj.name if ownerChainObj else ''
 
         else:
-            residueName, residueNum, residueInsertChar, chainName = '', 0, '', ''
+            resName, resNum, resIns, chainName = '', 0, '', ''
 
         if self.name[0].isdigit() or len(self.name) == 4:
             atomName = '%-4s' % self.name
         else:
             atomName = ' %-3s' % self.name
 
-        return 'ATOM  %5d %s%1s%3s %1s%4d%1s   %8.3f%8.3f%8.3f%-26s\n' % (
-            self.num, atomName, self.ins, residueName, chainName, residueNum, residueInsertChar,
-            self.coord[0], self.coord[1], self.coord[2],
-            self.following.rstrip('\n'))
+        return 'ATOM  %5d %s%1s%3s %1s%4d%1s   %8.3f%8.3f%8.3f%6.2f%6.2f          %2s%2s\n' % (
+            self.num, atomName, self.ins, resName, chainName, resNum, resIns,
+            self.coord[0], self.coord[1], self.coord[2], self.occ, self.tempF,
+            self.ele, self.e)
