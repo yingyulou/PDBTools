@@ -11,7 +11,6 @@
 import six
 from abc import abstractmethod
 from numpy import array
-import logging
 
 # Import PDBTools
 if six.PY2:
@@ -190,6 +189,26 @@ class __NotProteinStructBase(__StructBase):
         return self.owner.sub.index(self)
 
 
+    @property
+    def pre(self):
+
+        subObjList = self.owner.sub
+        selfIdx = subObjList.index(self)
+
+        if selfIdx == 0:
+            raise IndexError
+        else:
+            return subObjList[selfIdx - 1]
+
+
+    @property
+    def next(self):
+
+        subObjList = self.owner.sub
+
+        return subObjList[subObjList.index(self) + 1]
+
+
     def Remove(self):
 
         self.owner.sub.remove(self)
@@ -353,6 +372,18 @@ class Residue(__NotAtomStructBase, __NotProteinStructBase):
         self.num, self.ins = completeNumList
 
 
+    @property
+    def atomsDict(self):
+
+        return {atomObj.name: atomObj for atomObj in self.sub}
+
+
+    @property
+    def coordDict(self):
+
+        return {atomObj.name: atomObj.coord for atomObj in self.sub}
+
+
     def Copy(self):
 
         copyResObj = Residue(self.name, self.num, self.ins)
@@ -392,33 +423,28 @@ class Residue(__NotAtomStructBase, __NotProteinStructBase):
         indexInOwner = ownerChainObj.sub.index(self)
         atomObjDict = {atomObj.name: atomObj for atomObj in self}
 
-        if dihedralSideStr.lower() in ['l', 'phi']:
+        if dihedralSideStr.lower() in {'l', 'phi'}:
 
             if indexInOwner == 0:
-                logging.warning('First residue of the chain can not calc left dihedral. Will return None.')
-                return None
+                raise IndexError
 
             for atomObj in ownerChainObj[indexInOwner - 1]:
                 if atomObj.name == 'C':
                     leftCCoord = atomObj.coord
                     break
 
-            bbDihedralAngle = CalcDihedralAngle(
-                leftCCoord, atomObjDict['N'].coord, atomObjDict['CA'].coord, atomObjDict['C'].coord)
+            bbDihedralAngle = CalcDihedralAngle(leftCCoord, atomObjDict['N'].coord,
+                atomObjDict['CA'].coord, atomObjDict['C'].coord)
 
         else:
-
-            if self == ownerChainObj[-1]:
-                logging.warning('Last residue of the chain can not calc right dihedral. Will return None.')
-                return None
 
             for atomObj in ownerChainObj[indexInOwner + 1]:
                 if atomObj.name == 'N':
                     rightNCoord = atomObj.coord
                     break
 
-            bbDihedralAngle = CalcDihedralAngle(
-                atomObjDict['N'].coord, atomObjDict['CA'].coord, atomObjDict['C'].coord, rightNCoord)
+            bbDihedralAngle = CalcDihedralAngle(atomObjDict['N'].coord,
+                atomObjDict['CA'].coord, atomObjDict['C'].coord, rightNCoord)
 
         return bbDihedralAngle
 
@@ -427,14 +453,14 @@ class Residue(__NotAtomStructBase, __NotProteinStructBase):
 
         atomObjDict = {atomObj.name: atomObj for atomObj in self}
 
-        if dihedralSideStr.lower() in ['l', 'phi']:
+        if dihedralSideStr.lower() in {'l', 'phi'}:
             moveCoord    = atomObjDict['N'].coord
             rotationAxis = atomObjDict['CA'].coord - moveCoord
         else:
             moveCoord    = atomObjDict['CA'].coord
             rotationAxis = atomObjDict['C'].coord - moveCoord
 
-        if modifySideStr.lower() in ['l', 'n']:
+        if modifySideStr.lower() in {'l', 'n'}:
             deltaAngle = -deltaAngle
 
         rotationMatrix = CalcRotationMatrix(rotationAxis, deltaAngle)
@@ -444,16 +470,9 @@ class Residue(__NotAtomStructBase, __NotProteinStructBase):
 
     def CalcBBRotationMatrixByTargetAngle(self, dihedralSideStr, modifySideStr, targetAngle):
 
-        sourceAngle = self.CalcBBDihedralAngle(dihedralSideStr)
-
-        if sourceAngle == None:
-            logging.warning('Can not calc rotation matrix becase the backbone dihedral is None. Will return None.')
-            return None
-
-        rotationAngle = targetAngle - sourceAngle
-
         moveCoord, rotationMatrix = self.CalcBBRotationMatrixByDeltaAngle(
-            dihedralSideStr, modifySideStr, rotationAngle)
+            dihedralSideStr, modifySideStr,
+            targetAngle - self.CalcBBDihedralAngle(dihedralSideStr))
 
         return moveCoord, rotationMatrix
 
@@ -464,23 +483,23 @@ class Residue(__NotAtomStructBase, __NotProteinStructBase):
         ownerChainObj = self.owner
         indexInOwner = ownerChainObj.sub.index(self)
 
-        if modifySideStr.lower() in ['l', 'n']:
+        if modifySideStr.lower() in {'l', 'n'}:
 
             for resObj in ownerChainObj.sub[0:indexInOwner]:
                 rotationAtomObjList.extend(resObj.sub)
 
-            if dihedralSideStr.lower() not in ['l', 'phi']:
+            if dihedralSideStr.lower() not in {'l', 'phi'}:
                 rotationAtomObjList.extend([atomObj
-                    for atomObj in self if atomObj.name not in ['CA', 'C', 'O', 'OXT']])
+                    for atomObj in self if atomObj.name not in {'CA', 'C', 'O', 'OXT'}])
 
         else:
 
-            if dihedralSideStr.lower() in ['l', 'phi']:
+            if dihedralSideStr.lower() in {'l', 'phi'}:
                 rotationAtomObjList.extend([atomObj
-                    for atomObj in self if atomObj.name not in ['N', 'CA']])
+                    for atomObj in self if atomObj.name not in {'N', 'CA'}])
             else:
                 rotationAtomObjList.extend([atomObj
-                    for atomObj in self if atomObj.name in ['O', 'OXT']])
+                    for atomObj in self if atomObj.name in {'O', 'OXT'}])
 
             for resObj in ownerChainObj.sub[indexInOwner + 1:]:
                 rotationAtomObjList.extend(resObj.sub)
