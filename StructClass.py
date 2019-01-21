@@ -150,14 +150,14 @@ class __NotAtomStructBase(__StructBase):
 
     def FilterAtoms(self, atomName = 'CA', *atomNameTuple):
 
-        atomNameList = set([atomName] + list(atomNameTuple))
+        atomNameList = set((atomName,) + atomNameTuple)
 
         return [atomObj for atomObj in self.IGetAtoms() if atomObj.name in atomNameList]
 
 
     def IFilterAtoms(self, atomName = 'CA', *atomNameTuple):
 
-        atomNameList = set([atomName] + list(atomNameTuple))
+        atomNameList = set((atomName,) + atomNameTuple)
 
         for atomObj in self.IGetAtoms():
             if atomObj.name in atomNameList:
@@ -171,7 +171,7 @@ class __NotAtomStructBase(__StructBase):
 
     def FilterAtomsCoord(self, atomName = 'CA', *atomNameTuple):
 
-        atomNameList = set([atomName] + list(atomNameTuple))
+        atomNameList = set((atomName,) + atomNameTuple)
 
         return array([atomObj.coord for atomObj in self.IGetAtoms()
             if atomObj.name in atomNameList])
@@ -619,8 +619,8 @@ class Atom(__NotProteinStructBase):
 
     def __repr__(self):
 
-        return '<Atom object: %d %s %s %s, at 0x%X>' % (
-            self.num, self.name, self.ins, str(self.coord), id(self))
+        return '<Atom object: %d %s %s, at 0x%X>' % (
+            self.num, self.name, str(self.coord), id(self))
 
     __str__ = __repr__
 
