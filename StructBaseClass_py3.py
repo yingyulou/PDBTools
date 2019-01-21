@@ -28,11 +28,6 @@ class __StructBase(ABC):
         raise NotImplementedError
 
 
-    def __bool__(self):
-
-        return True
-
-
     def Dump(self, dumpFileName, fileMode = 'w'):
 
         with open(dumpFileName, fileMode) as fo:

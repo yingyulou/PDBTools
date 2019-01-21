@@ -30,11 +30,6 @@ class __StructBase(object):
         raise NotImplementedError
 
 
-    def __nonzero__(self):
-
-        return True
-
-
     def Dump(self, dumpFileName, fileMode = 'w'):
 
         with open(dumpFileName, fileMode) as fo:

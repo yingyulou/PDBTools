@@ -10,17 +10,13 @@ DESCRIPTION
     structure modify.
     See README file for full description and examples.
 
-AUTHOR
-
-    Yingyulou
-
 VERSION
 
-    2.14.4
+    2.14.6
 
 LATEST UPDATE
 
-    2019.1.15
+    2019.1.21
 
 '''
 

@@ -24,14 +24,14 @@ CONST_H_RE = compile(r'\d*H')
 
 def Load(pdbFileName, parseHBool = False):
 
+    proObj = Protein(splitext(basename(pdbFileName))[0])
+
+    lastChainName = None
+    lastResName   = None
+    lastResNum    = None
+    lastResIns    = None
+
     with open(pdbFileName) as f:
-
-        proObj = Protein(splitext(basename(pdbFileName))[0])
-
-        lastChainName = None
-        lastResName   = None
-        lastResNum    = None
-        lastResIns    = None
 
         for line in f:
 
@@ -77,10 +77,16 @@ def Load(pdbFileName, parseHBool = False):
 
 def LoadModel(pdbFileName, parseHBool = False):
 
-    with open(pdbFileName) as f:
+    pdbIdStr   = splitext(basename(pdbFileName))[0]
+    proObj     = Protein('%s_model_0' % pdbIdStr)
+    proObjList = [proObj]
 
-        proObjList = []
-        pdbIdStr = splitext(basename(pdbFileName))[0]
+    lastChainName = None
+    lastResName   = None
+    lastResNum    = None
+    lastResIns    = None
+
+    with open(pdbFileName) as f:
 
         for line in f:
 
@@ -128,5 +134,8 @@ def LoadModel(pdbFileName, parseHBool = False):
 
             Atom(atomName, atomNum, atomCoord, atomIns, atomOccupancy, atomTempFactor,
                 atomElement, atomCharge, resObj)
+
+    if not proObjList[0]:
+        proObjList.pop(0)
 
     return proObjList

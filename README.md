@@ -28,8 +28,10 @@ PDB文件在PDBTools中将被解析为4个层级：Protein -> Chain -> Residue -> Atom
 * LoadModel(pdbFileName, parseHBool = False)
 
 将含有MODEL关键词的PDB解析为Protein对象list，这些蛋白对象的name属性将被设置为：
-PDB文件名 + '_model_' + MODEL编号。请注意，不含MODEL关键词的PDB文件不可使用
-LoadModel函数进行解析。参数同Load函数。
+PDB文件名 + '_model_' + MODEL编号。参数同Load函数。
+
+如果PDB中不含MODEL关键词，或第一个MODEL关键词之前仍具有ATOM行，则这部分原子将被
+解析至返回值list的第一个元素中，其name属性将被设置为：PDB文件名 + '_model_0'。
 
 返回值：
     Protein对象list
@@ -188,7 +190,10 @@ len(structObj)
 布尔值
 ------
 
-任何层级对象的布尔值都为True。
+非Atom对象的布尔值依据其是否为空结构进行判定。即：如果self.sub为[]，则布尔值为
+False，否则为True。
+
+Atom对象的布尔值一定为True。
 
 
 欧氏距离
@@ -515,7 +520,8 @@ Load函数在解析时会跳过任何非ATOM开头的行。而LoadModel函数会跳过任何非ATOM或MODEL
     Atom：每检测到一个新的ATOM行都会创建一个Atom对象。
 
 * LoadModel函数：
-    Protein：每次检测到MODEL关键词时，会创建一个新的蛋白对象。
+    Protein：解析开始前，以及每次检测到MODEL关键词时，会创建一个新的蛋白对象。
+如果解析开始前创建的蛋白对象为空，则会在最后的返回值中被删除。
     Chain：解析开始时，每次检测到链名发生变化时（从上一个ATOM行到当前行），以及
 一个新的Model出现时，都会创建新的链对象。
     Residue：解析开始时，每次检测到残基名、残基编号或残基插入字符三者之一发生变

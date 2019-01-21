@@ -287,7 +287,7 @@ class Chain(__NotAtomStructBase, __NotProteinStructBase):
         self.owner = owner
         self.sub   = []
 
-        if owner:
+        if owner != None:
             owner.sub.append(self)
 
 
@@ -349,7 +349,7 @@ class Residue(__NotAtomStructBase, __NotProteinStructBase):
         self.owner = owner
         self.sub   = []
 
-        if owner:
+        if owner != None:
             owner.sub.append(self)
 
 
@@ -613,7 +613,7 @@ class Atom(__NotProteinStructBase):
         self.e     = atomCharge
         self.owner = owner
 
-        if owner:
+        if owner != None:
             owner.sub.append(self)
 
 
@@ -640,14 +640,14 @@ class Atom(__NotProteinStructBase):
 
         ownerResObj = self.owner
 
-        if ownerResObj:
+        if ownerResObj != None:
 
             resName = ownerResObj.name
             resNum  = ownerResObj.num
             resIns  = ownerResObj.ins
 
             ownerChainObj = ownerResObj.owner
-            chainName = ownerChainObj.name if ownerChainObj else ''
+            chainName = ownerChainObj.name if ownerChainObj != None else ''
 
         else:
             resName, resNum, resIns, chainName = '', 0, '', ''
