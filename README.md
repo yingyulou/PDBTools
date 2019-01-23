@@ -270,15 +270,13 @@ Residue：不包含插入字符的残基序号
 Atom：原子序号
 
 
-* ins, str
-
-此属性对于不同的层级含义不同：
-Residue：残基插入字符
-Atom：原子转变位置指示符
-
-
 Residue独有属性
 ---------------
+
+* ins, str
+
+残基插入字符
+
 
 * compNum, str (特殊方式写)
 
@@ -307,12 +305,17 @@ Atom独有属性
 原子坐标
 
 
-* occ, float
+* alt, str
+
+备用位置指示
+
+
+* occ, str
 
 占有
 
 
-* tempF, float
+* tempF, str
 
 温度因子
 
@@ -322,7 +325,7 @@ Atom独有属性
 元素符号
 
 
-* e, str
+* chg, str
 
 电荷
 
@@ -464,17 +467,25 @@ Atom独有属性
     rotationAngle, float：旋转角
 
 
-* PDBTools.CalcRotationMatrixByTwoVector(coordA, coordB)
+* CalcRotationMatrixByTwoVector(coordA, coordB)
 
 计算从向量A旋转至向量B所需要的旋转矩阵。
 
 
-* PDBTools.CalcDihedralAngle(coordA, coordB, coordC, coordD)
+* CalcDihedralAngle(coordA, coordB, coordC, coordD)
 
-计算二面角。返回有符号角度（-pi ~ pi）
+计算二面角。返回有符号角度（-pi ~ pi）。
 
 
-* PDBTools.CalcSuperimposeRotationMatrix(sourceCoordArray, targetCoordArray)
+* CalcRMSD(coordArrayA, coordArrayB)
+
+计算RMSD。
+
+参数：
+    coordArrayA, coordArrayB, ndarray(N*3)：两组由三维坐标组成的等长二维数组
+
+
+* CalcSuperimposeRotationMatrix(sourceCoordArray, targetCoordArray)
 
 计算从sourceCoordArray到targetCoordArray的叠合旋转矩阵。
 

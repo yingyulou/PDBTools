@@ -121,6 +121,15 @@ def CalcDihedralAngle(coordA, coordB, coordC, coordD):
 
 
 ################################################################################
+# Calc RMSD (Root-mean-square Deviation)
+################################################################################
+
+def CalcRMSD(coordArrayA, coordArrayB):
+
+    return sqrt(((coordArrayA - coordArrayB)**2).sum() / len(coordArrayA))
+
+
+################################################################################
 # Calc Superimpose Rotation Matrix (Kabsch Algorithm)
 ################################################################################
 

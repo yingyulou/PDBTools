@@ -44,14 +44,14 @@ def Load(pdbFileName, parseHBool = False):
                 continue
 
             atomNum        = int(line[6:11])
-            atomIns        = line[16].strip()
+            atomAltLoc     = line[16].strip()
             resName        = line[17:20].strip()
             chainName      = line[21].strip()
             resNum         = int(line[22:26])
             resIns         = line[26].strip()
             atomCoord      = array((float(line[30:38]), float(line[38:46]), float(line[46:54])))
-            atomOccupancy  = float(line[54:60])
-            atomTempFactor = float(line[60:66])
+            atomOccupancy  = line[54:60].strip()
+            atomTempFactor = line[60:66].strip()
             atomElement    = line[76:78].strip()
             atomCharge     = line[78:80].strip()
 
@@ -65,8 +65,8 @@ def Load(pdbFileName, parseHBool = False):
                 lastResNum, lastResName, lastResIns = resNum, resName, resIns
                 resObj = Residue(resName, resNum, resIns, chainObj)
 
-            Atom(atomName, atomNum, atomCoord, atomIns, atomOccupancy, atomTempFactor,
-                atomElement, atomCharge, resObj)
+            Atom(atomName, atomNum, atomCoord, atomAltLoc, atomOccupancy,
+                atomTempFactor, atomElement, atomCharge, resObj)
 
     return proObj
 
@@ -111,14 +111,14 @@ def LoadModel(pdbFileName, parseHBool = False):
                 continue
 
             atomNum        = int(line[6:11])
-            atomIns        = line[16].strip()
+            atomAltLoc     = line[16].strip()
             resName        = line[17:20].strip()
             chainName      = line[21].strip()
             resNum         = int(line[22:26])
             resIns         = line[26].strip()
             atomCoord      = array((float(line[30:38]), float(line[38:46]), float(line[46:54])))
-            atomOccupancy  = float(line[54:60])
-            atomTempFactor = float(line[60:66])
+            atomOccupancy  = line[54:60].strip()
+            atomTempFactor = line[60:66].strip()
             atomElement    = line[76:78].strip()
             atomCharge     = line[78:80].strip()
 
@@ -132,8 +132,8 @@ def LoadModel(pdbFileName, parseHBool = False):
                 lastResNum, lastResName, lastResIns = resNum, resName, resIns
                 resObj = Residue(resName, resNum, resIns, chainObj)
 
-            Atom(atomName, atomNum, atomCoord, atomIns, atomOccupancy, atomTempFactor,
-                atomElement, atomCharge, resObj)
+            Atom(atomName, atomNum, atomCoord, atomAltLoc, atomOccupancy,
+                atomTempFactor, atomElement, atomCharge, resObj)
 
     if not proObjList[0]:
         proObjList.pop(0)

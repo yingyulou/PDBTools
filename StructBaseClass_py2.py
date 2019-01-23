@@ -4,7 +4,7 @@
 '''
     StructBaseClass
     ===============
-        Struct base class definem (in Python 2).
+        Struct base class define (in Python 2).
 '''
 
 # Import Python Lib

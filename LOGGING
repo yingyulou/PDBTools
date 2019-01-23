@@ -1,6 +1,17 @@
 PDBTools更新日志
 
-version 2.14.6
+Version 2.14.8
+==============
+
+1. [PDBParser, StructClass] 修改Load与LoadModel函数，将原子的occ和tempF属性解析
+类型由float修改至str。并修改Atom类的Dumps方法的格式字符串，以适用于新类型。
+
+2. [StructClass] Atom类的ins属性更名为alt，e属性更名为chg。
+
+3. [MathUtil] 增加CalcRMSD函数。
+
+
+Version 2.14.6
 ==============
 
 1. [StructBaseClass] 修改__StructBase中的布尔逻辑，去除原基类中__nonzero__与__bool__
@@ -10,7 +21,7 @@ version 2.14.6
 2. [PDBParser] 修改LoadModel函数，使其能够正确解析不含有MODEL关键词的PDB。
 
 
-version 2.14.4
+Version 2.14.4
 ==============
 
 1. [StructClass] 为__NotProteinStructBase类增加pre与next方法
@@ -21,13 +32,13 @@ version 2.14.4
 为IndexError
 
 
-version 2.14.2
+Version 2.14.2
 ==============
 
 1. [StructClass] 将Atom类的following属性拆分为四个属性：occ，tempF，ele，e
 
 
-version 2.14.0
+Version 2.14.0
 ==============
 
 1. [StructClass, StructConst] 为C_ResidueStruct类增加方法：CalcSCDihedralAngle，
@@ -47,7 +58,7 @@ C_AtomStruct分别更名为：__StructBase，__NotAtomStructBase，__NotProteinStructBas
 Protein，Chain，Residue，Atom
 
 
-version 2.12.4
+Version 2.12.4
 ==============
 
 1. [StructClass, PDBParser] 为C_AtomStruct类增加了ins属性，用于存储转变位置指示符。
@@ -58,7 +69,7 @@ version 2.12.4
 用于对残基和原子进行重编号
 
 
-version 2.12.2
+Version 2.12.2
 ==============
 
 1. [StructClass] 为C_ResidueStruct类增加fasta属性，用于生成默认格式的fasta文件
@@ -71,7 +82,7 @@ version 2.12.2
 文件
 
 
-version 2.12.0
+Version 2.12.0
 ==============
 
 1. 重构StructClass与StructClass_py2，将抽象基类__C_StructBase的定义模块单独分离

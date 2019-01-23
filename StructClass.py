@@ -597,20 +597,20 @@ class Residue(__NotAtomStructBase, __NotProteinStructBase):
 
 class Atom(__NotProteinStructBase):
 
-    __slots__ = ('name', 'num', 'coord', 'ins', 'occ', 'tempF', 'ele', 'e', 'owner')
+    __slots__ = ('name', 'num', 'coord', 'alt', 'occ', 'tempF', 'ele', 'chg', 'owner')
 
     def __init__(self, atomName = '', atomNum = 0, atomCoord = array([0., 0., 0.]),
-        atomIns = '', atomOccupancy = 1., atomTempFactor = 0., atomElement = '',
+        atomAltLoc = '', atomOccupancy = '', atomTempFactor = '', atomElement = '',
         atomCharge = '', owner = None):
 
         self.name  = atomName
         self.num   = atomNum
         self.coord = atomCoord
-        self.ins   = atomIns
+        self.alt   = atomAltLoc
         self.occ   = atomOccupancy
         self.tempF = atomTempFactor
         self.ele   = atomElement
-        self.e     = atomCharge
+        self.chg   = atomCharge
         self.owner = owner
 
         if owner != None:
@@ -632,8 +632,8 @@ class Atom(__NotProteinStructBase):
 
     def Copy(self):
 
-        return Atom(self.name, self.num, self.coord.copy(), self.ins, self.occ,
-            self.tempF, self.ele, self.e)
+        return Atom(self.name, self.num, self.coord.copy(), self.alt, self.occ,
+            self.tempF, self.ele, self.chg)
 
 
     def Dumps(self):
@@ -657,7 +657,7 @@ class Atom(__NotProteinStructBase):
         else:
             atomName = ' %-3s' % self.name
 
-        return 'ATOM  %5d %s%1s%3s %1s%4d%1s   %8.3f%8.3f%8.3f%6.2f%6.2f          %2s%2s\n' % (
-            self.num, atomName, self.ins, resName, chainName, resNum, resIns,
+        return 'ATOM  %5d %s%1s%3s %1s%4d%1s   %8.3f%8.3f%8.3f%6s%6s          %2s%2s\n' % (
+            self.num, atomName, self.alt, resName, chainName, resNum, resIns,
             self.coord[0], self.coord[1], self.coord[2], self.occ, self.tempF,
-            self.ele, self.e)
+            self.ele, self.chg)
