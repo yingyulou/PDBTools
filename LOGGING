@@ -1,5 +1,11 @@
 PDBTools更新日志
 
+Version 2.14.10
+===============
+
+1. [StructClass] 为Protein类增加chainDict属性
+
+
 Version 2.14.8
 ==============
 

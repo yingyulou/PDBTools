@@ -235,6 +235,12 @@ class Protein(__NotAtomStructBase):
     __str__ = __repr__
 
 
+    @property
+    def chainDict(self):
+
+        return {chainObj.name: chainObj for chainObj in self.sub}
+
+
     def Copy(self):
 
         copyProObj = Protein(self.name)
@@ -373,7 +379,7 @@ class Residue(__NotAtomStructBase, __NotProteinStructBase):
 
 
     @property
-    def atomsDict(self):
+    def atomDict(self):
 
         return {atomObj.name: atomObj for atomObj in self.sub}
 

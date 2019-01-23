@@ -270,6 +270,14 @@ Residue：不包含插入字符的残基序号
 Atom：原子序号
 
 
+Protein独有属性
+---------------
+
+* chainDict, dict (只读)
+
+由self的所有链对象组成的链名-链对象哈希表
+
+
 Residue独有属性
 ---------------
 
@@ -287,7 +295,7 @@ Residue独有属性
 resObj.compNum = (1, '')
 
 
-* atomsDict, dict (只读)
+* atomDict, dict (只读)
 
 由self的所有原子组成的原子名-原子对象哈希表
 
