@@ -397,7 +397,7 @@ Atom独有属性
 
 * RotateBBDihedralAngleByTargetAngle(self, dihedralSideStr, modifySideStr, targetAngle)
 
-以目标角度作为参数旋转主链。参数同CalcBBRotationMatrixByTargetAngle方法。
+以目标角度作为参数直接旋转主链。参数同CalcBBRotationMatrixByTargetAngle方法。
 
 
 侧链二面角

@@ -56,7 +56,7 @@ GetSCRotationAtomObj，RotateSCDihedralAngleByDeltaAngle，RotateSCDihedralAngleBy
 2. [StructClass] C_ResidueStruct类的CalcBBRotationMatrix，GetRotationAtomObj，
 ModifyBBDihedralAngleByDeltaAngle，ModifyBBDihedralAngle方法，
 分别更名为：CalcBBRotationMatrixByTargetAngle，GetBBRotationAtomObj，
-ModifyBBDihedralAngleByDeltaAngle，RotateBBDihedralAngleByTargetAngle
+RotateBBDihedralAngleByDeltaAngle，RotateBBDihedralAngleByTargetAngle
 
 3. [StructClass, StructBaseClass] 类：__C_StructBase，__C_NotAtomStructBase，
 __C_NotProteinStructBase，C_ProteinStruct, C_ChainStruct, C_ResidueStruct,
