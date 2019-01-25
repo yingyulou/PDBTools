@@ -1,5 +1,11 @@
 PDBTools更新日志
 
+Version 2.14.12
+===============
+
+1. [StructClass] chainDict，atomDict属性均更名为subDict
+
+
 Version 2.14.10
 ===============
 
@@ -10,11 +16,11 @@ Version 2.14.8
 ==============
 
 1. [PDBParser, StructClass] 修改Load与LoadModel函数，将原子的occ和tempF属性解析
-类型由float修改至str。并修改Atom类的Dumps方法的格式字符串，以适用于新类型。
+类型由float修改至str。并修改Atom类的Dumps方法的格式字符串，以适用于新类型
 
-2. [StructClass] Atom类的ins属性更名为alt，e属性更名为chg。
+2. [StructClass] Atom类的ins属性更名为alt，e属性更名为chg
 
-3. [MathUtil] 增加CalcRMSD函数。
+3. [MathUtil] 增加CalcRMSD函数
 
 
 Version 2.14.6
@@ -22,9 +28,9 @@ Version 2.14.6
 
 1. [StructBaseClass] 修改__StructBase中的布尔逻辑，去除原基类中__nonzero__与__bool__
 方法，将布尔值的判定托管至__len__函数。这样做将使得空结构对象（sub属性长度为0）
-的布尔值为False，而Atom对象由于失去了所有布尔值判定方法，其布尔值一定为True。
+的布尔值为False，而Atom对象由于失去了所有布尔值判定方法，其布尔值一定为True
 
-2. [PDBParser] 修改LoadModel函数，使其能够正确解析不含有MODEL关键词的PDB。
+2. [PDBParser] 修改LoadModel函数，使其能够正确解析不含有MODEL关键词的PDB
 
 
 Version 2.14.4

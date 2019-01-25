@@ -236,7 +236,7 @@ class Protein(__NotAtomStructBase):
 
 
     @property
-    def chainDict(self):
+    def subDict(self):
 
         return {chainObj.name: chainObj for chainObj in self.sub}
 
@@ -379,7 +379,7 @@ class Residue(__NotAtomStructBase, __NotProteinStructBase):
 
 
     @property
-    def atomDict(self):
+    def subDict(self):
 
         return {atomObj.name: atomObj for atomObj in self.sub}
 

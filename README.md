@@ -260,6 +260,16 @@ self的前/后一个同层级对象
 如果self没有前/后一个对象，则抛出IndexError
 
 
+Protein与Residue层级公有属性
+----------------------------
+
+* subDict, dict (只读)
+
+此属性对于不同的层级含义不同：
+Protein：由self的所有链对象组成的链名-链对象哈希表
+Residue：由self的所有原子对象组成的原子名-原子对象哈希表
+
+
 Residue与Atom层级公有属性
 -------------------------
 
@@ -268,14 +278,6 @@ Residue与Atom层级公有属性
 此属性对于不同的层级含义不同：
 Residue：不包含插入字符的残基序号
 Atom：原子序号
-
-
-Protein独有属性
----------------
-
-* chainDict, dict (只读)
-
-由self的所有链对象组成的链名-链对象哈希表
 
 
 Residue独有属性
@@ -293,11 +295,6 @@ Residue独有属性
 此属性通过(num, ins)二元组进行赋值：
 
 resObj.compNum = (1, '')
-
-
-* atomDict, dict (只读)
-
-由self的所有原子组成的原子名-原子对象哈希表
 
 
 * coordDict, dict (只读)
