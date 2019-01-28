@@ -254,28 +254,25 @@ self的父级对象
 self在其owner的sub中的索引值
 
 
-* pre, next (只读)
+* pre, next, obj (只读)
 
 self的前/后一个同层级对象
 如果self没有前/后一个对象，则抛出IndexError
 
 
-Protein与Residue层级公有属性
-----------------------------
+其他公有属性
+------------
 
 * subDict, dict (只读)
 
-此属性对于不同的层级含义不同：
+Protein与Residue层级公有，含义分别为：
 Protein：由self的所有链对象组成的链名-链对象哈希表
 Residue：由self的所有原子对象组成的原子名-原子对象哈希表
 
 
-Residue与Atom层级公有属性
--------------------------
-
 * num, int
 
-此属性对于不同的层级含义不同：
+Residue与Atom层级公有，含义分别为：
 Residue：不包含插入字符的残基序号
 Atom：原子序号
 
@@ -312,7 +309,7 @@ Atom独有属性
 
 * alt, str
 
-备用位置指示
+备用位置指示符
 
 
 * occ, str
