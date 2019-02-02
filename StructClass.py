@@ -107,8 +107,6 @@ class __NotAtomStructBase(__StructBase):
         for atomObj in self.IGetAtoms():
             atomObj.coord -= centerCoord
 
-        return self
-
 
     def RenumResidues(self, startNum = 1):
 
@@ -116,16 +114,12 @@ class __NotAtomStructBase(__StructBase):
             residueObj.compNum = (startNum, '')
             startNum += 1
 
-        return self
-
 
     def RenumAtoms(self, startNum = 1):
 
         for atomObj in self.IGetAtoms():
             atomObj.num = startNum
             startNum += 1
-
-        return self
 
 
     def Append(self, *appendObjTuple):

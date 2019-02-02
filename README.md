@@ -134,7 +134,7 @@ structObj.FilterAtoms('N', 'CA', 'C')  # 筛选骨架原子
 
 * MoveCenter(self)
 
-将self的center平移至原点，返回self。
+整体平移self，使得self的几何中心平移至原点。
 
 
 * Append(self, *appendObjTuple), Insert(self, idxNum, *insertObjTuple)
