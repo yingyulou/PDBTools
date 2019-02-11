@@ -12,11 +12,11 @@ DESCRIPTION
 
 VERSION
 
-    2.15.0
+    2.16.0
 
 LATEST UPDATE
 
-    2019.2.2
+    2019.2.11
 
 '''
 
@@ -31,7 +31,8 @@ from .MathUtil import Dis, Norm, CalcVectorAngle, CalcRotationMatrix, \
 from .StructClass import Protein, Chain, Residue, Atom
 
 # Const
-from .StructConst import RESIDUE_NAME_THREE_TO_ONE_DICT, RESIDUE_NAME_ONE_TO_THREE_DICT
+from .StructConst import DIH, SIDE, RESIDUE_NAME_THREE_TO_ONE_DICT, \
+    RESIDUE_NAME_ONE_TO_THREE_DICT
 
 # Struct Util
 from .StructUtil import Dumpl, DumpFastal

@@ -344,23 +344,21 @@ Atom独有属性
 对主链进行操作时请注意：最靠近N端与C端的两个残基分别无法进行二面角PHI与PSI的计算
 或调整（因为这两个二面角不存在）。如果出现上述情况，则抛出IndexError。
 
-* CalcBBDihedralAngle(self, dihedralSideStr)
+* CalcBBDihedralAngle(self, dihedralEnum)
 
 计算主链二面角。
 
 参数：
-    dihedralSideStr, str：主链二面角种类。l/phi表示PHI，其他字符串表示PSI，不区
-分大小写。
+    dihedralEnum, DIH：主链二面角种类。DIH.PHI或DIH.L表示Phi，DIH.PSI或DIH.R表示Psi。
 
 
-* CalcBBRotationMatrixByDeltaAngle(self, dihedralSideStr, modifySideStr, deltaAngle)
+* CalcBBRotationMatrixByDeltaAngle(self, dihedralEnum, sideEnum, deltaAngle)
 
 以旋转角度作为参数，计算主链旋转矩阵。
 
 参数：
-    dihedralSideStr：同CalcBBDihedralAngle方法。
-    modifySideStr, str：转动侧。l/n表示对N端进行旋转，其余字符串表示对C端进行旋
-转，不区分大小写。
+    dihedralEnum, DIH：同CalcBBDihedralAngle方法。
+    sideEnum, SIDE：转动侧。SIDE.N或SIDE.L表示转动N端，SIDE.C或SIDE.R表示转动C端。
     deltaAngle, float：转动角度。
 
 返回值：
@@ -368,14 +366,14 @@ Atom独有属性
     rotationMatrix, ndarray(3*3)：旋转矩阵
 
 
-* CalcBBRotationMatrixByTargetAngle(self, dihedralSideStr, modifySideStr, targetAngle)
+* CalcBBRotationMatrixByTargetAngle(self, dihedralEnum, sideEnum, targetAngle)
 
 以目标角度作为参数，计算主链旋转矩阵。
 
 参数与返回值同CalcBBRotationMatrixByDeltaAngle方法。但targetAngle表示目标角度。
 
 
-* GetBBRotationAtomObj(self, dihedralSideStr, modifySideStr)
+* GetBBRotationAtomObj(self, dihedralEnum, sideEnum)
 
 获取以给定参数进行旋转时，所有需要旋转的原子对象。参数同CalcBBRotationMatrixByDeltaAngle
 方法。
@@ -384,12 +382,12 @@ Atom独有属性
     rotationAtomObjList, list：原子对象list
 
 
-* RotateBBDihedralAngleByDeltaAngle(self, dihedralSideStr, modifySideStr, deltaAngle)
+* RotateBBDihedralAngleByDeltaAngle(self, dihedralEnum, sideEnum, deltaAngle)
 
 以旋转角度作为参数直接旋转主链。参数同CalcBBRotationMatrixByDeltaAngle方法。
 
 
-* RotateBBDihedralAngleByTargetAngle(self, dihedralSideStr, modifySideStr, targetAngle)
+* RotateBBDihedralAngleByTargetAngle(self, dihedralEnum, sideEnum, targetAngle)
 
 以目标角度作为参数直接旋转主链。参数同CalcBBRotationMatrixByTargetAngle方法。
 
@@ -502,6 +500,16 @@ Atom独有属性
 
 常量
 ====
+
+* DIH
+
+枚举变量，表示主链二面角种类。
+
+
+* SIDE
+
+枚举变量，表示主链二面角旋转时的转动侧。
+
 
 * RESIDUE_NAME_THREE_TO_ONE_DICT, RESIDUE_NAME_ONE_TO_THREE_DICT
 

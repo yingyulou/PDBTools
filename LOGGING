@@ -1,5 +1,13 @@
 PDBTools更新日志
 
+Version 2.16.0
+==============
+
+1. [StructConst, StructClass] 为StructConst增加枚举变量DIH与SIDE，将所有“主链二
+面角种类”参数限定为DIH枚举变量中的值，将所有“主链二面角转动侧”参数限定为SIDE枚举
+变量中的值
+
+
 Version 2.15.0
 ==============
 
