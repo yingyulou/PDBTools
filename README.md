@@ -59,7 +59,7 @@ PDB文件名 + '_model_' + MODEL编号。参数同Load函数。
 Protein(proteinID = '')
 Chain(chainName = '', owner = None)
 Residue(resName = '', resNum = 0, resIns = '', owner = None)
-Atom(atomName = '', atomNum = 0, atomCoord = np.array([0., 0., 0.]), atomIns = '', atomFollowing = '', owner = None)
+Atom(atomName = '', atomNum = 0, atomCoord = array([0., 0., 0.]), atomAltLoc = '', atomOccupancy = '', atomTempFactor = '', atomElement = '', atomCharge = '', owner = None)
 
 当调用这些构造函数时，如果owner不为None，则构造函数将自动在owner与新结构对象之间
 建立从属关系。
