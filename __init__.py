@@ -12,11 +12,11 @@ DESCRIPTION
 
 VERSION
 
-    2.16.0
+    2.16.2
 
 LATEST UPDATE
 
-    2019.2.11
+    2019.2.19
 
 '''
 

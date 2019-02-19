@@ -78,7 +78,7 @@ def Load(pdbFileName, parseHBool = False):
 def LoadModel(pdbFileName, parseHBool = False):
 
     pdbIdStr   = splitext(basename(pdbFileName))[0]
-    proObj     = Protein('%s_model_0' % pdbIdStr)
+    proObj     = Protein(pdbIdStr)
     proObjList = [proObj]
 
     lastChainName = None
@@ -92,7 +92,7 @@ def LoadModel(pdbFileName, parseHBool = False):
 
             if line[:5] == 'MODEL':
 
-                proObj = Protein('%s_model_%s' % (pdbIdStr, line.split()[1]))
+                proObj = Protein('%s_MODEL_%s' % (pdbIdStr, line.split()[1]))
                 proObjList.append(proObj)
 
                 lastChainName = None

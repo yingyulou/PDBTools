@@ -1,5 +1,12 @@
 PDBTools更新日志
 
+Version 2.16.2
+==============
+
+1. [PDBParser] 修改LoadModel函数对于"PDBID_Model_0"的命名行为。原"PDBID_Model_0"
+命名行为修改为直接命名为"PDBID"
+
+
 Version 2.16.0
 ==============
 

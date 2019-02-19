@@ -28,10 +28,10 @@ PDB文件在PDBTools中将被解析为4个层级：Protein -> Chain -> Residue -> Atom
 * LoadModel(pdbFileName, parseHBool = False)
 
 将含有MODEL关键词的PDB解析为Protein对象list，这些蛋白对象的name属性将被设置为：
-PDB文件名 + '_model_' + MODEL编号。参数同Load函数。
+PDB文件名（不包含".pdb"）+ '_model_' + MODEL编号。参数同Load函数。
 
 如果PDB中不含MODEL关键词，或第一个MODEL关键词之前仍具有ATOM行，则这部分原子将被
-解析至返回值list的第一个元素中，其name属性将被设置为：PDB文件名 + '_model_0'。
+解析至返回值list的第一个元素中，其name属性将被设置为PDB文件名（不包含".pdb"）。
 
 返回值：
     Protein对象list
@@ -213,7 +213,7 @@ atomObjA - atomObjB
 * name, str
 
 此属性对于不同的层级含义不同：
-Protein：PDB文件名（不包含".pdb"扩展名）
+Protein：PDB文件名（不包含".pdb"）
 Chain：链名
 Residue：残基名
 Atom：原子名
