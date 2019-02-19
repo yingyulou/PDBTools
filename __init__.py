@@ -12,7 +12,7 @@ DESCRIPTION
 
 VERSION
 
-    2.16.2
+    2.16.4
 
 LATEST UPDATE
 
@@ -35,4 +35,4 @@ from .StructConst import DIH, SIDE, RESIDUE_NAME_THREE_TO_ONE_DICT, \
     RESIDUE_NAME_ONE_TO_THREE_DICT
 
 # Struct Util
-from .StructUtil import Dumpl, DumpFastal
+from .StructUtil import Dumpls, Dumpl, DumpFastals, DumpFastal

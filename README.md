@@ -47,9 +47,19 @@ PDB文件名（不包含".pdb"）+ '_model_' + MODEL编号。参数同Load函数。
     fileMode, str：文件句柄打开模式
 
 
+* Dumpls(structObjList)
+
+得到字符串形式的Dumpl函数输出内容。
+
+
 * DumpFastal(structObjList, dumpFileName, fileMode = 'w')
 
 将非Atom层级对象构成的list输出到Fasta文件。参数同Dumpl函数。
+
+
+* DumpFastals(structObjList)
+
+得到字符串形式的DumpFastal函数输出内容。
 
 
 * __init__

@@ -1,5 +1,11 @@
 PDBTools更新日志
 
+Version 2.16.4
+==============
+
+1. [StructUtil] 增加Dumpls和DumpFastals函数。
+
+
 Version 2.16.2
 ==============
 
