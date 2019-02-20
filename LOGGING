@@ -1,9 +1,11 @@
 PDBTools更新日志
 
-Version 2.16.4
-==============
+Version 3.0.0
+=============
 
-1. [StructUtil] 增加Dumpls和DumpFastals函数。
+1. [StructUtil] 增加Dumpls和DumpFastals函数
+
+2. [StructClass] 将StructBaseClass_py2，StructBaseClass_py3与StructClass合并
 
 
 Version 2.16.2

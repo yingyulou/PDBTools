@@ -4,23 +4,70 @@
 '''
     StructClass
     ===========
-        Four struct class (Protein, Chain, Residue, Atom) define.
+        All class define.
 '''
 
 # Import Python Lib
-import six
-from abc import abstractmethod
+import sys
 from numpy import array
 
 # Import PDBTools
-if six.PY2:
-    from .StructBaseClass_py2 import __StructBase
-else:
-    from .StructBaseClass_py3 import __StructBase
-
 from .MathUtil import Dis, CalcRotationMatrix, CalcDihedralAngle
 from .StructConst import DIH, SIDE, RESIDUE_NAME_THREE_TO_ONE_DICT, \
     _RESIDUE_SIDECHAIN_ROTATION_ATOMS_NAME_DICT
+
+################################################################################
+# Struct Base Class
+################################################################################
+
+if sys.version_info[0] == 3:
+
+    from abc import ABC, abstractmethod
+
+    class __StructBase(ABC):
+
+        @abstractmethod
+        def Copy(self):
+
+            raise NotImplementedError
+
+
+        @abstractmethod
+        def Dumps(self):
+
+            raise NotImplementedError
+
+
+        def Dump(self, dumpFileName, fileMode = 'w'):
+
+            with open(dumpFileName, fileMode) as fo:
+                fo.write(self.Dumps())
+
+else:
+
+    from abc import ABCMeta, abstractmethod
+
+    class __StructBase(object):
+
+        __metaclass__ = ABCMeta
+
+        @abstractmethod
+        def Copy(self):
+
+            raise NotImplementedError
+
+
+        @abstractmethod
+        def Dumps(self):
+
+            raise NotImplementedError
+
+
+        def Dump(self, dumpFileName, fileMode = 'w'):
+
+            with open(dumpFileName, fileMode) as fo:
+                fo.write(self.Dumps())
+
 
 ################################################################################
 # Not Atom Struct Class Base
