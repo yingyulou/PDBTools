@@ -577,8 +577,8 @@ class Residue(__NotAtomStructBase, __NotProteinStructBase):
             _RESIDUE_SIDECHAIN_ROTATION_ATOMS_NAME_DICT[self.name][dihedralIdx][:4]
 
         scDihedralAngle = CalcDihedralAngle(
-            atomObjDict[atomNameA], atomObjDict[atomNameB],
-            atomObjDict[atomNameC], atomObjDict[atomNameD],
+            coordDict[atomNameA], coordDict[atomNameB],
+            coordDict[atomNameC], coordDict[atomNameD],
         )
 
         return scDihedralAngle
@@ -590,8 +590,8 @@ class Residue(__NotAtomStructBase, __NotProteinStructBase):
         atomNameA, atomNameB = \
             _RESIDUE_SIDECHAIN_ROTATION_ATOMS_NAME_DICT[self.name][dihedralIdx][1:3]
 
-        moveCoord = atomObjDict[atomNameA]
-        rotationAxis = atomObjDict[atomNameB] - atomObjDict[atomNameA]
+        moveCoord = coordDict[atomNameA]
+        rotationAxis = coordDict[atomNameB] - coordDict[atomNameA]
 
         rotationMatrix = CalcRotationMatrix(rotationAxis, deltaAngle)
 
