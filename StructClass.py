@@ -4,7 +4,7 @@
 '''
     StructClass
     ===========
-        All class define.
+        Classes define.
 '''
 
 # Import Python Lib
