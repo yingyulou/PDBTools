@@ -1,177 +1,177 @@
 # PDBTools
 
-PDBÎÄ¼þ²ã¼¶»¯½âÎöÓë×ø±êÏßÐÔ´úÊýÔËËã¹¤¾ß¼¯¡£
+PDBæ–‡ä»¶å±‚çº§åŒ–è§£æžä¸Žåæ ‡çº¿æ€§ä»£æ•°è¿ç®—å·¥å…·é›†ã€‚
 
-PDBÎÄ¼þÔÚPDBToolsÖÐ½«±»½âÎöÎª4¸ö²ã¼¶£ºProtein -> Chain -> Residue -> Atom
+PDBæ–‡ä»¶åœ¨PDBToolsä¸­å°†è¢«è§£æžä¸º4ä¸ªå±‚çº§ï¼šProtein -> Chain -> Residue -> Atom
 
-Çë×¢Òâ£º±¾ÎÄµµÖÐËùÓÐµÄ¡°½Ç¶È¡±¾ùÖ¸»¡¶ÈÖÆ½Ç¶È£»ËùÓÐµÄ¡°Ðý×ª¾ØÕó¡±¾ùÖ¸ÓÒ³ËÐý×ª¾ØÕó¡£
+è¯·æ³¨æ„ï¼šæœ¬æ–‡æ¡£ä¸­æ‰€æœ‰çš„â€œè§’åº¦â€å‡æŒ‡å¼§åº¦åˆ¶è§’åº¦ï¼›æ‰€æœ‰çš„â€œæ—‹è½¬çŸ©é˜µâ€å‡æŒ‡å³ä¹˜æ—‹è½¬çŸ©é˜µã€‚
 
 
-»ù±¾º¯ÊýÓë·½·¨
+åŸºæœ¬å‡½æ•°ä¸Žæ–¹æ³•
 ==============
 
-»ù±¾º¯Êý
+åŸºæœ¬å‡½æ•°
 --------
 
 * Load(pdbFileName, parseHBool = False)
 
-½«PDBÎÄ¼þ½âÎöÎªProtein¶ÔÏó¡£
+å°†PDBæ–‡ä»¶è§£æžä¸ºProteinå¯¹è±¡ã€‚
 
-²ÎÊý£º
-    pdbFileName, str£ºPDBÎÄ¼þÃû
-    parseHBool, bool£ºÊÇ·ñ¿ªÆôÇâÔ­×Ó½âÎö
+å‚æ•°ï¼š
+    pdbFileName, strï¼šPDBæ–‡ä»¶å
+    parseHBool, boolï¼šæ˜¯å¦å¼€å¯æ°¢åŽŸå­è§£æž
 
-·µ»ØÖµ£º
-    Protein¶ÔÏó
+è¿”å›žå€¼ï¼š
+    Proteinå¯¹è±¡
 
 
 * LoadModel(pdbFileName, parseHBool = False)
 
-½«º¬ÓÐMODEL¹Ø¼ü´ÊµÄPDB½âÎöÎªProtein¶ÔÏólist£¬ÕâÐ©µ°°×¶ÔÏóµÄnameÊôÐÔ½«±»ÉèÖÃÎª£º
-PDBÎÄ¼þÃû£¨²»°üº¬".pdb"£©+ '_model_' + MODEL±àºÅ¡£²ÎÊýÍ¬Loadº¯Êý¡£
+å°†å«æœ‰MODELå…³é”®è¯çš„PDBè§£æžä¸ºProteinå¯¹è±¡listï¼Œè¿™äº›è›‹ç™½å¯¹è±¡çš„nameå±žæ€§å°†è¢«è®¾ç½®ä¸ºï¼š
+PDBæ–‡ä»¶åï¼ˆä¸åŒ…å«".pdb"ï¼‰+ '_MODEL_' + MODELç¼–å·ã€‚å‚æ•°åŒLoadå‡½æ•°ã€‚
 
-Èç¹ûPDBÖÐ²»º¬MODEL¹Ø¼ü´Ê£¬»òµÚÒ»¸öMODEL¹Ø¼ü´ÊÖ®Ç°ÈÔ¾ßÓÐATOMÐÐ£¬ÔòÕâ²¿·ÖÔ­×Ó½«±»
-½âÎöÖÁ·µ»ØÖµlistµÄµÚÒ»¸öÔªËØÖÐ£¬ÆänameÊôÐÔ½«±»ÉèÖÃÎªPDBÎÄ¼þÃû£¨²»°üº¬".pdb"£©¡£
+å¦‚æžœPDBä¸­ä¸å«MODELå…³é”®è¯ï¼Œæˆ–ç¬¬ä¸€ä¸ªMODELå…³é”®è¯ä¹‹å‰ä»å…·æœ‰ATOMè¡Œï¼Œåˆ™è¿™éƒ¨åˆ†åŽŸå­å°†è¢«
+è§£æžè‡³è¿”å›žå€¼listçš„ç¬¬ä¸€ä¸ªå…ƒç´ ä¸­ï¼Œå…¶nameå±žæ€§å°†è¢«è®¾ç½®ä¸ºPDBæ–‡ä»¶åï¼ˆä¸åŒ…å«".pdb"ï¼‰ã€‚
 
-·µ»ØÖµ£º
-    Protein¶ÔÏólist
+è¿”å›žå€¼ï¼š
+    Proteinå¯¹è±¡list
 
 
 * Dumpl(structObjList, dumpFileName, fileMode = 'w')
 
-½«ÈÎºÎ²ã¼¶¶ÔÏó¹¹³ÉµÄlistÊä³öµ½PDBÎÄ¼þ¡£
+å°†ä»»ä½•å±‚çº§å¯¹è±¡æž„æˆçš„listè¾“å‡ºåˆ°PDBæ–‡ä»¶ã€‚
 
-²ÎÊý£º
-    structObjList, list£º²ã¼¶¶ÔÏó¹¹³ÉµÄlist
-    dumpFileName, str£ºPDBÎÄ¼þÃû
-    fileMode, str£ºÎÄ¼þ¾ä±ú´ò¿ªÄ£Ê½
+å‚æ•°ï¼š
+    structObjList, listï¼šå±‚çº§å¯¹è±¡æž„æˆçš„list
+    dumpFileName, strï¼šPDBæ–‡ä»¶å
+    fileMode, strï¼šæ–‡ä»¶å¥æŸ„æ‰“å¼€æ¨¡å¼
 
 
 * Dumpls(structObjList)
 
-µÃµ½×Ö·û´®ÐÎÊ½µÄDumplº¯ÊýÊä³öÄÚÈÝ¡£
+å¾—åˆ°å­—ç¬¦ä¸²å½¢å¼çš„Dumplå‡½æ•°è¾“å‡ºå†…å®¹ã€‚
 
 
 * DumpFastal(structObjList, dumpFileName, fileMode = 'w')
 
-½«·ÇAtom²ã¼¶¶ÔÏó¹¹³ÉµÄlistÊä³öµ½FastaÎÄ¼þ¡£²ÎÊýÍ¬Dumplº¯Êý¡£
+å°†éžAtomå±‚çº§å¯¹è±¡æž„æˆçš„listè¾“å‡ºåˆ°Fastaæ–‡ä»¶ã€‚å‚æ•°åŒDumplå‡½æ•°ã€‚
 
 
 * DumpFastals(structObjList)
 
-µÃµ½×Ö·û´®ÐÎÊ½µÄDumpFastalº¯ÊýÊä³öÄÚÈÝ¡£
+å¾—åˆ°å­—ç¬¦ä¸²å½¢å¼çš„DumpFastalå‡½æ•°è¾“å‡ºå†…å®¹ã€‚
 
 
 * __init__
 
-ËÄÖÖ½á¹¹¶ÔÏóµÄ¹¹Ôìº¯Êý¶¨ÒåÈçÏÂ£º
+å››ç§ç»“æž„å¯¹è±¡çš„æž„é€ å‡½æ•°å®šä¹‰å¦‚ä¸‹ï¼š
 
 Protein(proteinID = '')
 Chain(chainName = '', owner = None)
 Residue(resName = '', resNum = 0, resIns = '', owner = None)
 Atom(atomName = '', atomNum = 0, atomCoord = array([0., 0., 0.]), atomAltLoc = '', atomOccupancy = '', atomTempFactor = '', atomElement = '', atomCharge = '', owner = None)
 
-µ±µ÷ÓÃÕâÐ©¹¹Ôìº¯ÊýÊ±£¬Èç¹ûowner²»ÎªNone£¬Ôò¹¹Ôìº¯Êý½«×Ô¶¯ÔÚownerÓëÐÂ½á¹¹¶ÔÏóÖ®¼ä
-½¨Á¢´ÓÊô¹ØÏµ¡£
+å½“è°ƒç”¨è¿™äº›æž„é€ å‡½æ•°æ—¶ï¼Œå¦‚æžœownerä¸ä¸ºNoneï¼Œåˆ™æž„é€ å‡½æ•°å°†è‡ªåŠ¨åœ¨ownerä¸Žæ–°ç»“æž„å¯¹è±¡ä¹‹é—´
+å»ºç«‹ä»Žå±žå…³ç³»ã€‚
 
 
-ËùÓÐ²ã¼¶¹«ÓÐ·½·¨
+æ‰€æœ‰å±‚çº§å…¬æœ‰æ–¹æ³•
 ----------------
 
 * Dump(self, dumpFileName, fileMode = 'w')
 
-½«selfÊä³öµ½PDBÎÄ¼þ¡£
+å°†selfè¾“å‡ºåˆ°PDBæ–‡ä»¶ã€‚
 
-²ÎÊý£º
-    dumpFileName, str£ºÊä³öÎÄ¼þÃû
-    fileMode, str£ºÎÄ¼þ¾ä±ú´ò¿ªÄ£Ê½
+å‚æ•°ï¼š
+    dumpFileName, strï¼šè¾“å‡ºæ–‡ä»¶å
+    fileMode, strï¼šæ–‡ä»¶å¥æŸ„æ‰“å¼€æ¨¡å¼
 
 
 * Dumps(self)
 
-µÃµ½×Ö·û´®ÐÎÊ½µÄPDBÎÄ¼þÄÚÈÝ¡£
+å¾—åˆ°å­—ç¬¦ä¸²å½¢å¼çš„PDBæ–‡ä»¶å†…å®¹ã€‚
 
 
 * Copy(self)
 
-µÃµ½selfµÄÉî¿½±´¡£
+å¾—åˆ°selfçš„æ·±æ‹·è´ã€‚
 
 
-·ÇAtom²ã¼¶¹«ÓÐ·½·¨
+éžAtomå±‚çº§å…¬æœ‰æ–¹æ³•
 ------------------
 
 * DumpFasta(self, dumpFileName, fileMode = 'w')
 
-½«selfÊä³öµ½fastaÎÄ¼þ¡£²ÎÊýÍ¬Dump·½·¨¡£
+å°†selfè¾“å‡ºåˆ°fastaæ–‡ä»¶ã€‚å‚æ•°åŒDumpæ–¹æ³•ã€‚
 
 
 * GetResidues(self), IGetResidues(self)
 
-¿ç²ã¼¶Ö±½Ó·µ»Øself°üº¬µÄËùÓÐ²Ð»ù¶ÔÏó¡£ÆäÖÐ£¬GetResidues·½·¨·µ»Ølist£¬IGetResidues
-·½·¨·µ»ØÉú³ÉÆ÷¡£
+è·¨å±‚çº§ç›´æŽ¥è¿”å›žselfåŒ…å«çš„æ‰€æœ‰æ®‹åŸºå¯¹è±¡ã€‚å…¶ä¸­ï¼ŒGetResiduesæ–¹æ³•è¿”å›žlistï¼ŒIGetResidues
+æ–¹æ³•è¿”å›žç”Ÿæˆå™¨ã€‚
 
 
 * GetAtoms(self), IGetAtoms(self)
 
-¿ç²ã¼¶Ö±½Ó·µ»Øself°üº¬µÄËùÓÐÔ­×Ó¶ÔÏó¡£ÆäÖÐ£¬GetAtoms·½·¨·µ»Ølist£¬IGetAtoms·½·¨
-·µ»ØÉú³ÉÆ÷¡£
+è·¨å±‚çº§ç›´æŽ¥è¿”å›žselfåŒ…å«çš„æ‰€æœ‰åŽŸå­å¯¹è±¡ã€‚å…¶ä¸­ï¼ŒGetAtomsæ–¹æ³•è¿”å›žlistï¼ŒIGetAtomsæ–¹æ³•
+è¿”å›žç”Ÿæˆå™¨ã€‚
 
 
 * FilterAtoms(self, atomName = 'CA', *atomNameTuple), IFilterAtoms(self, atomName = 'CA', *atomNameTuple)
 
-¿ç²ã¼¶Ö±½Ó°´Ò»¸ö»ò¶à¸öÔ­×ÓÃûÉ¸Ñ¡self°üº¬µÄËùÓÐÔ­×Ó¶ÔÏó¡£ÆäÖÐ£¬FilterAtoms·½·¨·µ
-»Ølist£¬IFilterAtoms·½·¨·µ»ØÉú³ÉÆ÷¡£
+è·¨å±‚çº§ç›´æŽ¥æŒ‰ä¸€ä¸ªæˆ–å¤šä¸ªåŽŸå­åç­›é€‰selfåŒ…å«çš„æ‰€æœ‰åŽŸå­å¯¹è±¡ã€‚å…¶ä¸­ï¼ŒFilterAtomsæ–¹æ³•è¿”
+å›žlistï¼ŒIFilterAtomsæ–¹æ³•è¿”å›žç”Ÿæˆå™¨ã€‚
 
-structObj.FilterAtoms()  # É¸Ñ¡CAÔ­×Ó£¨Ä¬ÈÏ£©
-structObj.FilterAtoms('N', 'CA', 'C')  # É¸Ñ¡¹Ç¼ÜÔ­×Ó
+structObj.FilterAtoms()  # ç­›é€‰CAåŽŸå­ï¼ˆé»˜è®¤ï¼‰
+structObj.FilterAtoms('N', 'CA', 'C')  # ç­›é€‰éª¨æž¶åŽŸå­
 
 
 * GetAtomsCoord(self)
 
-¿ç²ã¼¶Ö±½Ó·µ»Øself°üº¬µÄËùÓÐÔ­×ÓµÄ×ø±ê£¨N*3 ndarray£©¡£
+è·¨å±‚çº§ç›´æŽ¥è¿”å›žselfåŒ…å«çš„æ‰€æœ‰åŽŸå­çš„åæ ‡ï¼ˆN*3 ndarrayï¼‰ã€‚
 
 
 * FilterAtomsCoord(self, atomName = 'CA', *atomNameTuple)
 
-¿ç²ã¼¶Ö±½Ó°´Ò»¸ö»ò¶à¸öÔ­×ÓÃûÉ¸Ñ¡self°üº¬µÄËùÓÐÔ­×Ó¶ÔÏó£¬·µ»ØÉ¸Ñ¡ºóµÄËùÓÐÔ­×ÓµÄ
-×ø±ê£¨N*3 ndarray£©¡£
+è·¨å±‚çº§ç›´æŽ¥æŒ‰ä¸€ä¸ªæˆ–å¤šä¸ªåŽŸå­åç­›é€‰selfåŒ…å«çš„æ‰€æœ‰åŽŸå­å¯¹è±¡ï¼Œè¿”å›žç­›é€‰åŽçš„æ‰€æœ‰åŽŸå­çš„
+åæ ‡ï¼ˆN*3 ndarrayï¼‰ã€‚
 
 
 * RenumResidues(self, startNum = 1), RenumAtoms(self, startNum = 1)
 
-¶Ôself°üº¬µÄËùÓÐ²Ð»ù/Ô­×Ó½øÐÐÖØ±àºÅ¡£startNum²ÎÊýÓÃÓÚÉè¶¨ÆðÊ¼±àºÅ¡£·µ»Øself¡£
+å¯¹selfåŒ…å«çš„æ‰€æœ‰æ®‹åŸº/åŽŸå­è¿›è¡Œé‡ç¼–å·ã€‚startNumå‚æ•°ç”¨äºŽè®¾å®šèµ·å§‹ç¼–å·ã€‚è¿”å›žselfã€‚
 
 
 * MoveCenter(self)
 
-ÕûÌåÆ½ÒÆself£¬Ê¹µÃselfµÄ¼¸ºÎÖÐÐÄÆ½ÒÆÖÁÔ­µã¡£·µ»Øself¡£
+æ•´ä½“å¹³ç§»selfï¼Œä½¿å¾—selfçš„å‡ ä½•ä¸­å¿ƒå¹³ç§»è‡³åŽŸç‚¹ã€‚è¿”å›žselfã€‚
 
 
 * Append(self, *appendObjTuple), Insert(self, idxNum, *insertObjTuple)
 
-Îªself×·¼Ó/²åÈë×Ó½á¹¹¡£ËùÓÐÌí¼ÓÖÁselfµÄ×Ó½á¹¹¶¼ÊÇÔ­½á¹¹¶ÔÏóµ÷ÓÃCopy·½·¨µÃµ½µÄ¿½±´£¬
-ÇÒ»áÓëself×Ô¶¯½¨Á¢´ÓÊô¹ØÏµ¡£·µ»Øself¡£
+ä¸ºselfè¿½åŠ /æ’å…¥å­ç»“æž„ã€‚æ‰€æœ‰æ·»åŠ è‡³selfçš„å­ç»“æž„éƒ½æ˜¯åŽŸç»“æž„å¯¹è±¡è°ƒç”¨Copyæ–¹æ³•å¾—åˆ°çš„æ‹·è´ï¼Œ
+ä¸”ä¼šä¸Žselfè‡ªåŠ¨å»ºç«‹ä»Žå±žå…³ç³»ã€‚è¿”å›žselfã€‚
 
-²ÎÊý£º
-    *appendObjTuple, *insertObjTuple, *obj£ºself¶ÔÓ¦µÄ×Ó½á¹¹¶ÔÏó£¨²»¶¨³¤²ÎÊý£©
-    idxNum, int£º²åÈëÎ»ÖÃË÷ÒýÖµ
+å‚æ•°ï¼š
+    *appendObjTuple, *insertObjTuple, *objï¼šselfå¯¹åº”çš„å­ç»“æž„å¯¹è±¡ï¼ˆä¸å®šé•¿å‚æ•°ï¼‰
+    idxNum, intï¼šæ’å…¥ä½ç½®ç´¢å¼•å€¼
 
 
-·ÇProtein²ã¼¶¹«ÓÐ·½·¨
+éžProteinå±‚çº§å…¬æœ‰æ–¹æ³•
 ---------------------
 
 * Remove(self)
 
-´Ó½á¹¹¶ÔÏóÖÐÉ¾³ýself×ÔÉí¡£
+ä»Žç»“æž„å¯¹è±¡ä¸­åˆ é™¤selfè‡ªèº«ã€‚
 
 
-ÌØÊâ²Ù×÷
+ç‰¹æ®Šæ“ä½œ
 ========
 
-µü´ú
+è¿­ä»£
 ----
 
-·ÇAtom¶ÔÏó¿ÉÖ±½Óµü´ú£¬´Ó¶ø·ÃÎÊµ±Ç°²ã¼¶µÄ×Ó²ã¼¶¶ÔÏóÁÐ±í£º
+éžAtomå¯¹è±¡å¯ç›´æŽ¥è¿­ä»£ï¼Œä»Žè€Œè®¿é—®å½“å‰å±‚çº§çš„å­å±‚çº§å¯¹è±¡åˆ—è¡¨ï¼š
 
 for chainObj in structObj:
     for resObj in chainObj:
@@ -179,403 +179,403 @@ for chainObj in structObj:
             pass
 
 
-ÇÐÆ¬
+åˆ‡ç‰‡
 ----
 
-·ÇAtom¶ÔÏó¿ÉÇÐÆ¬£º
+éžAtomå¯¹è±¡å¯åˆ‡ç‰‡ï¼š
 
-structObj[:]        # »ñÈ¡Á´¶ÔÏó
-structObj[0][1:]    # »ñÈ¡²Ð»ù¶ÔÏó
-structObj[0][0][0]  # »ñÈ¡Ô­×Ó¶ÔÏó
+structObj[:]        # èŽ·å–é“¾å¯¹è±¡
+structObj[0][1:]    # èŽ·å–æ®‹åŸºå¯¹è±¡
+structObj[0][0][0]  # èŽ·å–åŽŸå­å¯¹è±¡
 
 
-³¤¶È
+é•¿åº¦
 ----
 
-·ÇAtom¶ÔÏó¿Éµ÷ÓÃlenº¯Êý£¬ÇóÆä×Ó½á¹¹ÁÐ±íµÄ³¤¶È£º
+éžAtomå¯¹è±¡å¯è°ƒç”¨lenå‡½æ•°ï¼Œæ±‚å…¶å­ç»“æž„åˆ—è¡¨çš„é•¿åº¦ï¼š
 
 len(structObj)
 
 
-²¼¶ûÖµ
+å¸ƒå°”å€¼
 ------
 
-·ÇAtom¶ÔÏóµÄ²¼¶ûÖµÒÀ¾ÝÆäÊÇ·ñÎª¿Õ½á¹¹½øÐÐÅÐ¶¨¡£¼´£ºÈç¹ûself.subÎª[]£¬Ôò²¼¶ûÖµÎª
-False£¬·ñÔòÎªTrue¡£
+éžAtomå¯¹è±¡çš„å¸ƒå°”å€¼ä¾æ®å…¶æ˜¯å¦ä¸ºç©ºç»“æž„è¿›è¡Œåˆ¤å®šã€‚å³ï¼šå¦‚æžœself.subä¸º[]ï¼Œåˆ™å¸ƒå°”å€¼ä¸º
+Falseï¼Œå¦åˆ™ä¸ºTrueã€‚
 
-Atom¶ÔÏóµÄ²¼¶ûÖµÒ»¶¨ÎªTrue¡£
+Atomå¯¹è±¡çš„å¸ƒå°”å€¼ä¸€å®šä¸ºTrueã€‚
 
 
-Å·ÊÏ¾àÀë
+æ¬§æ°è·ç¦»
 --------
 
-Ô­×Ó¶ÔÏóÖØÔØÁË¼õ·¨ÔËËã·û£¬ÓÃÓÚÇóÁ½Ô­×ÓÖ®¼äµÄÅ·ÊÏ¾àÀë£º
+åŽŸå­å¯¹è±¡é‡è½½äº†å‡æ³•è¿ç®—ç¬¦ï¼Œç”¨äºŽæ±‚ä¸¤åŽŸå­ä¹‹é—´çš„æ¬§æ°è·ç¦»ï¼š
 
 atomObjA - atomObjB
 
 
-ÊôÐÔ
+å±žæ€§
 ====
 
-ËùÓÐ²ã¼¶¹«ÓÐÊôÐÔ
+æ‰€æœ‰å±‚çº§å…¬æœ‰å±žæ€§
 ----------------
 
 * name, str
 
-´ËÊôÐÔ¶ÔÓÚ²»Í¬µÄ²ã¼¶º¬Òå²»Í¬£º
-Protein£ºPDBÎÄ¼þÃû£¨²»°üº¬".pdb"£©
-Chain£ºÁ´Ãû
-Residue£º²Ð»ùÃû
-Atom£ºÔ­×ÓÃû
+æ­¤å±žæ€§å¯¹äºŽä¸åŒçš„å±‚çº§å«ä¹‰ä¸åŒï¼š
+Proteinï¼šPDBæ–‡ä»¶åï¼ˆä¸åŒ…å«".pdb"ï¼‰
+Chainï¼šé“¾å
+Residueï¼šæ®‹åŸºå
+Atomï¼šåŽŸå­å
 
 
-·ÇAtom²ã¼¶¹«ÓÐÊôÐÔ
+éžAtomå±‚çº§å…¬æœ‰å±žæ€§
 ------------------
 
 * sub, list
 
-selfµÄ×Ó²ã¼¶¶ÔÏóÁÐ±í
+selfçš„å­å±‚çº§å¯¹è±¡åˆ—è¡¨
 
 
-* center, ndarray (Ö»¶Á)
-selfµÄËùÓÐÔ­×Ó×ø±ê¼¸ºÎÖÐÐÄ¡£
+* center, ndarray (åªè¯»)
+selfçš„æ‰€æœ‰åŽŸå­åæ ‡å‡ ä½•ä¸­å¿ƒã€‚
 
 
-* seq, str (Ö»¶Á)
+* seq, str (åªè¯»)
 
-selfµÄ²Ð»ùÐòÁÐ
-
-
-* fasta, str (Ö»¶Á)
-
-selfµÄfastaÎÄ¼þ×Ö·û´®
+selfçš„æ®‹åŸºåºåˆ—
 
 
-·ÇProtein²ã¼¶¹«ÓÐÊôÐÔ
+* fasta, str (åªè¯»)
+
+selfçš„fastaæ–‡ä»¶å­—ç¬¦ä¸²
+
+
+éžProteinå±‚çº§å…¬æœ‰å±žæ€§
 ---------------------
 
 * owner, obj
 
-selfµÄ¸¸¼¶¶ÔÏó
+selfçš„çˆ¶çº§å¯¹è±¡
 
 
-* idx, int (Ö»¶Á)
+* idx, int (åªè¯»)
 
-selfÔÚÆäownerµÄsubÖÐµÄË÷ÒýÖµ
-
-
-* pre, next, obj (Ö»¶Á)
-
-selfµÄÇ°/ºóÒ»¸öÍ¬²ã¼¶¶ÔÏó
-Èç¹ûselfÃ»ÓÐÇ°/ºóÒ»¸ö¶ÔÏó£¬ÔòÅ×³öIndexError
+selfåœ¨å…¶ownerçš„subä¸­çš„ç´¢å¼•å€¼
 
 
-ÆäËû¹«ÓÐÊôÐÔ
+* pre, next, obj (åªè¯»)
+
+selfçš„å‰/åŽä¸€ä¸ªåŒå±‚çº§å¯¹è±¡
+å¦‚æžœselfæ²¡æœ‰å‰/åŽä¸€ä¸ªå¯¹è±¡ï¼Œåˆ™æŠ›å‡ºIndexError
+
+
+å…¶ä»–å…¬æœ‰å±žæ€§
 ------------
 
-* subDict, dict (Ö»¶Á)
+* subDict, dict (åªè¯»)
 
-ProteinÓëResidue²ã¼¶¹«ÓÐ£¬º¬Òå·Ö±ðÎª£º
-Protein£ºÓÉselfµÄËùÓÐÁ´¶ÔÏó×é³ÉµÄÁ´Ãû-Á´¶ÔÏó¹þÏ£±í
-Residue£ºÓÉselfµÄËùÓÐÔ­×Ó¶ÔÏó×é³ÉµÄÔ­×ÓÃû-Ô­×Ó¶ÔÏó¹þÏ£±í
+Proteinä¸ŽResidueå±‚çº§å…¬æœ‰ï¼Œå«ä¹‰åˆ†åˆ«ä¸ºï¼š
+Proteinï¼šç”±selfçš„æ‰€æœ‰é“¾å¯¹è±¡ç»„æˆçš„é“¾å-é“¾å¯¹è±¡å“ˆå¸Œè¡¨
+Residueï¼šç”±selfçš„æ‰€æœ‰åŽŸå­å¯¹è±¡ç»„æˆçš„åŽŸå­å-åŽŸå­å¯¹è±¡å“ˆå¸Œè¡¨
 
 
 * num, int
 
-ResidueÓëAtom²ã¼¶¹«ÓÐ£¬º¬Òå·Ö±ðÎª£º
-Residue£º²»°üº¬²åÈë×Ö·ûµÄ²Ð»ùÐòºÅ
-Atom£ºÔ­×ÓÐòºÅ
+Residueä¸ŽAtomå±‚çº§å…¬æœ‰ï¼Œå«ä¹‰åˆ†åˆ«ä¸ºï¼š
+Residueï¼šä¸åŒ…å«æ’å…¥å­—ç¬¦çš„æ®‹åŸºåºå·
+Atomï¼šåŽŸå­åºå·
 
 
-Residue¶ÀÓÐÊôÐÔ
+Residueç‹¬æœ‰å±žæ€§
 ---------------
 
 * ins, str
 
-²Ð»ù²åÈë×Ö·û
+æ®‹åŸºæ’å…¥å­—ç¬¦
 
 
-* compNum, str (ÌØÊâ·½Ê½Ð´)
+* compNum, str (ç‰¹æ®Šæ–¹å¼å†™)
 
-²Ð»ùÐòºÅ + ²Ð»ù²åÈë×Ö·û
+æ®‹åŸºåºå· + æ®‹åŸºæ’å…¥å­—ç¬¦
 
-´ËÊôÐÔÍ¨¹ý(num, ins)¶þÔª×é½øÐÐ¸³Öµ£º
+æ­¤å±žæ€§é€šè¿‡(num, ins)äºŒå…ƒç»„è¿›è¡Œèµ‹å€¼ï¼š
 
 resObj.compNum = (1, '')
 
 
-* coordDict, dict (Ö»¶Á)
+* coordDict, dict (åªè¯»)
 
-ÓÉselfµÄËùÓÐÔ­×Ó×é³ÉµÄÔ­×ÓÃû-Ô­×Ó×ø±ê¹þÏ£±í
+ç”±selfçš„æ‰€æœ‰åŽŸå­ç»„æˆçš„åŽŸå­å-åŽŸå­åæ ‡å“ˆå¸Œè¡¨
 
 
-Atom¶ÀÓÐÊôÐÔ
+Atomç‹¬æœ‰å±žæ€§
 ------------
 
 * coord, ndarray
 
-Ô­×Ó×ø±ê
+åŽŸå­åæ ‡
 
 
 * alt, str
 
-±¸ÓÃÎ»ÖÃÖ¸Ê¾·û
+å¤‡ç”¨ä½ç½®æŒ‡ç¤ºç¬¦
 
 
 * occ, str
 
-Õ¼ÓÐ
+å æœ‰
 
 
 * tempF, str
 
-ÎÂ¶ÈÒò×Ó
+æ¸©åº¦å› å­
 
 
 * ele, str
 
-ÔªËØ·ûºÅ
+å…ƒç´ ç¬¦å·
 
 
 * chg, str
 
-µçºÉ
+ç”µè·
 
 
-²Ð»ù¶þÃæ½Ç
+æ®‹åŸºäºŒé¢è§’
 ==========
 
-²Ð»ù¶ÔÏóÊµÏÖÁËÈô¸É¶Ôµ°°×Ö÷Á´¶þÃæ½Ç½øÐÐ¼ÆËã¡¢Ðý×ªÏà¹ØµÄ·½·¨£¨¼´ÒÔÏÂËùÓÐ·½·¨µÄself
-¶¼×¨Ö¸Residue¶ÔÏó£©¡£
+æ®‹åŸºå¯¹è±¡å®žçŽ°äº†è‹¥å¹²å¯¹è›‹ç™½ä¸»é“¾äºŒé¢è§’è¿›è¡Œè®¡ç®—ã€æ—‹è½¬ç›¸å…³çš„æ–¹æ³•ï¼ˆå³ä»¥ä¸‹æ‰€æœ‰æ–¹æ³•çš„self
+éƒ½ä¸“æŒ‡Residueå¯¹è±¡ï¼‰ã€‚
 
-Ö÷Á´¶þÃæ½Ç
+ä¸»é“¾äºŒé¢è§’
 ----------
 
-¶ÔÖ÷Á´½øÐÐ²Ù×÷Ê±Çë×¢Òâ£º×î¿¿½üN¶ËÓëC¶ËµÄÁ½¸ö²Ð»ù·Ö±ðÎÞ·¨½øÐÐ¶þÃæ½ÇPHIÓëPSIµÄ¼ÆËã
-»òµ÷Õû£¨ÒòÎªÕâÁ½¸ö¶þÃæ½Ç²»´æÔÚ£©¡£Èç¹û³öÏÖÉÏÊöÇé¿ö£¬ÔòÅ×³öIndexError¡£
+å¯¹ä¸»é“¾è¿›è¡Œæ“ä½œæ—¶è¯·æ³¨æ„ï¼šæœ€é è¿‘Nç«¯ä¸ŽCç«¯çš„ä¸¤ä¸ªæ®‹åŸºåˆ†åˆ«æ— æ³•è¿›è¡ŒäºŒé¢è§’PHIä¸ŽPSIçš„è®¡ç®—
+æˆ–è°ƒæ•´ï¼ˆå› ä¸ºè¿™ä¸¤ä¸ªäºŒé¢è§’ä¸å­˜åœ¨ï¼‰ã€‚å¦‚æžœå‡ºçŽ°ä¸Šè¿°æƒ…å†µï¼Œåˆ™æŠ›å‡ºIndexErrorã€‚
 
 * CalcBBDihedralAngle(self, dihedralEnum)
 
-¼ÆËãÖ÷Á´¶þÃæ½Ç¡£
+è®¡ç®—ä¸»é“¾äºŒé¢è§’ã€‚
 
-²ÎÊý£º
-    dihedralEnum, DIH£ºÖ÷Á´¶þÃæ½ÇÖÖÀà¡£DIH.PHI»òDIH.L±íÊ¾Phi£¬DIH.PSI»òDIH.R±íÊ¾Psi¡£
+å‚æ•°ï¼š
+    dihedralEnum, DIHï¼šä¸»é“¾äºŒé¢è§’ç§ç±»ã€‚DIH.PHIæˆ–DIH.Lè¡¨ç¤ºPhiï¼ŒDIH.PSIæˆ–DIH.Rè¡¨ç¤ºPsiã€‚
 
 
 * CalcBBRotationMatrixByDeltaAngle(self, dihedralEnum, sideEnum, deltaAngle)
 
-ÒÔÐý×ª½Ç¶È×÷Îª²ÎÊý£¬¼ÆËãÖ÷Á´Ðý×ª¾ØÕó¡£
+ä»¥æ—‹è½¬è§’åº¦ä½œä¸ºå‚æ•°ï¼Œè®¡ç®—ä¸»é“¾æ—‹è½¬çŸ©é˜µã€‚
 
-²ÎÊý£º
-    dihedralEnum, DIH£ºÍ¬CalcBBDihedralAngle·½·¨¡£
-    sideEnum, SIDE£º×ª¶¯²à¡£SIDE.N»òSIDE.L±íÊ¾×ª¶¯N¶Ë£¬SIDE.C»òSIDE.R±íÊ¾×ª¶¯C¶Ë¡£
-    deltaAngle, float£º×ª¶¯½Ç¶È¡£
+å‚æ•°ï¼š
+    dihedralEnum, DIHï¼šåŒCalcBBDihedralAngleæ–¹æ³•ã€‚
+    sideEnum, SIDEï¼šè½¬åŠ¨ä¾§ã€‚SIDE.Næˆ–SIDE.Lè¡¨ç¤ºè½¬åŠ¨Nç«¯ï¼ŒSIDE.Cæˆ–SIDE.Rè¡¨ç¤ºè½¬åŠ¨Cç«¯ã€‚
+    deltaAngle, floatï¼šè½¬åŠ¨è§’åº¦ã€‚
 
-·µ»ØÖµ£º
-    moveCoord, ndarray(1*3)£ºÐý×ªÇ°/ºóÆ½ÒÆÏòÁ¿
-    rotationMatrix, ndarray(3*3)£ºÐý×ª¾ØÕó
+è¿”å›žå€¼ï¼š
+    moveCoord, ndarray(1*3)ï¼šæ—‹è½¬å‰/åŽå¹³ç§»å‘é‡
+    rotationMatrix, ndarray(3*3)ï¼šæ—‹è½¬çŸ©é˜µ
 
 
 * CalcBBRotationMatrixByTargetAngle(self, dihedralEnum, sideEnum, targetAngle)
 
-ÒÔÄ¿±ê½Ç¶È×÷Îª²ÎÊý£¬¼ÆËãÖ÷Á´Ðý×ª¾ØÕó¡£
+ä»¥ç›®æ ‡è§’åº¦ä½œä¸ºå‚æ•°ï¼Œè®¡ç®—ä¸»é“¾æ—‹è½¬çŸ©é˜µã€‚
 
-²ÎÊýÓë·µ»ØÖµÍ¬CalcBBRotationMatrixByDeltaAngle·½·¨¡£µ«targetAngle±íÊ¾Ä¿±ê½Ç¶È¡£
+å‚æ•°ä¸Žè¿”å›žå€¼åŒCalcBBRotationMatrixByDeltaAngleæ–¹æ³•ã€‚ä½†targetAngleè¡¨ç¤ºç›®æ ‡è§’åº¦ã€‚
 
 
 * GetBBRotationAtomObj(self, dihedralEnum, sideEnum)
 
-»ñÈ¡ÒÔ¸ø¶¨²ÎÊý½øÐÐÐý×ªÊ±£¬ËùÓÐÐèÒªÐý×ªµÄÔ­×Ó¶ÔÏó¡£²ÎÊýÍ¬CalcBBRotationMatrixByDeltaAngle
-·½·¨¡£
+èŽ·å–ä»¥ç»™å®šå‚æ•°è¿›è¡Œæ—‹è½¬æ—¶ï¼Œæ‰€æœ‰éœ€è¦æ—‹è½¬çš„åŽŸå­å¯¹è±¡ã€‚å‚æ•°åŒCalcBBRotationMatrixByDeltaAngle
+æ–¹æ³•ã€‚
 
-·µ»ØÖµ£º
-    rotationAtomObjList, list£ºÔ­×Ó¶ÔÏólist
+è¿”å›žå€¼ï¼š
+    rotationAtomObjList, listï¼šåŽŸå­å¯¹è±¡list
 
 
 * RotateBBDihedralAngleByDeltaAngle(self, dihedralEnum, sideEnum, deltaAngle)
 
-ÒÔÐý×ª½Ç¶È×÷Îª²ÎÊýÖ±½ÓÐý×ªÖ÷Á´¡£²ÎÊýÍ¬CalcBBRotationMatrixByDeltaAngle·½·¨¡£
+ä»¥æ—‹è½¬è§’åº¦ä½œä¸ºå‚æ•°ç›´æŽ¥æ—‹è½¬ä¸»é“¾ã€‚å‚æ•°åŒCalcBBRotationMatrixByDeltaAngleæ–¹æ³•ã€‚
 
 
 * RotateBBDihedralAngleByTargetAngle(self, dihedralEnum, sideEnum, targetAngle)
 
-ÒÔÄ¿±ê½Ç¶È×÷Îª²ÎÊýÖ±½ÓÐý×ªÖ÷Á´¡£²ÎÊýÍ¬CalcBBRotationMatrixByTargetAngle·½·¨¡£
+ä»¥ç›®æ ‡è§’åº¦ä½œä¸ºå‚æ•°ç›´æŽ¥æ—‹è½¬ä¸»é“¾ã€‚å‚æ•°åŒCalcBBRotationMatrixByTargetAngleæ–¹æ³•ã€‚
 
 
-²àÁ´¶þÃæ½Ç
+ä¾§é“¾äºŒé¢è§’
 ----------
 
-¶Ô²àÁ´½øÐÐµ÷ÕûÊ±Çë×¢Òâ£ºGLY¡¢ALA²Ð»ùÓÉÓÚ²»´æÔÚ²àÁ´¶þÃæ½Ç£¬²»¿Éµ÷ÓÃÏÂÁÐ·½·¨¡£ÇÒ²»
-¿ÉÊ¹ÓÃ²»´æÔÚµÄ²àÁ´¶þÃæ½ÇË÷ÒýÖµµ÷ÓÃÏÂÁÐ·½·¨¡£Èç¹û³öÏÖÉÏÊöÇé¿ö£¬ÔòÅ×³öIndexError¡£
+å¯¹ä¾§é“¾è¿›è¡Œè°ƒæ•´æ—¶è¯·æ³¨æ„ï¼šGLYã€ALAæ®‹åŸºç”±äºŽä¸å­˜åœ¨ä¾§é“¾äºŒé¢è§’ï¼Œä¸å¯è°ƒç”¨ä¸‹åˆ—æ–¹æ³•ã€‚ä¸”ä¸
+å¯ä½¿ç”¨ä¸å­˜åœ¨çš„ä¾§é“¾äºŒé¢è§’ç´¢å¼•å€¼è°ƒç”¨ä¸‹åˆ—æ–¹æ³•ã€‚å¦‚æžœå‡ºçŽ°ä¸Šè¿°æƒ…å†µï¼Œåˆ™æŠ›å‡ºIndexErrorã€‚
 
 * CalcSCDihedralAngle(self, dihedralIdx)
 
-¼ÆËã²àÁ´¶þÃæ½Ç¡£
+è®¡ç®—ä¾§é“¾äºŒé¢è§’ã€‚
 
-²ÎÊý£º
-    dihedralIdx, int£º²àÁ´¶þÃæ½ÇË÷ÒýÖµ¡£Ë÷ÒýÖµ´Ó0¿ªÊ¼±àºÅ£¬×î´óÔÊÐíË÷ÒýÖµ¸ù¾Ý²Ð
-»ùÖÖÀà¶ø²»Í¬¡£Ë÷ÒýÖµ±íÊ¾Ä³¸ö²Ð»ù´ÓÖ÷Á´µ½²àÁ´·½ÏòÉÏµÄµÚN¸ö²àÁ´¶þÃæ½Ç¡£
+å‚æ•°ï¼š
+    dihedralIdx, intï¼šä¾§é“¾äºŒé¢è§’ç´¢å¼•å€¼ã€‚ç´¢å¼•å€¼ä»Ž0å¼€å§‹ç¼–å·ï¼Œæœ€å¤§å…è®¸ç´¢å¼•å€¼æ ¹æ®æ®‹
+åŸºç§ç±»è€Œä¸åŒã€‚ç´¢å¼•å€¼è¡¨ç¤ºæŸä¸ªæ®‹åŸºä»Žä¸»é“¾åˆ°ä¾§é“¾æ–¹å‘ä¸Šçš„ç¬¬Nä¸ªä¾§é“¾äºŒé¢è§’ã€‚
 
 
 * CalcSCRotationMatrixByDeltaAngle(self, dihedralIdx, deltaAngle)
 
-ÒÔÐý×ª½Ç¶È×÷Îª²ÎÊý£¬¼ÆËã²àÁ´Ðý×ª¾ØÕó¡£
+ä»¥æ—‹è½¬è§’åº¦ä½œä¸ºå‚æ•°ï¼Œè®¡ç®—ä¾§é“¾æ—‹è½¬çŸ©é˜µã€‚
 
-²ÎÊý£º
-    dihedralIdx£ºÍ¬CalcSCDihedralAngle·½·¨
-    deltaAngle£ºÐý×ª½Ç¶È
+å‚æ•°ï¼š
+    dihedralIdxï¼šåŒCalcSCDihedralAngleæ–¹æ³•
+    deltaAngleï¼šæ—‹è½¬è§’åº¦
 
-·µ»ØÖµÍ¬CalcBBRotationMatrixByDeltaAngle·½·¨¡£
+è¿”å›žå€¼åŒCalcBBRotationMatrixByDeltaAngleæ–¹æ³•ã€‚
 
 
 * CalcSCRotationMatrixByTargetAngle(self, dihedralIdx, targetAngle)
 
-ÒÔÄ¿±ê½Ç¶È×÷Îª²ÎÊý£¬¼ÆËã²àÁ´Ðý×ª¾ØÕó¡£²ÎÊýÓë·µ»ØÖµÍ¬CalcSCRotationMatrixByDeltaAngle
-·½·¨¡£µ«targetAngle±íÊ¾Ä¿±ê½Ç¶È¡£
+ä»¥ç›®æ ‡è§’åº¦ä½œä¸ºå‚æ•°ï¼Œè®¡ç®—ä¾§é“¾æ—‹è½¬çŸ©é˜µã€‚å‚æ•°ä¸Žè¿”å›žå€¼åŒCalcSCRotationMatrixByDeltaAngle
+æ–¹æ³•ã€‚ä½†targetAngleè¡¨ç¤ºç›®æ ‡è§’åº¦ã€‚
 
 
 * GetSCRotationAtomObj(self, dihedralIdx)
 
-»ñÈ¡ÒÔ¸ø¶¨²àÁ´¶þÃæ½Ç½øÐÐÐý×ªÊ±£¬ËùÓÐÐèÒªÐý×ªµÄÔ­×Ó¶ÔÏó¡£²ÎÊýÍ¬CalcSCDihedralAngle
-·½·¨¡£·µ»ØÖµÍ¬GetBBRotationAtomObj·½·¨¡£
+èŽ·å–ä»¥ç»™å®šä¾§é“¾äºŒé¢è§’è¿›è¡Œæ—‹è½¬æ—¶ï¼Œæ‰€æœ‰éœ€è¦æ—‹è½¬çš„åŽŸå­å¯¹è±¡ã€‚å‚æ•°åŒCalcSCDihedralAngle
+æ–¹æ³•ã€‚è¿”å›žå€¼åŒGetBBRotationAtomObjæ–¹æ³•ã€‚
 
 
 * RotateSCDihedralAngleByDeltaAngle(self, dihedralIdx, deltaAngle)
 
-ÒÔÐý×ª½Ç¶È×÷Îª²ÎÊýÖ±½ÓÐý×ª²àÁ´¡£²ÎÊýÍ¬CalcSCRotationMatrixByDeltaAngle·½·¨¡£
+ä»¥æ—‹è½¬è§’åº¦ä½œä¸ºå‚æ•°ç›´æŽ¥æ—‹è½¬ä¾§é“¾ã€‚å‚æ•°åŒCalcSCRotationMatrixByDeltaAngleæ–¹æ³•ã€‚
 
 
 * RotateSCDihedralAngleByTargetAngle(self, dihedralIdx, targetAngle)
 
-ÒÔÄ¿±ê½Ç¶È×÷Îª²ÎÊýÖ±½ÓÐý×ª²àÁ´¡£²ÎÊýÍ¬CalcSCRotationMatrixByTargetAngle·½·¨¡£
+ä»¥ç›®æ ‡è§’åº¦ä½œä¸ºå‚æ•°ç›´æŽ¥æ—‹è½¬ä¾§é“¾ã€‚å‚æ•°åŒCalcSCRotationMatrixByTargetAngleæ–¹æ³•ã€‚
 
 
-ÊýÑ§º¯Êý
+æ•°å­¦å‡½æ•°
 ========
 
 * Dis(coordA, coordB)
 
-¼ÆËãÁ½¸öÈýÎ¬×ø±êÖ®¼äµÄÅ·Ê½¾àÀë¡£
+è®¡ç®—ä¸¤ä¸ªä¸‰ç»´åæ ‡ä¹‹é—´çš„æ¬§å¼è·ç¦»ã€‚
 
 
 * Norm(coordArray)
 
-¼ÆËãÒ»¸öÈýÎ¬×ø±êµÄ¶þ·¶Êý¡£
+è®¡ç®—ä¸€ä¸ªä¸‰ç»´åæ ‡çš„äºŒèŒƒæ•°ã€‚
 
 
 * CalcVectorAngle(coordA, coordB)
 
-¼ÆËãÁ½ÏòÁ¿¼Ð½Ç£¬·µ»Ø½Ç¶È£¨0 ~ pi£©¡£
+è®¡ç®—ä¸¤å‘é‡å¤¹è§’ï¼Œè¿”å›žè§’åº¦ï¼ˆ0 ~ piï¼‰ã€‚
 
 
 * CalcRotationMatrix(rotationAxis, rotationAngle)
 
-¼ÆËãÖá½ÇÐý×ª¾ØÕó¡£
+è®¡ç®—è½´è§’æ—‹è½¬çŸ©é˜µã€‚
 
-²ÎÊý£º
-    rotationAxis, ndarray(1*3)£ºÐý×ªÖáÏòÁ¿£¬ÎÞÐèËõ·ÅÖÁµ¥Î»³¤¶È
-    rotationAngle, float£ºÐý×ª½Ç
+å‚æ•°ï¼š
+    rotationAxis, ndarray(1*3)ï¼šæ—‹è½¬è½´å‘é‡ï¼Œæ— éœ€ç¼©æ”¾è‡³å•ä½é•¿åº¦
+    rotationAngle, floatï¼šæ—‹è½¬è§’
 
 
 * CalcRotationMatrixByTwoVector(coordA, coordB)
 
-¼ÆËã´ÓÏòÁ¿AÐý×ªÖÁÏòÁ¿BËùÐèÒªµÄÐý×ª¾ØÕó¡£
+è®¡ç®—ä»Žå‘é‡Aæ—‹è½¬è‡³å‘é‡Bæ‰€éœ€è¦çš„æ—‹è½¬çŸ©é˜µã€‚
 
 
 * CalcDihedralAngle(coordA, coordB, coordC, coordD)
 
-¼ÆËã¶þÃæ½Ç¡£·µ»ØÓÐ·ûºÅ½Ç¶È£¨-pi ~ pi£©¡£
+è®¡ç®—äºŒé¢è§’ã€‚è¿”å›žæœ‰ç¬¦å·è§’åº¦ï¼ˆ-pi ~ piï¼‰ã€‚
 
 
 * CalcRMSD(coordArrayA, coordArrayB)
 
-¼ÆËãRMSD¡£
+è®¡ç®—RMSDã€‚
 
-²ÎÊý£º
-    coordArrayA, coordArrayB, ndarray(N*3)£ºÁ½×éÓÉÈýÎ¬×ø±ê×é³ÉµÄµÈ³¤¶þÎ¬Êý×é
+å‚æ•°ï¼š
+    coordArrayA, coordArrayB, ndarray(N*3)ï¼šä¸¤ç»„ç”±ä¸‰ç»´åæ ‡ç»„æˆçš„ç­‰é•¿äºŒç»´æ•°ç»„
 
 
 * CalcSuperimposeRotationMatrix(sourceCoordArray, targetCoordArray)
 
-¼ÆËã´ÓsourceCoordArrayµ½targetCoordArrayµÄµþºÏÐý×ª¾ØÕó¡£
+è®¡ç®—ä»ŽsourceCoordArrayåˆ°targetCoordArrayçš„å åˆæ—‹è½¬çŸ©é˜µã€‚
 
-²ÎÊý£º
-    sourceCoordArray, targetCoordArray, ndarray(N*3)£ºÁ½×éÓÉÈýÎ¬×ø±ê×é³ÉµÄµÈ³¤
-¶þÎ¬Êý×é
+å‚æ•°ï¼š
+    sourceCoordArray, targetCoordArray, ndarray(N*3)ï¼šä¸¤ç»„ç”±ä¸‰ç»´åæ ‡ç»„æˆçš„ç­‰é•¿
+äºŒç»´æ•°ç»„
 
-·µ»ØÖµÎªÆ½ÒÆÏòÁ¿sourceCenterCoord£¬Ðý×ª¾ØÕórotationMatrix£¬ÒÔ¼°Æ½ÒÆÏòÁ¿targetCenterCoord¡£
-Ê¹µÃsourceCoordArrayÍ¨¹ý(sourceCoordArray - sourceCenterCoord).dot(rotationMatrix) + targetCenterCoord
-ÕâÑùµÄÆ½ÒÆ->Ðý×ª->Æ½ÒÆ²Ù×÷ºó£¬ÓëtargetCoordArrayÐÎ³ÉµþºÏ¡£
+è¿”å›žå€¼ä¸ºå¹³ç§»å‘é‡sourceCenterCoordï¼Œæ—‹è½¬çŸ©é˜µrotationMatrixï¼Œä»¥åŠå¹³ç§»å‘é‡targetCenterCoordã€‚
+ä½¿å¾—sourceCoordArrayé€šè¿‡(sourceCoordArray - sourceCenterCoord).dot(rotationMatrix) + targetCenterCoord
+è¿™æ ·çš„å¹³ç§»->æ—‹è½¬->å¹³ç§»æ“ä½œåŽï¼Œä¸ŽtargetCoordArrayå½¢æˆå åˆã€‚
 
 
-³£Á¿
+å¸¸é‡
 ====
 
 * DIH
 
-Ã¶¾Ù±äÁ¿£¬±íÊ¾Ö÷Á´¶þÃæ½ÇÖÖÀà¡£
+æžšä¸¾å˜é‡ï¼Œè¡¨ç¤ºä¸»é“¾äºŒé¢è§’ç§ç±»ã€‚
 
 
 * SIDE
 
-Ã¶¾Ù±äÁ¿£¬±íÊ¾Ö÷Á´¶þÃæ½ÇÐý×ªÊ±µÄ×ª¶¯²à¡£
+æžšä¸¾å˜é‡ï¼Œè¡¨ç¤ºä¸»é“¾äºŒé¢è§’æ—‹è½¬æ—¶çš„è½¬åŠ¨ä¾§ã€‚
 
 
 * RESIDUE_NAME_THREE_TO_ONE_DICT, RESIDUE_NAME_ONE_TO_THREE_DICT
 
-Èý×ÖÄ¸£¬µ¥×ÖÄ¸²Ð»ùÃûµÄÏà»¥×ª»»¹þÏ£±í¡£
+ä¸‰å­—æ¯ï¼Œå•å­—æ¯æ®‹åŸºåçš„ç›¸äº’è½¬æ¢å“ˆå¸Œè¡¨ã€‚
 
 
-ÆäËûËµÃ÷
+å…¶ä»–è¯´æ˜Ž
 ========
 
-½âÎöº¯Êý
+è§£æžå‡½æ•°
 --------
 
-½âÎöº¯Êý£¨Load¡¢LoadModel£©½«ÍêÈ«°´ÕÕPDBÎÄ¼þÖÐATOMÐÐµÄ³öÏÖË³Ðò¶ÔPDBÎÄ¼þ½øÐÐ½âÎö
-Óë´æ´¢¡£²»»á½øÐÐÈÎºÎÅÅÐò¹ý³Ì¡£
+è§£æžå‡½æ•°ï¼ˆLoadã€LoadModelï¼‰å°†å®Œå…¨æŒ‰ç…§PDBæ–‡ä»¶ä¸­ATOMè¡Œçš„å‡ºçŽ°é¡ºåºå¯¹PDBæ–‡ä»¶è¿›è¡Œè§£æž
+ä¸Žå­˜å‚¨ã€‚ä¸ä¼šè¿›è¡Œä»»ä½•æŽ’åºè¿‡ç¨‹ã€‚
 
-Loadº¯ÊýÔÚ½âÎöÊ±»áÌø¹ýÈÎºÎ·ÇATOM¿ªÍ·µÄÐÐ¡£¶øLoadModelº¯Êý»áÌø¹ýÈÎºÎ·ÇATOM»òMODEL
-¿ªÍ·µÄÐÐ¡£
+Loadå‡½æ•°åœ¨è§£æžæ—¶ä¼šè·³è¿‡ä»»ä½•éžATOMå¼€å¤´çš„è¡Œã€‚è€ŒLoadModelå‡½æ•°ä¼šè·³è¿‡ä»»ä½•éžATOMæˆ–MODEL
+å¼€å¤´çš„è¡Œã€‚
 
 
-¶ÔÓÚ´´½¨ÐÂ²ã¼¶¶ÔÏóµÄÅÐ¶¨
+å¯¹äºŽåˆ›å»ºæ–°å±‚çº§å¯¹è±¡çš„åˆ¤å®š
 ------------------------
 
-* Loadº¯Êý£º
-    Protein£ºÖ»»áÔÚ½âÎö¿ªÊ¼Ç°´´½¨Î¨Ò»µÄÒ»¸ö£¬²¢×îÖÕ·µ»ØÕâ¸ö¶ÔÏó¡£
-    Chain£ºÔÚ½âÎö¿ªÊ¼Ê±£¬ÒÔ¼°Ã¿´Î¼ì²âµ½Á´Ãû·¢Éú±ä»¯Ê±£¨´ÓÉÏÒ»¸öATOMÐÐµ½µ±Ç°ÐÐ£©£¬¶¼
-»á´´½¨ÐÂµÄÁ´¶ÔÏó¡£
-    Residue£ºÔÚ½âÎö¿ªÊ¼Ê±£¬ÒÔ¼°Ã¿´Î¼ì²âµ½²Ð»ùÃû¡¢²Ð»ù±àºÅ»ò²Ð»ù²åÈë×Ö·ûÈýÕßÖ®Ò»·¢Éú
-±ä»¯Ê±£¨´ÓÉÏÒ»¸öATOMÐÐµ½µ±Ç°ÐÐ£©£¬¶¼»á´´½¨ÐÂµÄ²Ð»ù¶ÔÏó¡£
-    Atom£ºÃ¿¼ì²âµ½Ò»¸öÐÂµÄATOMÐÐ¶¼»á´´½¨Ò»¸öAtom¶ÔÏó¡£
+* Loadå‡½æ•°ï¼š
+    Proteinï¼šåªä¼šåœ¨è§£æžå¼€å§‹å‰åˆ›å»ºå”¯ä¸€çš„ä¸€ä¸ªï¼Œå¹¶æœ€ç»ˆè¿”å›žè¿™ä¸ªå¯¹è±¡ã€‚
+    Chainï¼šåœ¨è§£æžå¼€å§‹æ—¶ï¼Œä»¥åŠæ¯æ¬¡æ£€æµ‹åˆ°é“¾åå‘ç”Ÿå˜åŒ–æ—¶ï¼ˆä»Žä¸Šä¸€ä¸ªATOMè¡Œåˆ°å½“å‰è¡Œï¼‰ï¼Œéƒ½
+ä¼šåˆ›å»ºæ–°çš„é“¾å¯¹è±¡ã€‚
+    Residueï¼šåœ¨è§£æžå¼€å§‹æ—¶ï¼Œä»¥åŠæ¯æ¬¡æ£€æµ‹åˆ°æ®‹åŸºåã€æ®‹åŸºç¼–å·æˆ–æ®‹åŸºæ’å…¥å­—ç¬¦ä¸‰è€…ä¹‹ä¸€å‘ç”Ÿ
+å˜åŒ–æ—¶ï¼ˆä»Žä¸Šä¸€ä¸ªATOMè¡Œåˆ°å½“å‰è¡Œï¼‰ï¼Œéƒ½ä¼šåˆ›å»ºæ–°çš„æ®‹åŸºå¯¹è±¡ã€‚
+    Atomï¼šæ¯æ£€æµ‹åˆ°ä¸€ä¸ªæ–°çš„ATOMè¡Œéƒ½ä¼šåˆ›å»ºä¸€ä¸ªAtomå¯¹è±¡ã€‚
 
-* LoadModelº¯Êý£º
-    Protein£º½âÎö¿ªÊ¼Ç°£¬ÒÔ¼°Ã¿´Î¼ì²âµ½MODEL¹Ø¼ü´ÊÊ±£¬»á´´½¨Ò»¸öÐÂµÄµ°°×¶ÔÏó¡£
-Èç¹û½âÎö¿ªÊ¼Ç°´´½¨µÄµ°°×¶ÔÏóÎª¿Õ£¬Ôò»áÔÚ×îºóµÄ·µ»ØÖµÖÐ±»É¾³ý¡£
-    Chain£º½âÎö¿ªÊ¼Ê±£¬Ã¿´Î¼ì²âµ½Á´Ãû·¢Éú±ä»¯Ê±£¨´ÓÉÏÒ»¸öATOMÐÐµ½µ±Ç°ÐÐ£©£¬ÒÔ¼°
-Ò»¸öÐÂµÄModel³öÏÖÊ±£¬¶¼»á´´½¨ÐÂµÄÁ´¶ÔÏó¡£
-    Residue£º½âÎö¿ªÊ¼Ê±£¬Ã¿´Î¼ì²âµ½²Ð»ùÃû¡¢²Ð»ù±àºÅ»ò²Ð»ù²åÈë×Ö·ûÈýÕßÖ®Ò»·¢Éú±ä
-»¯Ê±£¨´ÓÉÏÒ»¸öATOMÐÐµ½µ±Ç°ÐÐ£©£¬ÒÔ¼°Ò»¸öÐÂµÄModel³öÏÖÊ±£¬¶¼»á´´½¨ÐÂµÄ²Ð»ù¶ÔÏó¡£
-    Atom£ºÃ¿¼ì²âµ½Ò»¸öÐÂµÄATOMÐÐ¶¼»á´´½¨Ò»¸öAtom¶ÔÏó¡£
+* LoadModelå‡½æ•°ï¼š
+    Proteinï¼šè§£æžå¼€å§‹å‰ï¼Œä»¥åŠæ¯æ¬¡æ£€æµ‹åˆ°MODELå…³é”®è¯æ—¶ï¼Œä¼šåˆ›å»ºä¸€ä¸ªæ–°çš„è›‹ç™½å¯¹è±¡ã€‚
+å¦‚æžœè§£æžå¼€å§‹å‰åˆ›å»ºçš„è›‹ç™½å¯¹è±¡ä¸ºç©ºï¼Œåˆ™ä¼šåœ¨æœ€åŽçš„è¿”å›žå€¼ä¸­è¢«åˆ é™¤ã€‚
+    Chainï¼šè§£æžå¼€å§‹æ—¶ï¼Œæ¯æ¬¡æ£€æµ‹åˆ°é“¾åå‘ç”Ÿå˜åŒ–æ—¶ï¼ˆä»Žä¸Šä¸€ä¸ªATOMè¡Œåˆ°å½“å‰è¡Œï¼‰ï¼Œä»¥åŠ
+ä¸€ä¸ªæ–°çš„Modelå‡ºçŽ°æ—¶ï¼Œéƒ½ä¼šåˆ›å»ºæ–°çš„é“¾å¯¹è±¡ã€‚
+    Residueï¼šè§£æžå¼€å§‹æ—¶ï¼Œæ¯æ¬¡æ£€æµ‹åˆ°æ®‹åŸºåã€æ®‹åŸºç¼–å·æˆ–æ®‹åŸºæ’å…¥å­—ç¬¦ä¸‰è€…ä¹‹ä¸€å‘ç”Ÿå˜
+åŒ–æ—¶ï¼ˆä»Žä¸Šä¸€ä¸ªATOMè¡Œåˆ°å½“å‰è¡Œï¼‰ï¼Œä»¥åŠä¸€ä¸ªæ–°çš„Modelå‡ºçŽ°æ—¶ï¼Œéƒ½ä¼šåˆ›å»ºæ–°çš„æ®‹åŸºå¯¹è±¡ã€‚
+    Atomï¼šæ¯æ£€æµ‹åˆ°ä¸€ä¸ªæ–°çš„ATOMè¡Œéƒ½ä¼šåˆ›å»ºä¸€ä¸ªAtomå¯¹è±¡ã€‚
 
 
-¿Õ×Ö¶Î
+ç©ºå­—æ®µ
 ------
 
-½âÎöÊ±»á¶ÔËùÓÐ×Ö·û´®ÊôÐÔ½øÐÐstrip·½·¨´¦Àí£¬¹ÊËùÓÐµÄ¿Õ×Ö¶Î¶¼»á±»½âÎöÎª¿Õ×Ö·û´®¡£
-´ËÐÔÖÊÔÚÉ¸Ñ¡¼°ÊôÐÔÐÞ¸ÄÊ±¿ÉÄÜÓÐÓÃ¡£
+è§£æžæ—¶ä¼šå¯¹æ‰€æœ‰å­—ç¬¦ä¸²å±žæ€§è¿›è¡Œstripæ–¹æ³•å¤„ç†ï¼Œæ•…æ‰€æœ‰çš„ç©ºå­—æ®µéƒ½ä¼šè¢«è§£æžä¸ºç©ºå­—ç¬¦ä¸²ã€‚
+æ­¤æ€§è´¨åœ¨ç­›é€‰åŠå±žæ€§ä¿®æ”¹æ—¶å¯èƒ½æœ‰ç”¨ã€‚
 
 
 __slots__
 ---------
 
-³öÓÚÐÔÄÜµÄ¿¼ÂÇ£¬ËÄ¸ö½á¹¹Àà¶¼¶¨ÒåÁË__slots__£¬¹Ê²»¿ÉÒÔËæÒâÌí¼ÓÏÞ¶¨ÒÔÍâµÄÊôÐÔ¡£
+å‡ºäºŽæ€§èƒ½çš„è€ƒè™‘ï¼Œå››ä¸ªç»“æž„ç±»éƒ½å®šä¹‰äº†__slots__ï¼Œæ•…ä¸å¯ä»¥éšæ„æ·»åŠ é™å®šä»¥å¤–çš„å±žæ€§ã€‚
 
 
-Î´¶¨ÒåÐÐÎª
+æœªå®šä¹‰è¡Œä¸º
 ----------
 
-±¾ÎÄµµÖÐÎ´Ìá¼°µÄ£¬ÒÔ¼°Ã÷ÏÔ²»·ûºÏ²ã¼¶½á¹¹µÄ²Ù×÷£¬Èç¸ø²Ð»ù×·¼ÓÁ´¶ÔÏó£¬µü´úÔ­×Ó¶ÔÏó
-µÈ£¬ÆäÐÐÎª¶¼ÊÇÎ´¶¨ÒåµÄ¡£¿ÉÄÜ»áÒý·¢´íÎó»òÆäËûÎ´ÖªÎÊÌâ¡£³öÓÚÐÔÄÜµÄ¿¼ÂÇ£¬´úÂëÖÐÎ´¶Ô
-µ÷ÓÃÊ±µÄ¸÷ÖÖ²»ºÏÀíÐÐÎª×öÈ«ÃæµÄÀàÐÍ¼ì²éÓëÐÐÎª¼ì²é¡£
+æœ¬æ–‡æ¡£ä¸­æœªæåŠçš„ï¼Œä»¥åŠæ˜Žæ˜¾ä¸ç¬¦åˆå±‚çº§ç»“æž„çš„æ“ä½œï¼Œå¦‚ç»™æ®‹åŸºè¿½åŠ é“¾å¯¹è±¡ï¼Œè¿­ä»£åŽŸå­å¯¹è±¡
+ç­‰ï¼Œå…¶è¡Œä¸ºéƒ½æ˜¯æœªå®šä¹‰çš„ã€‚å¯èƒ½ä¼šå¼•å‘é”™è¯¯æˆ–å…¶ä»–æœªçŸ¥é—®é¢˜ã€‚å‡ºäºŽæ€§èƒ½çš„è€ƒè™‘ï¼Œä»£ç ä¸­æœªå¯¹
+è°ƒç”¨æ—¶çš„å„ç§ä¸åˆç†è¡Œä¸ºåšå…¨é¢çš„ç±»åž‹æ£€æŸ¥ä¸Žè¡Œä¸ºæ£€æŸ¥ã€‚
