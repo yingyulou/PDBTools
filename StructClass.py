@@ -156,12 +156,16 @@ class __NotAtomStructBase(__StructBase):
         for atomObj in self.IGetAtoms():
             atomObj.coord -= centerCoord
 
+        return self
+
 
     def RenumResidues(self, startNum = 1):
 
         for residueObj in self.IGetResidues():
             residueObj.compNum = (startNum, '')
             startNum += 1
+
+        return self
 
 
     def RenumAtoms(self, startNum = 1):
@@ -170,6 +174,8 @@ class __NotAtomStructBase(__StructBase):
             atomObj.num = startNum
             startNum += 1
 
+        return self
+
 
     def Append(self, *appendObjTuple):
 
@@ -177,6 +183,8 @@ class __NotAtomStructBase(__StructBase):
             copyAppendObj = appendObj.Copy()
             copyAppendObj.owner = self
             self.sub.append(copyAppendObj)
+
+        return self
 
 
     def Insert(self, idxNum, *insertObjTuple):
@@ -189,6 +197,8 @@ class __NotAtomStructBase(__StructBase):
             copyInsertObjList.append(copyInsertObj)
 
         self.sub = self.sub[:idxNum] + copyInsertObjList + self.sub[idxNum:]
+
+        return self
 
 
     def FilterAtoms(self, atomName = 'CA', *atomNameTuple):
@@ -522,10 +532,10 @@ class Residue(__NotAtomStructBase, __NotProteinStructBase):
             for resObj in self.owner.sub[:self.idx]:
                 rotationAtomObjList.extend(resObj.sub)
 
-            if dihedralEnum == DIH.L:
+            if dihedralEnum == DIH.R:
                 rotationAtomObjList.extend([atomObj for atomObj in self
                     if atomObj.name not in {'CA', 'C', 'O', 'OXT'}])
-            elif dihedralEnum != DIH.R:
+            elif dihedralEnum != DIH.L:
                 raise ValueError("Argument 'dihedralEnum' must be DIH.(PHI/PSI/L/R)")
 
         elif sideEnum == SIDE.R:

@@ -1,5 +1,14 @@
 PDBTools更新日志
 
+Version 3.2.0
+=============
+
+1. [StructClass] 为MoveCenter，RenumResidues，RenumAtoms，Append，Insert方法增加
+return self
+
+2. [StructClass] 修复GetBBRotationAtomObj方法的错误行为
+
+
 Version 3.0.0
 =============
 

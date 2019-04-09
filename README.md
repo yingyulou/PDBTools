@@ -139,18 +139,18 @@ structObj.FilterAtoms('N', 'CA', 'C')  # 筛选骨架原子
 
 * RenumResidues(self, startNum = 1), RenumAtoms(self, startNum = 1)
 
-对self包含的所有残基/原子进行重编号。startNum参数用于设定起始编号。
+对self包含的所有残基/原子进行重编号。startNum参数用于设定起始编号。返回self。
 
 
 * MoveCenter(self)
 
-整体平移self，使得self的几何中心平移至原点。
+整体平移self，使得self的几何中心平移至原点。返回self。
 
 
 * Append(self, *appendObjTuple), Insert(self, idxNum, *insertObjTuple)
 
 为self追加/插入子结构。所有添加至self的子结构都是原结构对象调用Copy方法得到的拷贝，
-且会与self自动建立从属关系。
+且会与self自动建立从属关系。返回self。
 
 参数：
     *appendObjTuple, *insertObjTuple, *obj：self对应的子结构对象（不定长参数）
