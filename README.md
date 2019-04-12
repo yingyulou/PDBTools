@@ -513,12 +513,13 @@ Atom独有属性
 
 * DIH
 
-枚举变量，表示主链二面角种类。
+枚举变量，表示主链二面角种类。DIH.PHI或DIH.L表示Phi，DIH.PSI或DIH.R表示Psi。
 
 
 * SIDE
 
-枚举变量，表示主链二面角旋转时的转动侧。
+枚举变量，表示主链二面角旋转时的转动侧。SIDE.N或SIDE.L表示转动N端，SIDE.C或SIDE.R
+表示转动C端。
 
 
 * RESIDUE_NAME_THREE_TO_ONE_DICT, RESIDUE_NAME_ONE_TO_THREE_DICT
@@ -533,7 +534,7 @@ Atom独有属性
 --------
 
 解析函数（Load、LoadModel）将完全按照PDB文件中ATOM行的出现顺序对PDB文件进行解析
-与存储。不会进行任何排序过程。
+与存储。不会进行任何排序或重组过程。
 
 Load函数在解析时会跳过任何非ATOM开头的行。而LoadModel函数会跳过任何非ATOM或MODEL
 开头的行。
