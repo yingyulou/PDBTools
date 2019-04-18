@@ -157,6 +157,12 @@ structObj.FilterAtoms('N', 'CA', 'C')  # 筛选骨架原子
     idxNum, int：插入位置索引值
 
 
+* RemoveAlt(self)
+
+一个特殊的操作：遍历self包含的所有原子对象，如果原子对象的alt属性为''，则忽略，
+如果为'A'，则修改为''，否则删除当前原子。返回self。
+
+
 非Protein层级公有方法
 ---------------------
 

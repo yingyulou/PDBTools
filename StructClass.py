@@ -230,6 +230,17 @@ class __NotAtomStructBase(__StructBase):
             if atomObj.name in atomNameList])
 
 
+    def RemoveAlt(self):
+
+        for atomObj in self.GetAtoms():
+            if atomObj.alt == 'A':
+                atomObj.alt = ''
+            elif atomObj.alt:
+                atomObj.Remove()
+
+        return self
+
+
 ################################################################################
 # Not Protein Struct Class Base
 ################################################################################
