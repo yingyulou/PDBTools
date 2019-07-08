@@ -80,7 +80,7 @@ Atom(atomName = '', atomNum = 0, atomCoord = array([0., 0., 0.]), atomAltLoc = '
 
 * Dump(self, dumpFileName, fileMode = 'w')
 
-将self输出到PDB文件。
+将self输出到PDB文件。返回self。
 
 参数：
     dumpFileName, str：输出文件名
@@ -401,11 +401,13 @@ Atom独有属性
 * RotateBBDihedralAngleByDeltaAngle(self, dihedralEnum, sideEnum, deltaAngle)
 
 以旋转角度作为参数直接旋转主链。参数同CalcBBRotationMatrixByDeltaAngle方法。
+返回self。
 
 
 * RotateBBDihedralAngleByTargetAngle(self, dihedralEnum, sideEnum, targetAngle)
 
 以目标角度作为参数直接旋转主链。参数同CalcBBRotationMatrixByTargetAngle方法。
+返回self。
 
 
 侧链二面角
@@ -449,11 +451,13 @@ Atom独有属性
 * RotateSCDihedralAngleByDeltaAngle(self, dihedralIdx, deltaAngle)
 
 以旋转角度作为参数直接旋转侧链。参数同CalcSCRotationMatrixByDeltaAngle方法。
+返回self。
 
 
 * RotateSCDihedralAngleByTargetAngle(self, dihedralIdx, targetAngle)
 
 以目标角度作为参数直接旋转侧链。参数同CalcSCRotationMatrixByTargetAngle方法。
+返回self。
 
 
 数学函数

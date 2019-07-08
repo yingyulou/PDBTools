@@ -1,5 +1,13 @@
 PDBTools更新日志
 
+Version 3.4.2
+=============
+
+1. [StructClass] 为Dump，RotateBBDihedralAngleByDeltaAngle，
+RotateBBDihedralAngleByTargetAngle，RotateSCDihedralAngleByDeltaAngle，
+RotateSCDihedralAngleByTargetAngle方法增加return self
+
+
 Version 3.4.0
 =============
 

@@ -43,6 +43,8 @@ if sys.version_info[0] == 3:
             with open(dumpFileName, fileMode) as fo:
                 fo.write(self.Dumps())
 
+            return self
+
 else:
 
     from abc import ABCMeta, abstractmethod
@@ -67,6 +69,8 @@ else:
 
             with open(dumpFileName, fileMode) as fo:
                 fo.write(self.Dumps())
+
+            return self
 
 
 ################################################################################
@@ -579,6 +583,8 @@ class Residue(__NotAtomStructBase, __NotProteinStructBase):
         for atomObj in rotationAtomObjList:
             atomObj.coord = (atomObj.coord - moveCoord).dot(rotationMatrix) + moveCoord
 
+        return self
+
 
     def RotateBBDihedralAngleByTargetAngle(self, dihedralEnum, sideEnum, targetAngle):
 
@@ -589,6 +595,8 @@ class Residue(__NotAtomStructBase, __NotProteinStructBase):
 
         for atomObj in rotationAtomObjList:
             atomObj.coord = (atomObj.coord - moveCoord).dot(rotationMatrix) + moveCoord
+
+        return self
 
 
     def CalcSCDihedralAngle(self, dihedralIdx):
@@ -643,6 +651,8 @@ class Residue(__NotAtomStructBase, __NotProteinStructBase):
         for atomObj in rotationAtomObjList:
             atomObj.coord = (atomObj.coord - moveCoord).dot(rotationMatrix) + moveCoord
 
+        return self
+
 
     def RotateSCDihedralAngleByTargetAngle(self, dihedralIdx, targetAngle):
 
@@ -651,6 +661,8 @@ class Residue(__NotAtomStructBase, __NotProteinStructBase):
 
         for atomObj in rotationAtomObjList:
             atomObj.coord = (atomObj.coord - moveCoord).dot(rotationMatrix) + moveCoord
+
+        return self
 
 
 ################################################################################
