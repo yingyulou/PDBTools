@@ -12,11 +12,11 @@ DESCRIPTION
 
 VERSION
 
-    3.4.2
+    3.4.4
 
 LATEST UPDATE
 
-    2019.7.8
+    2019.7.10
 
 '''
 
@@ -25,7 +25,8 @@ from .PDBParser import Load, LoadModel
 
 # Math Util
 from .MathUtil import Dis, Norm, CalcVectorAngle, CalcRotationMatrix, \
-    CalcRotationMatrixByTwoVector, CalcDihedralAngle, CalcRMSD, CalcSuperimposeRotationMatrix
+    CalcRotationMatrixByTwoVector, CalcDihedralAngle, CalcRMSD, \
+    CalcSuperimposeRotationMatrix, CalcRMSDAfterSuperimpose
 
 # Struct Class
 from .StructClass import Protein, Chain, Residue, Atom

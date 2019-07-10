@@ -1,5 +1,11 @@
 PDBTools更新日志
 
+Version 3.4.4
+=============
+
+1. [MathUtil] 增加CalcRMSDAfterSuperimpose函数
+
+
 Version 3.4.2
 =============
 

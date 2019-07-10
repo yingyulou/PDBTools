@@ -518,6 +518,16 @@ Atom独有属性
 这样的平移->旋转->平移操作后，与targetCoordArray形成叠合。
 
 
+* CalcRMSDAfterSuperimpose(coordArrayA, coordArrayB)
+
+叠合并计算RMSD。
+
+参数同CalcRMSD函数。
+
+此函数会将coordArrayA通过CalcSuperimposeRotationMatrix函数向coordArrayB进行叠合，
+然后计算两组坐标之间的RMSD。
+
+
 常量
 ====
 

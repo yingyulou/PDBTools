@@ -147,3 +147,16 @@ def CalcSuperimposeRotationMatrix(sourceCoordArray, targetCoordArray):
     rotationMatrix = U.dot(V)
 
     return sourceCenterCoord, rotationMatrix, targetCenterCoord
+
+
+################################################################################
+# Calc RMSD After Superimpose A => B
+################################################################################
+
+def CalcRMSDAfterSuperimpose(coordArrayA, coordArrayB):
+
+    sourceCenterCoord, rotationMatrix, targetCenterCoord = CalcSuperimposeRotationMatrix(
+        coordArrayA, coordArrayB)
+
+    return CalcRMSD((coordArrayA - sourceCenterCoord).dot(rotationMatrix) +
+        targetCenterCoord, coordArrayB)
