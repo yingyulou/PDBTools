@@ -10,7 +10,7 @@ PDB文件在PDBTools中将被解析为4个层级：Protein -> Chain -> Residue -
 
 ### 基本函数
 
-1. Load
+#### 1. Load
 
 ``` Python
 Load(pdbFileName, parseHBool = False)
@@ -27,7 +27,7 @@ Load(pdbFileName, parseHBool = False)
 
 - Protein对象
 
-2. LoadModel
+#### 2. LoadModel
 
 ``` Python
 LoadModel(pdbFileName, parseHBool = False)
@@ -41,7 +41,7 @@ LoadModel(pdbFileName, parseHBool = False)
 
 - Protein对象list
 
-3. Dumpl
+#### 3. Dumpl
 
 ``` Python
 Dumpl(structObjList, dumpFileName, fileMode = 'w')
@@ -55,7 +55,7 @@ Dumpl(structObjList, dumpFileName, fileMode = 'w')
 - dumpFileName, str：PDB文件名
 - fileMode, str：文件句柄打开模式
 
-4. Dumpls
+#### 4. Dumpls
 
 ``` Python
 Dumpls(structObjList)
@@ -63,7 +63,7 @@ Dumpls(structObjList)
 
 得到字符串形式的Dumpl函数输出内容。
 
-5. DumpFastal
+#### 5. DumpFastal
 
 ``` Python
 DumpFastal(structObjList, dumpFileName, fileMode = 'w')
@@ -71,7 +71,7 @@ DumpFastal(structObjList, dumpFileName, fileMode = 'w')
 
 将非Atom层级对象构成的list输出到Fasta文件。参数同Dumpl函数。
 
-6. DumpFastals
+#### 6. DumpFastals
 
 ``` Python
 DumpFastals(structObjList)
@@ -79,7 +79,7 @@ DumpFastals(structObjList)
 
 得到字符串形式的DumpFastal函数输出内容。
 
-7. \_\_init\_\_
+#### 7. \_\_init\_\_
 
 四种结构对象的构造函数定义如下：
 
@@ -97,7 +97,7 @@ Atom(atomName = '', atomNum = 0, atomCoord = array([0., 0., 0.]), atomAltLoc = '
 
 ### 所有层级公有方法
 
-1. Dump
+#### 1. Dump
 
 ``` Python
 Dump(self, dumpFileName, fileMode = 'w')
@@ -110,7 +110,7 @@ Dump(self, dumpFileName, fileMode = 'w')
 - dumpFileName, str：输出文件名
 - fileMode, str：文件句柄打开模式
 
-2. Dumps
+#### 2. Dumps
 
 ``` Python
 Dumps(self)
@@ -118,7 +118,7 @@ Dumps(self)
 
 得到字符串形式的PDB文件内容。
 
-3. Copy
+#### 3. Copy
 
 ``` Python
 Copy(self)
@@ -128,7 +128,7 @@ Copy(self)
 
 ### 非Atom层级公有方法
 
-1. DumpFasta
+#### 1. DumpFasta
 
 ``` Python
 DumpFasta(self, dumpFileName, fileMode = 'w')
@@ -136,7 +136,7 @@ DumpFasta(self, dumpFileName, fileMode = 'w')
 
 将self输出到fasta文件。参数同Dump方法。
 
-2. GetResidues, IGetResidues
+#### 2. GetResidues, IGetResidues
 
 ``` Python
 GetResidues(self)
@@ -145,7 +145,7 @@ IGetResidues(self)
 
 跨层级直接返回self包含的所有残基对象。其中，GetResidues方法返回list，IGetResidues方法返回生成器。
 
-3. GetAtoms, IGetAtoms
+#### 3. GetAtoms, IGetAtoms
 
 ``` Python
 GetAtoms(self)
@@ -154,7 +154,7 @@ IGetAtoms(self)
 
 跨层级直接返回self包含的所有原子对象。其中，GetAtoms方法返回list，IGetAtoms方法返回生成器。
 
-4. FilterAtoms, IFilterAtoms
+#### 4. FilterAtoms, IFilterAtoms
 
 ``` Python
 FilterAtoms(self, atomName = 'CA', *atomNameTuple)
@@ -168,7 +168,7 @@ structObj.FilterAtoms()                 # 筛选CA原子（默认）
 structObj.FilterAtoms('N', 'CA', 'C')   # 筛选骨架原子
 ```
 
-5. GetAtomsCoord
+#### 5. GetAtomsCoord
 
 ``` Python
 GetAtomsCoord(self)
@@ -176,7 +176,7 @@ GetAtomsCoord(self)
 
 跨层级直接返回self包含的所有原子的坐标（N*3 ndarray）。
 
-6. FilterAtomsCoord
+#### 6. FilterAtomsCoord
 
 ``` Python
 FilterAtomsCoord(self, atomName = 'CA', *atomNameTuple)
@@ -184,7 +184,7 @@ FilterAtomsCoord(self, atomName = 'CA', *atomNameTuple)
 
 跨层级直接按一个或多个原子名筛选self包含的所有原子对象，返回筛选后的所有原子的坐标（N*3 ndarray）。
 
-7. RenumResidues, RenumAtoms
+#### 7. RenumResidues, RenumAtoms
 
 ``` Python
 RenumResidues(self, startNum = 1)
@@ -193,7 +193,7 @@ RenumAtoms(self, startNum = 1)
 
 对self包含的所有残基/原子进行重编号。startNum参数用于设定起始编号。返回self。
 
-8. MoveCenter
+#### 8. MoveCenter
 
 ``` Python
 MoveCenter(self)
@@ -201,7 +201,7 @@ MoveCenter(self)
 
 整体平移self，使得self的几何中心平移至原点。返回self。
 
-9. Append, Insert
+#### 9. Append, Insert
 
 ``` Python
 Append(self, *appendObjTuple)
@@ -215,7 +215,7 @@ Insert(self, idxNum, *insertObjTuple)
 - *appendObjTuple, *insertObjTuple, *obj：self对应的子结构对象（不定长参数）
 - idxNum, int：插入位置索引值
 
-10. RemoveAlt
+#### 10. RemoveAlt
 
 ``` Python
 RemoveAlt(self)
@@ -225,7 +225,7 @@ RemoveAlt(self)
 
 ### 非Protein层级公有方法
 
-1. Remove
+#### 1. Remove
 
 ``` Python
 Remove(self)
@@ -235,7 +235,7 @@ Remove(self)
 
 ## 特殊操作
 
-- 迭代
+### 迭代
 
 非Atom对象可直接迭代，从而访问当前层级的子层级对象列表：
 
@@ -246,7 +246,7 @@ for chainObj in structObj:
             pass
 ```
 
-- 切片
+### 切片
 
 非Atom对象可切片：
 
@@ -256,7 +256,7 @@ structObj[0][1:]    # 获取残基对象
 structObj[0][0][0]  # 获取原子对象
 ```
 
-- 长度
+### 长度
 
 非Atom对象可调用len函数，求其子结构列表的长度：
 
@@ -264,13 +264,13 @@ structObj[0][0][0]  # 获取原子对象
 len(structObj)
 ```
 
-- 布尔值
+### 布尔值
 
 非Atom对象的布尔值依据其是否为空结构进行判定。即：如果self.sub为[]，则布尔值为False，否则为True。
 
 Atom对象的布尔值一定为True。
 
-- 欧氏距离
+### 欧氏距离
 
 原子对象重载了减法运算符，用于求两原子之间的欧氏距离：
 
@@ -282,7 +282,7 @@ atomObjA - atomObjB
 
 ### 所有层级公有属性
 
-1. name, str
+#### 1. name, str
 
 此属性对于不同的层级含义不同：
 
@@ -293,33 +293,33 @@ atomObjA - atomObjB
 
 ### 非Atom层级公有属性
 
-1. sub, list
+#### 1. sub, list
 
 self的子层级对象列表
 
-2. center, ndarray (只读)
+#### 2. center, ndarray (只读)
 
 self的所有原子坐标几何中心。
 
-3. seq, str (只读)
+#### 3. seq, str (只读)
 
 self的残基序列
 
-4. fasta, str (只读)
+#### 4. fasta, str (只读)
 
 self的fasta文件字符串
 
 ### 非Protein层级公有属性
 
-1. owner, obj
+#### 1. owner, obj
 
 self的父级对象
 
-2. idx, int (只读)
+#### 2. idx, int (只读)
 
 self在其owner的sub中的索引值
 
-3. pre, next, obj (只读)
+#### 3. pre, next, obj (只读)
 
 self的前/后一个同层级对象
 
@@ -327,14 +327,14 @@ self的前/后一个同层级对象
 
 ### 其他公有属性
 
-1. subDict, dict (只读)
+#### 1. subDict, dict (只读)
 
 Protein与Residue层级公有，含义分别为：
 
 - Protein：由self的所有链对象组成的链名-链对象哈希表
 - Residue：由self的所有原子对象组成的原子名-原子对象哈希表
 
-2. num, int
+#### 2. num, int
 
 Residue与Atom层级公有，含义分别为：
 
@@ -343,11 +343,11 @@ Residue与Atom层级公有，含义分别为：
 
 ### Residue独有属性
 
-1. ins, str
+#### 1. ins, str
 
 残基插入字符
 
-2. compNum, str (特殊方式写)
+#### 2. compNum, str (特殊方式写)
 
 残基序号 + 残基插入字符
 
@@ -357,33 +357,33 @@ Residue与Atom层级公有，含义分别为：
 resObj.compNum = (1, '')
 ```
 
-3. coordDict, dict (只读)
+#### 3. coordDict, dict (只读)
 
 由self的所有原子组成的原子名-原子坐标哈希表
 
 ### Atom独有属性
 
-1. coord, ndarray
+#### 1. coord, ndarray
 
 原子坐标
 
-2. alt, str
+#### 2. alt, str
 
 备用位置指示符
 
-3. occ, str
+#### 3. occ, str
 
 占有
 
-4. tempF, str
+#### 4. tempF, str
 
 温度因子
 
-5. ele, str
+#### 5. ele, str
 
 元素符号
 
-6. chg, str
+#### 6. chg, str
 
 电荷
 
@@ -395,7 +395,7 @@ resObj.compNum = (1, '')
 
 **对主链进行操作时请注意：最靠近N端与C端的两个残基分别无法进行二面角PHI与PSI的计算或调整（因为这两个二面角不存在）。如果出现上述情况，则抛出IndexError。**
 
-1. CalcBBDihedralAngle
+#### 1. CalcBBDihedralAngle
 
 ``` Python
 CalcBBDihedralAngle(self, dihedralEnum)
@@ -407,7 +407,7 @@ CalcBBDihedralAngle(self, dihedralEnum)
 
 - dihedralEnum, DIH：主链二面角种类。DIH.PHI或DIH.L表示Phi，DIH.PSI或DIH.R表示Psi。
 
-2. CalcBBRotationMatrixByDeltaAngle
+#### 2. CalcBBRotationMatrixByDeltaAngle
 
 ``` Python
 CalcBBRotationMatrixByDeltaAngle(self, dihedralEnum, sideEnum, deltaAngle)
@@ -426,7 +426,7 @@ CalcBBRotationMatrixByDeltaAngle(self, dihedralEnum, sideEnum, deltaAngle)
 - moveCoord, ndarray(1*3)：旋转前/后平移向量
 - rotationMatrix, ndarray(3*3)：旋转矩阵
 
-3. CalcBBRotationMatrixByTargetAngle
+#### 3. CalcBBRotationMatrixByTargetAngle
 
 ``` Python
 CalcBBRotationMatrixByTargetAngle(self, dihedralEnum, sideEnum, targetAngle)
@@ -436,7 +436,7 @@ CalcBBRotationMatrixByTargetAngle(self, dihedralEnum, sideEnum, targetAngle)
 
 参数与返回值同CalcBBRotationMatrixByDeltaAngle方法。但targetAngle表示目标角度。
 
-4. GetBBRotationAtomObj
+#### 4. GetBBRotationAtomObj
 
 ``` Python
 GetBBRotationAtomObj(self, dihedralEnum, sideEnum)
@@ -448,7 +448,7 @@ GetBBRotationAtomObj(self, dihedralEnum, sideEnum)
 
 - rotationAtomObjList, list：原子对象list
 
-5. RotateBBDihedralAngleByDeltaAngle
+#### 5. RotateBBDihedralAngleByDeltaAngle
 
 ``` Python
 RotateBBDihedralAngleByDeltaAngle(self, dihedralEnum, sideEnum, deltaAngle)
@@ -456,7 +456,7 @@ RotateBBDihedralAngleByDeltaAngle(self, dihedralEnum, sideEnum, deltaAngle)
 
 以旋转角度作为参数直接旋转主链。参数同CalcBBRotationMatrixByDeltaAngle方法。返回self。
 
-6. RotateBBDihedralAngleByTargetAngle
+#### 6. RotateBBDihedralAngleByTargetAngle
 
 ``` Python
 RotateBBDihedralAngleByTargetAngle(self, dihedralEnum, sideEnum, targetAngle)
@@ -468,7 +468,7 @@ RotateBBDihedralAngleByTargetAngle(self, dihedralEnum, sideEnum, targetAngle)
 
 **对侧链进行调整时请注意：GLY、ALA残基由于不存在侧链二面角，不可调用下列方法。且不可使用不存在的侧链二面角索引值调用下列方法。如果出现上述情况，则抛出IndexError。**
 
-1. CalcSCDihedralAngle
+#### 1. CalcSCDihedralAngle
 
 ``` Python
 CalcSCDihedralAngle(self, dihedralIdx)
@@ -480,7 +480,7 @@ CalcSCDihedralAngle(self, dihedralIdx)
 
 - dihedralIdx, int：侧链二面角索引值。索引值从0开始编号，最大允许索引值根据残基种类而不同。索引值表示某个残基从主链到侧链方向上的第N个侧链二面角。
 
-2. CalcSCRotationMatrixByDeltaAngle
+#### 2. CalcSCRotationMatrixByDeltaAngle
 
 ``` Python
 CalcSCRotationMatrixByDeltaAngle(self, dihedralIdx, deltaAngle)
@@ -495,7 +495,7 @@ CalcSCRotationMatrixByDeltaAngle(self, dihedralIdx, deltaAngle)
 
 返回值同CalcBBRotationMatrixByDeltaAngle方法。
 
-3. CalcSCRotationMatrixByTargetAngle
+#### 3. CalcSCRotationMatrixByTargetAngle
 
 ``` Python
 CalcSCRotationMatrixByTargetAngle(self, dihedralIdx, targetAngle)
@@ -503,14 +503,14 @@ CalcSCRotationMatrixByTargetAngle(self, dihedralIdx, targetAngle)
 
 以目标角度作为参数，计算侧链旋转矩阵。参数与返回值同CalcSCRotationMatrixByDeltaAngle方法。但targetAngle表示目标角度。
 
-4. GetSCRotationAtomObj
+#### 4. GetSCRotationAtomObj
 ``` Python
 GetSCRotationAtomObj(self, dihedralIdx)
 ```
 
 获取以给定侧链二面角进行旋转时，所有需要旋转的原子对象。参数同CalcSCDihedralAngle方法。返回值同GetBBRotationAtomObj方法。
 
-5. RotateSCDihedralAngleByDeltaAngle
+#### 5. RotateSCDihedralAngleByDeltaAngle
 
 ``` Python
 RotateSCDihedralAngleByDeltaAngle(self, dihedralIdx, deltaAngle)
@@ -518,7 +518,7 @@ RotateSCDihedralAngleByDeltaAngle(self, dihedralIdx, deltaAngle)
 
 以旋转角度作为参数直接旋转侧链。参数同CalcSCRotationMatrixByDeltaAngle方法。返回self。
 
-6. RotateSCDihedralAngleByTargetAngle
+#### 6. RotateSCDihedralAngleByTargetAngle
 
 ``` Python
 RotateSCDihedralAngleByTargetAngle(self, dihedralIdx, targetAngle)
@@ -528,7 +528,7 @@ RotateSCDihedralAngleByTargetAngle(self, dihedralIdx, targetAngle)
 
 ## 数学函数
 
-1. Dis
+#### 1. Dis
 
 ``` Python
 Dis(coordA, coordB)
@@ -536,7 +536,7 @@ Dis(coordA, coordB)
 
 计算两个三维坐标之间的欧式距离。
 
-2. Norm
+#### 2. Norm
 
 ``` Python
 Norm(coordArray)
@@ -544,7 +544,7 @@ Norm(coordArray)
 
 计算一个三维坐标的二范数。
 
-3. CalcVectorAngle
+#### 3. CalcVectorAngle
 
 ``` Python
 CalcVectorAngle(coordA, coordB)
@@ -552,7 +552,7 @@ CalcVectorAngle(coordA, coordB)
 
 计算两向量夹角，返回角度（0 ~ pi）。
 
-4. CalcRotationMatrix
+#### 4. CalcRotationMatrix
 
 ``` Python
 CalcRotationMatrix(rotationAxis, rotationAngle)
@@ -565,7 +565,7 @@ CalcRotationMatrix(rotationAxis, rotationAngle)
 - rotationAxis, ndarray(1*3)：旋转轴向量，无需缩放至单位长度
 - rotationAngle, float：旋转角
 
-5. CalcRotationMatrixByTwoVector
+#### 5. CalcRotationMatrixByTwoVector
 
 ``` Python
 CalcRotationMatrixByTwoVector(coordA, coordB)
@@ -573,7 +573,7 @@ CalcRotationMatrixByTwoVector(coordA, coordB)
 
 计算从向量A旋转至向量B所需要的旋转矩阵。
 
-6. CalcDihedralAngle
+#### 6. CalcDihedralAngle
 
 ``` Python
 CalcDihedralAngle(coordA, coordB, coordC, coordD)
@@ -591,7 +591,7 @@ CalcRMSD(coordArrayA, coordArrayB)
 
 - coordArrayA, coordArrayB, ndarray(N*3)：两组由三维坐标组成的等长二维数组
 
-7. CalcSuperimposeRotationMatrix
+#### 7. CalcSuperimposeRotationMatrix
 
 ``` Python
 CalcSuperimposeRotationMatrix(sourceCoordArray, targetCoordArray)
@@ -605,7 +605,7 @@ CalcSuperimposeRotationMatrix(sourceCoordArray, targetCoordArray)
 
 返回值为平移向量sourceCenterCoord，旋转矩阵rotationMatrix，以及平移向量targetCenterCoord。使得sourceCoordArray通过(sourceCoordArray - sourceCenterCoord).dot(rotationMatrix) + targetCenterCoord这样的平移->旋转->平移操作后，与targetCoordArray形成叠合。
 
-8. CalcRMSDAfterSuperimpose
+#### 8. CalcRMSDAfterSuperimpose
 
 ``` Python
 CalcRMSDAfterSuperimpose(coordArrayA, coordArrayB)
@@ -619,15 +619,15 @@ CalcRMSDAfterSuperimpose(coordArrayA, coordArrayB)
 
 ## 常量
 
-1. DIH
+#### 1. DIH
 
 枚举变量，表示主链二面角种类。DIH.PHI或DIH.L表示Phi，DIH.PSI或DIH.R表示Psi。
 
-2. SIDE
+#### 2. SIDE
 
 枚举变量，表示主链二面角旋转时的转动侧。SIDE.N或SIDE.L表示转动N端，SIDE.C或SIDE.R表示转动C端。
 
-3. RESIDUE\_NAME\_THREE\_TO\_ONE\_DICT, RESIDUE\_NAME\_ONE\_TO\_THREE\_DICT
+#### 3. RESIDUE\_NAME\_THREE\_TO\_ONE\_DICT, RESIDUE\_NAME\_ONE\_TO\_THREE\_DICT
 
 三字母，单字母残基名的相互转换哈希表。
 
@@ -640,14 +640,14 @@ CalcRMSDAfterSuperimpose(coordArrayA, coordArrayB)
 
 ### 对于创建新层级对象的判定
 
-1. Load函数：
+#### 1. Load函数：
 
 - Protein：只会在解析开始前创建唯一的一个，并最终返回这个对象。
 - Chain：在解析开始时，以及每次检测到链名发生变化时（从上一个ATOM行到当前行），都会创建新的链对象。
 - Residue：在解析开始时，以及每次检测到残基名、残基编号或残基插入字符三者之一发生变化时（从上一个ATOM行到当前行），都会创建新的残基对象。
 - Atom：每检测到一个新的ATOM行都会创建一个Atom对象。
 
-2. LoadModel函数：
+#### 2. LoadModel函数：
 
 - Protein：解析开始前，以及每次检测到MODEL关键词时，会创建一个新的蛋白对象。如果解析开始前创建的蛋白对象为空，则会在最后的返回值中被删除。
 - Chain：解析开始时，每次检测到链名发生变化时（从上一个ATOM行到当前行），以及一个新的Model出现时，都会创建新的链对象。
