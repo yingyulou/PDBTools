@@ -581,6 +581,8 @@ CalcDihedralAngle(coordA, coordB, coordC, coordD)
 
 计算二面角。返回有符号角度（-pi ~ pi）。
 
+#### 7. CalcRMSD
+
 ``` Python
 CalcRMSD(coordArrayA, coordArrayB)
 ```
@@ -591,7 +593,7 @@ CalcRMSD(coordArrayA, coordArrayB)
 
 - coordArrayA, coordArrayB, ndarray(N*3)：两组由三维坐标组成的等长二维数组
 
-#### 7. CalcSuperimposeRotationMatrix
+#### 8. CalcSuperimposeRotationMatrix
 
 ``` Python
 CalcSuperimposeRotationMatrix(sourceCoordArray, targetCoordArray)
@@ -605,7 +607,7 @@ CalcSuperimposeRotationMatrix(sourceCoordArray, targetCoordArray)
 
 返回值为平移向量sourceCenterCoord，旋转矩阵rotationMatrix，以及平移向量targetCenterCoord。使得sourceCoordArray通过(sourceCoordArray - sourceCenterCoord).dot(rotationMatrix) + targetCenterCoord这样的平移->旋转->平移操作后，与targetCoordArray形成叠合。
 
-#### 8. CalcRMSDAfterSuperimpose
+#### 9. CalcRMSDAfterSuperimpose
 
 ``` Python
 CalcRMSDAfterSuperimpose(coordArrayA, coordArrayB)
