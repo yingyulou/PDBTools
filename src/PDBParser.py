@@ -9,14 +9,14 @@
 
 # Import Python Lib
 from os.path import splitext, basename
-from re import compile
 from numpy import array
 
 # Import PDBTools
-from .StructClass import Protein, Chain, Residue, Atom
-
-# Global Variable Define
-CONST_H_RE = compile(r'\d*H')
+from ProteinClass import Protein
+from ChainClass import Chain
+from ResidueClass import Residue
+from AtomClass import Atom
+from StructConst import __H_RE
 
 ################################################################################
 # Parse PDB File
@@ -40,7 +40,7 @@ def Load(pdbFilePath, parseHBool = False):
 
             atomName = line[12:16].strip()
 
-            if CONST_H_RE.match(atomName) and not parseHBool:
+            if __H_RE.match(atomName) and not parseHBool:
                 continue
 
             atomNum        = int(line[6:11])
@@ -107,7 +107,7 @@ def LoadModel(pdbFilePath, parseHBool = False):
 
             atomName = line[12:16].strip()
 
-            if CONST_H_RE.match(atomName) and not parseHBool:
+            if __H_RE.match(atomName) and not parseHBool:
                 continue
 
             atomNum        = int(line[6:11])

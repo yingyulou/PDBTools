@@ -322,9 +322,9 @@ resObj = Residue("X")
 atomObj = Atom("X", 0, np.array((0., 0., 0.)), "", "", "", "", "", resObj)
 ```
 
-### 非Atom层级特殊成员函数
+### 特殊成员函数
 
-#### 1. \_\_iter\_\_
+#### 1. \_\_iter\_\_（仅限非Atom层级）
 
 ``` Python
 __iter__(self)
