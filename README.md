@@ -160,7 +160,7 @@ self包含的所有原子对象。
 
 ``` Python
 proObj = Load('xxxx.pdb')
-proObj[0][0].compNum = (0, "")
+proObj[0][0].compNum = (0, '')
 ```
 
 #### 7. \<dict\<str, Atom\>\> subDict, 只读
@@ -244,7 +244,7 @@ self在self.owner.sub中的前/后一个同级对象，如果不存在这样的�
 #### 1. Protein构造函数
 
 ``` Python
-__init__(self, proteinID = "")
+__init__(self, proteinID = '')
 ```
 
 #### 参数：
@@ -254,13 +254,13 @@ __init__(self, proteinID = "")
 #### 例：
 
 ``` Python
-proObj = Protein("xxxx")
+proObj = Protein('xxxx')
 ```
 
 #### 2. Chain构造函数
 
 ``` Python
-__init__(self, chainName = "", owner = None)
+__init__(self, chainName = '', owner = None)
 ```
 
 #### 参数：
@@ -271,14 +271,14 @@ __init__(self, chainName = "", owner = None)
 #### 例：
 
 ``` Python
-proObj = Protein("xxxx")
-chainObj = Chain("X", proObj)
+proObj = Protein('xxxx')
+chainObj = Chain('X', proObj)
 ```
 
 #### 3. Residue构造函数
 
 ``` Python
-__init__(self, resName = "", resNum = 0, resIns = "", owner = None)
+__init__(self, resName = '', resNum = 0, resIns = '', owner = None)
 ```
 
 #### 参数：
@@ -291,16 +291,16 @@ __init__(self, resName = "", resNum = 0, resIns = "", owner = None)
 #### 例：
 
 ``` Python
-chainObj = Chain("X")
-resObj = Residue("XXX", 0, "", chainObj)
+chainObj = Chain('X')
+resObj = Residue('XXX', 0, '', chainObj)
 ```
 
 #### 4. Atom构造函数
 
 ``` Python
-__init__(self, atomName = "", atomNum = 0, atomCoord = array([0., 0., 0.]),
-    atomAltLoc = "", atomOccupancy = "", atomTempFactor = "", atomElement = "",
-    atomCharge = "", owner = None)
+__init__(self, atomName = '', atomNum = 0, atomCoord = array([0., 0., 0.]),
+    atomAltLoc = '', atomOccupancy = '', atomTempFactor = '', atomElement = '',
+    atomCharge = '', owner = None)
 ```
 
 #### 参数：
@@ -318,8 +318,8 @@ __init__(self, atomName = "", atomNum = 0, atomCoord = array([0., 0., 0.]),
 #### 例：
 
 ``` Python
-resObj = Residue("X")
-atomObj = Atom("X", 0, np.array((0., 0., 0.)), "", "", "", "", "", resObj)
+resObj = Residue('X')
+atomObj = Atom('X', 0, np.array((0., 0., 0.)), '', '', '', '', '', resObj)
 ```
 
 ### 特殊成员函数
@@ -484,17 +484,17 @@ GetAtoms(self)
 
 IGetAtoms(self)
 
-FilterAtoms(self, atomName = "CA", *atomNameTuple)
+FilterAtoms(self, atomName = 'CA', *atomNameTuple)
 
-IFilterAtoms(self, atomName = "CA", *atomNameTuple)
+IFilterAtoms(self, atomName = 'CA', *atomNameTuple)
 
 GetAtomsCoord(self)
 
 IGetAtomsCoord(self)
 
-FilterAtomsCoord(self, atomName = "CA", *atomNameTuple)
+FilterAtomsCoord(self, atomName = 'CA', *atomNameTuple)
 
-IFilterAtomsCoord(self, atomName = "CA", *atomNameTuple)
+IFilterAtomsCoord(self, atomName = 'CA', *atomNameTuple)
 ```
 
 跨层级直接返回self包含的所有，或按原子的name属性筛选后的原子对象或原子坐标。
@@ -516,14 +516,14 @@ IFilterAtomsCoord(self, atomName = "CA", *atomNameTuple)
 proObj = Load('xxxx.pdb')
 
 atomObjList = proObj.GetAtoms()
-filterAtomObjList = proObj.FilterAtoms("N", "CA", "C")
+filterAtomObjList = proObj.FilterAtoms('N', 'CA', 'C')
 atomCoordList = proObj.GetAtomsCoord()
-filterAtomCoordList = proObj.FilterAtomsCoord("N", "CA", "C")
+filterAtomCoordList = proObj.FilterAtomsCoord('N', 'CA', 'C')
 
 atomObjIter = proObj.IGetAtoms()
-filterAtomObjIter = proObj.IFilterAtoms("N", "CA", "C")
+filterAtomObjIter = proObj.IFilterAtoms('N', 'CA', 'C')
 atomCoordIter = proObj.IGetAtomsCoord()
-filterAtomCoordIter = proObj.IFilterAtomsCoord("N", "CA", "C")
+filterAtomCoordIter = proObj.IFilterAtomsCoord('N', 'CA', 'C')
 ```
 
 #### 3. MoveCenter
@@ -630,7 +630,7 @@ proObj.Append(proObj.sub[0]).Insert(0, proObj.sub[0])
 RemoveAlt(self)
 ```
 
-遍历self包含的所有原子对象，如果原子对象的alt属性为""，则忽略，如果为"A"，则修改为""，否则删除当前原子。
+遍历self包含的所有原子对象，如果原子对象的alt属性为''，则忽略，如果为'A'，则修改为''，否则删除当前原子。
 
 #### 参数：
 
