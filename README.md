@@ -573,7 +573,7 @@ proObj = Load('xxxx.pdb')
 proObj.DumpFasta('xxxx.fasta')
 ```
 
-#### 8. RenumResidues, RenumAtoms
+#### 5. RenumResidues, RenumAtoms
 
 ``` Python
 RenumResidues(self, startNum = 1)
@@ -598,7 +598,7 @@ proObj = Load('xxxx.pdb')
 proObj.RenumResidues().RenumAtoms()
 ```
 
-#### 9. Append, Insert
+#### 6. Append, Insert
 
 ``` Python
 Append(self, *subObjTuple)
@@ -624,7 +624,7 @@ proObj = Load('xxxx.pdb')
 proObj.Append(proObj.sub[0]).Insert(0, proObj.sub[0])
 ```
 
-#### 10. RemoveAlt
+#### 7. RemoveAlt
 
 ``` Python
 RemoveAlt(self)
