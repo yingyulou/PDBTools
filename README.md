@@ -1,16 +1,26 @@
 # PDBTools
 
-PDB文件层级化解析与坐标线性代数运算工具集。
+PDB文件解析与坐标线性代数运算工具集。
 
-PDB文件在PDBTools中将被解析为4个层级：Protein -> Chain -> Residue -> Atom
+PDB文件在PDBTools中将被解析为4个层级：Protein -\> Chain -\> Residue -\> Atom
 
-**请注意：本文档中所有的“角度”均指弧度制角度；所有的“旋转矩阵”均指右乘旋转矩阵。**
+**本文档中所有的“角度”均指弧度制角度；所有的“旋转矩阵”均指右乘旋转矩阵。**
 
-## 基本函数与方法
+## 使用说明
 
-### 基本函数
+- PDBTools依赖Numpy以及Enum（仅Python2）
 
-#### 1. Load
+- 导入"PDBTools"即可使用：
+
+``` Python
+import PDBTools
+```
+
+- PDBTools的所有接口均位于名称空间PDBTools下
+
+## PDB文件解析函数
+
+### 1. Load
 
 ``` Python
 Load(pdbFileName, parseHBool = False)
@@ -18,97 +28,379 @@ Load(pdbFileName, parseHBool = False)
 
 将PDB文件解析为Protein对象。
 
-参数：
+#### 参数：
 
-- pdbFileName, str：PDB文件名
-- parseHBool, bool：是否开启氢原子解析
+- \<str\> pdbFilePath：PDB文件路径
+- \<bool\> parseHBool：是否开启氢原子解析
 
-返回值：
+#### 返回值：
 
-- Protein对象
+- \<Protein\> Protein对象
 
-#### 2. LoadModel
-
-``` Python
-LoadModel(pdbFileName, parseHBool = False)
-```
-
-将含有MODEL关键词的PDB解析为Protein对象list，这些蛋白对象的name属性将被设置为：PDB文件名（不包含".pdb"）+ '\_MODEL\_' + MODEL编号。参数同Load函数。
-
-如果PDB中不含MODEL关键词，或第一个MODEL关键词之前仍具有ATOM行，则这部分原子将被解析至返回值list的第一个元素中，其name属性将被设置为PDB文件名（不包含".pdb"）。
-
-返回值：
-
-- Protein对象list
-
-#### 3. Dumpl
+#### 例：
 
 ``` Python
-Dumpl(structObjList, dumpFileName, fileMode = 'w')
+proObj = Load('xxxx.pdb')
 ```
 
-将任何层级对象构成的list输出到PDB文件。
-
-参数：
-
-- structObjList, list：层级对象构成的list
-- dumpFileName, str：PDB文件名
-- fileMode, str：文件句柄打开模式
-
-#### 4. Dumpls
+### 2. LoadModel
 
 ``` Python
-Dumpls(structObjList)
+LoadModel(pdbFilePath, parseHBool = False)
 ```
 
-得到字符串形式的Dumpl函数输出内容。
+将含有"MODEL"关键词的PDB文件解析为Protein对象list，这些Protein对象的name属性将被设置为：PDB文件名（不包含".pdb"）+ "\_MODEL\_" + MODEL编号。
 
-#### 5. DumpFastal
+如果PDB中不含"MODEL"关键词，或第一个"MODEL"关键词之前仍具有"ATOM"行，则这部分数据将被解析至返回值list的第一个元素中，此Protein对象的name属性将被设置为PDB文件名（不包含".pdb"）。
+
+#### 参数：
+
+- \<str\> pdbFilePath：PDB文件路径
+- \<bool\> parseHBool：是否开启氢原子解析
+
+#### 返回值：
+
+- \<list\<Protein\>\> Protein对象构成的list
+
+#### 例：
 
 ``` Python
-DumpFastal(structObjList, dumpFileName, fileMode = 'w')
+proObjList = LoadModel('xxxx.pdb')
 ```
 
-将非Atom层级对象构成的list输出到Fasta文件。参数同Dumpl函数。
+## 属性
 
-#### 6. DumpFastals
+### Protein属性
+
+#### 1. \<str\> name
+
+PDB文件名（不包含".pdb"）。
+
+#### 2. \<list\<Chain\>\> sub
+
+self包含的所有链对象。
+
+#### 3. \<dict\<str, Chain\>\> subDict
+
+self包含的所有{链名：链对象}哈希表。
+
+#### 4. \<np.ndarray(1 * 3)\> center, 只读
+
+self包含的所有原子的几何中心。
+
+#### 5. \<str\> seq, 只读
+
+self的残基序列。
+
+#### 6. \<str\> fasta, 只读
+
+self的字符串形式的Fasta文件内容，title为self.name。
+
+### Chain属性
+
+#### 1. \<str\> name
+
+链名。
+
+#### 2. \<Protein\> owner
+
+self所属的Protein。
+
+#### 3. \<list\<Residue\>\> sub
+
+self包含的所有残基对象。
+
+#### 4. \<np.ndarray(1 * 3)\> center, 只读
+
+self包含的所有原子的几何中心。
+
+#### 5. \<str\> seq, 只读
+
+self的残基序列。
+
+#### 6. \<str\> fasta, 只读
+
+self的字符串形式的Fasta文件内容，title为self.name。
+
+#### 7. \<int\> idx, 只读
+
+self在self.owner.sub中的索引值。
+
+#### 8. \<Chain\> pre, next, 只读
+
+self在self.owner.sub中的前/后一个同级对象，如果不存在这样的对象（self是self.owner.sub中的第一个或最后一个元素），则将抛出IndexError异常。
+
+### Residue属性
+
+#### 1. \<str\> name
+
+残基名。
+
+#### 2. \<int\> num
+
+残基编号。
+
+#### 3. \<str\> ins
+
+残基插入字符。
+
+#### 4. \<Chain\> owner
+
+self所属的Chain。
+
+#### 5. \<list\<Atom\>\> sub
+
+self包含的所有原子对象。
+
+#### 6. \<str\> compNum
+
+同时获取/设定残基对象的num + ins属性。
+
+使用以下方式设定属性：
 
 ``` Python
-DumpFastals(structObjList)
+proObj = Load('xxxx.pdb')
+proObj[0][0].compNum = (0, "")
 ```
 
-得到字符串形式的DumpFastal函数输出内容。
+#### 7. \<dict\<str, Atom\>\> subDict, 只读
 
-#### 7. \_\_init\_\_
+self包含的所有{原子名：原子对象}哈希表。
 
-四种结构对象的构造函数定义如下：
+#### 8. \<dict\<str, np.ndarray(1 * 3)\>\> coordDict, 只读
+
+self包含的所有{原子名：原子坐标}哈希表。
+
+#### 9. \<np.ndarray(1 * 3)\> center, 只读
+
+self包含的所有原子的几何中心。
+
+#### 10. \<str\> seq, 只读
+
+self的残基序列。
+
+#### 11. \<str\> fasta, 只读
+
+self的字符串形式的Fasta文件内容，title为self.name。
+
+#### 12. \<int\> idx, 只读
+
+self在self.owner.sub中的索引值。
+
+#### 13. \<Residue\> pre, next, 只读
+
+self在self.owner.sub中的前/后一个同级对象，如果不存在这样的对象（self是self.owner.sub中的第一个或最后一个元素），则将抛出IndexError异常。
+
+### Atom属性
+
+#### 1. \<str\> name
+
+原子名。
+
+#### 2. \<int\> num
+
+原子编号。
+
+#### 3. \<np.ndarray(1 * 3)\> coord
+
+原子坐标。
+
+#### 4. \<str\> alt
+
+备用位置指示符。
+
+#### 5. \<str\> occ
+
+占有。
+
+#### 6. \<str\> tempF
+
+温度因子。
+
+#### 7. \<str\> ele
+
+元素符号。
+
+#### 8. \<str\> chg
+
+电荷。
+
+#### 9. \<Residue\> owner
+
+self所属的Residue。
+
+#### 10. \<int\> idx, 只读
+
+self在self.owner.sub中的索引值。
+
+#### 11. \<Atom\> pre, next, 只读
+
+self在self.owner.sub中的前/后一个同级对象，如果不存在这样的对象（self是self.owner.sub中的第一个或最后一个元素），则将抛出IndexError异常。
+
+## 成员函数
+
+### 构造函数
+
+#### 1. Protein构造函数
 
 ``` Python
-Protein(proteinID = '')
-
-Chain(chainName = '', owner = None)
-
-Residue(resName = '', resNum = 0, resIns = '', owner = None)
-
-Atom(atomName = '', atomNum = 0, atomCoord = array([0., 0., 0.]), atomAltLoc = '', atomOccupancy = '', atomTempFactor = '', atomElement = '', atomCharge = '', owner = None)
+__init__(self, proteinID = "")
 ```
 
-当调用这些构造函数时，如果owner不为None，则构造函数将自动在owner与新结构对象之间建立从属关系。
+#### 参数：
 
-### 所有层级公有方法
+- \<str\> proteinID：蛋白名，用于初始化name属性
+
+#### 例：
+
+``` Python
+proObj = Protein("xxxx")
+```
+
+#### 2. Chain构造函数
+
+``` Python
+__init__(self, chainName = "", owner = None)
+```
+
+#### 参数：
+
+- \<str\> chainName, ：链名，用于初始化name属性
+- \<Protein\> \_\_owner：self的所属Protein，用于初始化owner属性。如果owner不为None，则构造函数将自动在owner与self之间建立从属关系
+
+#### 例：
+
+``` Python
+proObj = Protein("xxxx")
+chainObj = Chain("X", proObj)
+```
+
+#### 3. Residue构造函数
+
+``` Python
+__init__(self, resName = "", resNum = 0, resIns = "", owner = None)
+```
+
+#### 参数：
+
+- \<str\> resName：残基名，用于初始化name属性
+- \<int\> resNum：残基编号，用于初始化num属性
+- \<str\> resIns：残基插入字符，用于初始化ins属性
+- \<Chain\> \_\_owner：self的所属Chain，用于初始化owner属性。如果owner不为None，则构造函数将自动在owner与self之间建立从属关系
+
+#### 例：
+
+``` Python
+chainObj = Chain("X")
+resObj = Residue("XXX", 0, "", chainObj)
+```
+
+#### 4. Atom构造函数
+
+``` Python
+__init__(self, atomName = "", atomNum = 0, atomCoord = array([0., 0., 0.]),
+    atomAltLoc = "", atomOccupancy = "", atomTempFactor = "", atomElement = "",
+    atomCharge = "", owner = None)
+```
+
+#### 参数：
+
+- \<str\> atomName：原子名，用于初始化name属性
+- \<int\> atomNum：原子编号，用于初始化num属性
+- \<np.ndarray(1 * 3)\> atomCoord：原子坐标，用于初始化coord属性
+- \<str\> atomAltLoc：备用位置指示符，用于初始化alt属性
+- \<str\> atomOccupancy：占有，用于初始化occ属性
+- \<str\> atomTempFactor：温度因子，用于初始化tempF属性
+- \<str\> atomElement：元素符号，用于初始化ele属性
+- \<str\> atomCharge：电荷，用于初始化chg属性
+- \<Residue\> \_\_owner：self的所属Residue，用于初始化owner属性。如果owner不为None，则构造函数将自动在owner与self之间建立从属关系
+
+#### 例：
+
+``` Python
+resObj = Residue("X")
+atomObj = Atom("X", 0, np.array((0., 0., 0.)), "", "", "", "", "", resObj)
+```
+
+### 非Atom层级特殊成员函数
+
+#### 1. \_\_iter\_\_
+
+``` Python
+__iter__(self)
+```
+
+获取sub属性的迭代器。
+
+#### 例：
+
+``` Python
+proObj = Load('xxxx.pdb')
+
+for chainObj in proObj:
+    for resObj in chainObj:
+        for atomObj in resObj:
+            pass
+```
+
+#### 2. \_\_len\_\_
+
+``` Python
+__len__(self)
+```
+
+获取sub属性的长度。
+
+#### 例：
+
+``` Python
+proObj = Load('xxxx.pdb')
+subLen = len(proObj)
+```
+
+#### 3. \_\_getitem\_\_, \_\_setitem\_\_
+
+``` Python
+__getitem__(self, sliceObj)
+
+__setitem__(self, sliceObj, setValue)
+```
+
+通过索引值获取/设定sub属性中的元素。
+
+#### 例：
+
+``` Python
+proObj = Load('xxxx.pdb')
+atomObj = proObj[0][0][0]
+proObj[0] = proObj[1].Copy()
+```
+
+### 所有层级公有成员函数
 
 #### 1. Dump
 
 ``` Python
-Dump(self, dumpFileName, fileMode = 'w')
+Dump(self, dumpFilePath, fileMode = 'w')
 ```
 
-将self输出到PDB文件。返回self。
+将self输出到PDB文件。
 
-参数：
+#### 参数：
 
-- dumpFileName, str：输出文件名
-- fileMode, str：文件句柄打开模式
+- \<str\> dumpFilePath：输出PDB文件路径
+- \<str\> fileMode：文件句柄打开模式
+
+#### 返回值：
+
+- self
+
+#### 例：
+
+``` Python
+proObj = Load('xxxx.pdb')
+proObj.Dump('xxxx.pdb')
+```
 
 #### 2. Dumps
 
@@ -118,6 +410,21 @@ Dumps(self)
 
 得到字符串形式的PDB文件内容。
 
+#### 参数：
+
+- void
+
+#### 返回值：
+
+- \<str\> 字符串形式的PDB文件内容
+
+#### 例：
+
+``` Python
+proObj = Load('xxxx.pdb')
+dumpStr = proObj.Dumps()
+```
+
 #### 3. Copy
 
 ``` Python
@@ -126,94 +433,196 @@ Copy(self)
 
 得到self的深拷贝。
 
-### 非Atom层级公有方法
+#### 参数：
 
-#### 1. DumpFasta
+- void
+
+#### 返回值：
+
+- self的深拷贝
+
+#### 例：
 
 ``` Python
-DumpFasta(self, dumpFileName, fileMode = 'w')
+proObj = Load('xxxx.pdb')
+copyProObj = proObj.Copy()
 ```
 
-将self输出到fasta文件。参数同Dump方法。
+### 非Atom层级公有成员函数
 
-#### 2. GetResidues, IGetResidues
+#### 1. [I]GetResidues
 
 ``` Python
 GetResidues(self)
+
 IGetResidues(self)
 ```
 
-跨层级直接返回self包含的所有残基对象。其中，GetResidues方法返回list，IGetResidues方法返回生成器。
+跨层级直接返回self包含的所有残基对象。
 
-#### 3. GetAtoms, IGetAtoms
+#### 参数：
+
+- void
+
+#### 返回值：
+
+- \<list\<Residue\>\> 对于GetResidues
+- \<Generator\<Residue\>\> 对于IGetResidues
+
+#### 例：
+
+``` Python
+proObj = Load('xxxx.pdb')
+resObjList = proObj.GetResidues()
+resObjIter = proObj.IGetResidues()
+```
+
+#### 2. [I]GetAtoms, [I]FilterAtoms, [I]GetAtomsCoord, [I]FilterAtomsCoord
 
 ``` Python
 GetAtoms(self)
+
 IGetAtoms(self)
-```
 
-跨层级直接返回self包含的所有原子对象。其中，GetAtoms方法返回list，IGetAtoms方法返回生成器。
+FilterAtoms(self, atomName = "CA", *atomNameTuple)
 
-#### 4. FilterAtoms, IFilterAtoms
+IFilterAtoms(self, atomName = "CA", *atomNameTuple)
 
-``` Python
-FilterAtoms(self, atomName = 'CA', *atomNameTuple)
-IFilterAtoms(self, atomName = 'CA', *atomNameTuple)
-```
-
-跨层级直接按一个或多个原子名筛选self包含的所有原子对象。其中，FilterAtoms方法返回list，IFilterAtoms方法返回生成器。例：
-
-``` Python
-structObj.FilterAtoms()                 # 筛选CA原子（默认）
-structObj.FilterAtoms('N', 'CA', 'C')   # 筛选骨架原子
-```
-
-#### 5. GetAtomsCoord
-
-``` Python
 GetAtomsCoord(self)
+
+IGetAtomsCoord(self)
+
+FilterAtomsCoord(self, atomName = "CA", *atomNameTuple)
+
+IFilterAtomsCoord(self, atomName = "CA", *atomNameTuple)
 ```
 
-跨层级直接返回self包含的所有原子的坐标（N*3 ndarray）。
+跨层级直接返回self包含的所有，或按原子的name属性筛选后的原子对象或原子坐标。
 
-#### 6. FilterAtomsCoord
+#### 参数：
+
+- \<*str\> *atomNameTuple：原子名列表
+
+#### 返回值：
+
+- \<list\<Atom\>\> 对于GetAtoms，FilterAtoms
+- \<Generator\<Atom\>\> 对于IGetAtoms，IFilterAtoms
+- \<np.ndarray\> 对于GetAtomsCoord，FilterAtomsCoord
+- \<Generator\<np.ndarray(1 * 3)\>\> 对于IGetAtomsCoord，IFilterAtomsCoord
+
+#### 例：
 
 ``` Python
-FilterAtomsCoord(self, atomName = 'CA', *atomNameTuple)
+proObj = Load('xxxx.pdb')
+
+atomObjList = proObj.GetAtoms()
+filterAtomObjList = proObj.FilterAtoms("N", "CA", "C")
+atomCoordList = proObj.GetAtomsCoord()
+filterAtomCoordList = proObj.FilterAtomsCoord("N", "CA", "C")
+
+atomObjIter = proObj.IGetAtoms()
+filterAtomObjIter = proObj.IFilterAtoms("N", "CA", "C")
+atomCoordIter = proObj.IGetAtomsCoord()
+filterAtomCoordIter = proObj.IFilterAtomsCoord("N", "CA", "C")
 ```
 
-跨层级直接按一个或多个原子名筛选self包含的所有原子对象，返回筛选后的所有原子的坐标（N*3 ndarray）。
-
-#### 7. RenumResidues, RenumAtoms
-
-``` Python
-RenumResidues(self, startNum = 1)
-RenumAtoms(self, startNum = 1)
-```
-
-对self包含的所有残基/原子进行重编号。startNum参数用于设定起始编号。返回self。
-
-#### 8. MoveCenter
+#### 3. MoveCenter
 
 ``` Python
 MoveCenter(self)
 ```
 
-整体平移self，使得self的几何中心平移至原点。返回self。
+将self的所有原子坐标减去center向量。
+
+#### 参数：
+
+- void
+
+#### 返回值：
+
+- self
+
+#### 例：
+
+``` Python
+proObj = Load('xxxx.pdb')
+proObj.MoveCenter()
+```
+
+#### 4. DumpFasta
+
+``` Python
+DumpFasta(self, dumpFilePath, fileMode = 'w')
+```
+
+将self输出到Fasta文件。
+
+#### 参数：
+
+- \<str\> dumpFilePath：输出Fasta文件路径
+- \<str\> fileMode：文件句柄打开模式
+
+#### 返回值：
+
+- self
+
+#### 例：
+
+``` Python
+proObj = Load('xxxx.pdb')
+proObj.DumpFasta('xxxx.fasta')
+```
+
+#### 8. RenumResidues, RenumAtoms
+
+``` Python
+RenumResidues(self, startNum = 1)
+
+RenumAtoms(self, startNum = 1)
+```
+
+对self的所有残基/原子进行重编号。
+
+#### 参数：
+
+- \<int\> startNum：起始编号
+
+#### 返回值：
+
+- self
+
+#### 例：
+
+``` Python
+proObj = Load('xxxx.pdb')
+proObj.RenumResidues().RenumAtoms()
+```
 
 #### 9. Append, Insert
 
 ``` Python
-Append(self, *appendObjTuple)
-Insert(self, idxNum, *insertObjTuple)
+Append(self, *subObjTuple)
+
+Insert(self, insertIdx, *subObjTuple)
 ```
 
-为self追加/插入子结构。所有添加至self的子结构都是原结构对象调用Copy方法得到的拷贝，且会与self自动建立从属关系。返回self。
+为self追加/插入子结构。所有添加至self的子结构都是原结构对象调用Copy成员函数得到的拷贝，且会与self自动建立从属关系。
 
-参数：
+#### 参数：
 
-- *appendObjTuple, *insertObjTuple, *obj：self对应的子结构对象（不定长参数）
-- idxNum, int：插入位置索引值
+- \<*SubObj\> subObjTuple：self对应的子结构对象列表
+- \<int\> insertIdx：插入位置索引值
+
+#### 返回值：
+
+- self
+
+#### 例：
+
+``` Python
+proObj = Load('xxxx.pdb')
+proObj.Append(proObj.sub[0]).Insert(0, proObj.sub[0])
+```
 
 #### 10. RemoveAlt
 
@@ -221,9 +630,24 @@ Insert(self, idxNum, *insertObjTuple)
 RemoveAlt(self)
 ```
 
-一个特殊的操作：遍历self包含的所有原子对象，如果原子对象的alt属性为''，则忽略，如果为'A'，则修改为''，否则删除当前原子。返回self。
+遍历self包含的所有原子对象，如果原子对象的alt属性为""，则忽略，如果为"A"，则修改为""，否则删除当前原子。
 
-### 非Protein层级公有方法
+#### 参数：
+
+- void
+
+#### 返回值：
+
+- self
+
+#### 例：
+
+``` Python
+proObj = Load('xxxx.pdb')
+proObj.RemoveAlt()
+```
+
+### 非Protein层级公有成员函数
 
 #### 1. Remove
 
@@ -231,169 +655,30 @@ RemoveAlt(self)
 Remove(self)
 ```
 
-从结构对象中删除self自身。
+从self.owner.sub中删除self。
 
-## 特殊操作
+#### 参数：
 
-### 迭代
+- void
 
-非Atom对象可直接迭代，从而访问当前层级的子层级对象列表：
+#### 返回值：
 
-``` Python
-for chainObj in structObj:
-    for resObj in chainObj:
-        for atomObj in resObj:
-            pass
-```
+- void
 
-### 切片
-
-非Atom对象可切片：
+#### 例：
 
 ``` Python
-structObj[:]        # 获取链对象
-structObj[0][1:]    # 获取残基对象
-structObj[0][0][0]  # 获取原子对象
+proObj = Load('xxxx.pdb')
+proObj.sub[0].Remove()
 ```
-
-### 长度
-
-非Atom对象可调用len函数，求其子结构列表的长度：
-
-``` Python
-len(structObj)
-```
-
-### 布尔值
-
-非Atom对象的布尔值依据其是否为空结构进行判定。即：如果self.sub为[]，则布尔值为False，否则为True。
-
-Atom对象的布尔值一定为True。
-
-### 欧氏距离
-
-原子对象重载了减法运算符，用于求两原子之间的欧氏距离：
-
-``` Python
-atomObjA - atomObjB
-```
-
-## 属性
-
-### 所有层级公有属性
-
-#### 1. name, str
-
-此属性对于不同的层级含义不同：
-
-- Protein：PDB文件名（不包含".pdb"）
-- Chain：链名
-- Residue：残基名
-- Atom：原子名
-
-### 非Atom层级公有属性
-
-#### 1. sub, list
-
-self的子层级对象列表
-
-#### 2. center, ndarray (只读)
-
-self的所有原子坐标几何中心。
-
-#### 3. seq, str (只读)
-
-self的残基序列
-
-#### 4. fasta, str (只读)
-
-self的fasta文件字符串
-
-### 非Protein层级公有属性
-
-#### 1. owner, obj
-
-self的父级对象
-
-#### 2. idx, int (只读)
-
-self在其owner的sub中的索引值
-
-#### 3. pre, next, obj (只读)
-
-self的前/后一个同层级对象
-
-如果self没有前/后一个对象，则抛出IndexError
-
-### 其他公有属性
-
-#### 1. subDict, dict (只读)
-
-Protein与Residue层级公有，含义分别为：
-
-- Protein：由self的所有链对象组成的链名-链对象哈希表
-- Residue：由self的所有原子对象组成的原子名-原子对象哈希表
-
-#### 2. num, int
-
-Residue与Atom层级公有，含义分别为：
-
-- Residue：不包含插入字符的残基序号
-- Atom：原子序号
-
-### Residue独有属性
-
-#### 1. ins, str
-
-残基插入字符
-
-#### 2. compNum, str (特殊方式写)
-
-残基序号 + 残基插入字符
-
-此属性通过(num, ins)二元组进行赋值：
-
-``` Python
-resObj.compNum = (1, '')
-```
-
-#### 3. coordDict, dict (只读)
-
-由self的所有原子组成的原子名-原子坐标哈希表
-
-### Atom独有属性
-
-#### 1. coord, ndarray
-
-原子坐标
-
-#### 2. alt, str
-
-备用位置指示符
-
-#### 3. occ, str
-
-占有
-
-#### 4. tempF, str
-
-温度因子
-
-#### 5. ele, str
-
-元素符号
-
-#### 6. chg, str
-
-电荷
 
 ## 残基二面角
 
-残基对象实现了若干对蛋白主链二面角进行计算、旋转相关的方法（即以下所有方法的self都专指Residue对象）。
+残基对象实现了若干对蛋白主/侧链二面角进行计算和旋转相关的成员函数（即以下所有成员函数的self都专指Residue对象）。
 
 ### 主链二面角
 
-**对主链进行操作时请注意：最靠近N端与C端的两个残基分别无法进行二面角PHI与PSI的计算或调整（因为这两个二面角不存在）。如果出现上述情况，则抛出IndexError。**
+**对主链进行操作时请注意：N端与C端的两个残基分别无法进行二面角Phi与Psi的计算或调整（因为这两个二面角不存在）。如果出现上述情况，则将抛出IndexError异常。**
 
 #### 1. CalcBBDihedralAngle
 
@@ -403,70 +688,109 @@ CalcBBDihedralAngle(self, dihedralEnum)
 
 计算主链二面角。
 
-参数：
+#### 参数：
 
-- dihedralEnum, DIH：主链二面角种类。DIH.PHI或DIH.L表示Phi，DIH.PSI或DIH.R表示Psi。
+- \<DIH\> dihedralEnum：主链二面角种类。DIH.PHI或DIH.L表示Phi；DIH.PSI或DIH.R表示Psi
 
-#### 2. CalcBBRotationMatrixByDeltaAngle
+#### 返回值：
+
+- \<float\> 有符号二面角值（-pi ~ pi）
+
+#### 例：
+
+``` Python
+proObj = Load('xxxx.pdb')
+resObj = proObj[0][1]
+dihedralAngle = resObj.CalcBBDihedralAngle(DIH.PHI)
+```
+
+#### 2. CalcBBRotationMatrixByDeltaAngle, CalcBBRotationMatrixByTargetAngle
 
 ``` Python
 CalcBBRotationMatrixByDeltaAngle(self, dihedralEnum, sideEnum, deltaAngle)
-```
 
-以旋转角度作为参数，计算主链旋转矩阵。
-
-参数：
-
-- dihedralEnum, DIH：同CalcBBDihedralAngle方法。
-- sideEnum, SIDE：转动侧。SIDE.N或SIDE.L表示转动N端，SIDE.C或SIDE.R表示转动C端。
-- deltaAngle, float：转动角度。
-
-返回值：
-
-- moveCoord, ndarray(1*3)：旋转前/后平移向量
-- rotationMatrix, ndarray(3*3)：旋转矩阵
-
-#### 3. CalcBBRotationMatrixByTargetAngle
-
-``` Python
 CalcBBRotationMatrixByTargetAngle(self, dihedralEnum, sideEnum, targetAngle)
 ```
 
-以目标角度作为参数，计算主链旋转矩阵。
+以旋转角度/目标角度作为参数，计算主链旋转矩阵。
 
-参数与返回值同CalcBBRotationMatrixByDeltaAngle方法。但targetAngle表示目标角度。
+#### 参数：
 
-#### 4. GetBBRotationAtomObj
+- \<DIH\> dihedralEnum：主链二面角种类。DIH.PHI或DIH.L表示Phi；DIH.PSI或DIH.R表示Psi
+- \<SIDE\> sideEnum：转动侧。SIDE.N或SIDE.L表示转动N端；SIDE.C或SIDE.R表示转动C端
+- \<float\> deltaAngle/targetAngle：旋转角度/目标角度
+
+#### 返回值：
+
+- \<np.ndarray(1 * 3)\> 旋转前/后平移向量
+- \<np.ndarray(3 * 3)\> 旋转矩阵
+
+#### 例：
+
+``` Python
+proObj = Load('xxxx.pdb')
+resObj = proObj[0][1]
+moveCoord, rotationMatrix = resObj.CalcBBRotationMatrixByDeltaAngle(DIH.PHI, SIDE.N, 1.)
+moveCoord, rotationMatrix = resObj.CalcBBRotationMatrixByTargetAngle(DIH.PHI, SIDE.N, 0.)
+```
+
+#### 3. GetBBRotationAtomObj
 
 ``` Python
 GetBBRotationAtomObj(self, dihedralEnum, sideEnum)
 ```
 
-获取以给定参数进行旋转时，所有需要旋转的原子对象。参数同CalcBBRotationMatrixByDeltaAngle方法。
+获取以给定参数进行旋转时，所有需要旋转的原子对象列表。
 
-返回值：
+#### 参数：
 
-- rotationAtomObjList, list：原子对象list
+- \<DIH\> dihedralEnum：主链二面角种类。DIH.PHI或DIH.L表示Phi；DIH.PSI或DIH.R表示Psi
+- \<SIDE\> sideEnum：转动侧。SIDE.N或SIDE.L表示转动N端；SIDE.C或SIDE.R表示转动C端
 
-#### 5. RotateBBDihedralAngleByDeltaAngle
+#### 返回值：
+
+- \<list\<Atom\>\> 所有需要旋转的原子对象列表
+
+#### 例：
+
+``` Python
+proObj = Load('xxxx.pdb')
+resObj = proObj[0][1]
+rotationAtomObjList = resObj.GetBBRotationAtomObj(DIH.PHI, SIDE.N)
+```
+
+#### 4. RotateBBDihedralAngleByDeltaAngle, RotateBBDihedralAngleByTargetAngle
 
 ``` Python
 RotateBBDihedralAngleByDeltaAngle(self, dihedralEnum, sideEnum, deltaAngle)
-```
 
-以旋转角度作为参数直接旋转主链。参数同CalcBBRotationMatrixByDeltaAngle方法。返回self。
-
-#### 6. RotateBBDihedralAngleByTargetAngle
-
-``` Python
 RotateBBDihedralAngleByTargetAngle(self, dihedralEnum, sideEnum, targetAngle)
 ```
 
-以目标角度作为参数直接旋转主链。参数同CalcBBRotationMatrixByTargetAngle方法。返回self。
+以旋转角度/目标角度作为参数直接旋转主链。
+
+#### 参数：
+
+- \<DIH\> dihedralEnum：主链二面角种类。DIH.PHI或DIH.L表示Phi；DIH.PSI或DIH.R表示Psi
+- \<SIDE\> sideEnum：转动侧。SIDE.N或SIDE.L表示转动N端；SIDE.C或SIDE.R表示转动C端
+- \<float\> deltaAngle/targetAngle：旋转角度/目标角度
+
+#### 返回值：
+
+- self
+
+#### 例：
+
+``` Python
+proObj = Load('xxxx.pdb')
+resObj = proObj[0][1]
+resObj.RotateBBDihedralAngleByDeltaAngle(DIH.PHI, SIDE.N, 1.)
+resObj.RotateBBDihedralAngleByTargetAngle(DIH.PHI, SIDE.N, 0.)
+```
 
 ### 侧链二面角
 
-**对侧链进行调整时请注意：GLY、ALA残基由于不存在侧链二面角，不可调用下列方法。且不可使用不存在的侧链二面角索引值调用下列方法。如果出现上述情况，则抛出IndexError。**
+**对侧链进行调整时请注意：GLY、ALA残基由于不存在侧链二面角，不可调用下列成员函数。且不可使用不存在的侧链二面角索引值调用下列成员函数。如果出现上述情况，则将抛出IndexError异常。**
 
 #### 1. CalcSCDihedralAngle
 
@@ -476,83 +800,172 @@ CalcSCDihedralAngle(self, dihedralIdx)
 
 计算侧链二面角。
 
-参数：
+#### 参数：
 
-- dihedralIdx, int：侧链二面角索引值。索引值从0开始编号，最大允许索引值根据残基种类而不同。索引值表示某个残基从主链到侧链方向上的第N个侧链二面角。
+- \<int\> dihedralIdx：侧链二面角索引值。索引值从0开始编号，最大允许索引值根据残基种类而不同。索引值表示某个残基从主链到侧链方向上的第N个侧链二面角
 
-#### 2. CalcSCRotationMatrixByDeltaAngle
+#### 返回值：
+
+- \<float\> 有符号二面角值（-pi ~ pi）
+
+#### 例：
+
+``` Python
+proObj = Load('xxxx.pdb')
+resObj = proObj[0][1]
+dihedralAngle = resObj.CalcSCDihedralAngle(0)
+```
+
+#### 2. CalcSCRotationMatrixByDeltaAngle, CalcSCRotationMatrixByDeltaAngle
 
 ``` Python
 CalcSCRotationMatrixByDeltaAngle(self, dihedralIdx, deltaAngle)
-```
 
-以旋转角度作为参数，计算侧链旋转矩阵。
-
-参数：
-
-- dihedralIdx：同CalcSCDihedralAngle方法
-- deltaAngle：旋转角度
-
-返回值同CalcBBRotationMatrixByDeltaAngle方法。
-
-#### 3. CalcSCRotationMatrixByTargetAngle
-
-``` Python
 CalcSCRotationMatrixByTargetAngle(self, dihedralIdx, targetAngle)
 ```
 
-以目标角度作为参数，计算侧链旋转矩阵。参数与返回值同CalcSCRotationMatrixByDeltaAngle方法。但targetAngle表示目标角度。
+以旋转角度/目标角度作为参数，计算侧链旋转矩阵。
 
-#### 4. GetSCRotationAtomObj
+#### 参数：
+
+- \<int\> dihedralIdx：侧链二面角索引值。索引值从0开始编号，最大允许索引值根据残基种类而不同。索引值表示某个残基从主链到侧链方向上的第N个侧链二面角
+- \<float\> deltaAngle/targetAngle：旋转角度/目标角度
+
+#### 返回值：
+
+- \<np.ndarray(1 * 3)\> 旋转前/后平移向量
+- \<np.ndarray(3 * 3)\> 旋转矩阵
+
+#### 例：
+
+``` Python
+proObj = Load('xxxx.pdb')
+resObj = proObj.sub[0].sub[1]
+moveCoord, rotationMatrix = resObj.CalcSCRotationMatrixByDeltaAngle(0, 1.)
+moveCoord, rotationMatrix = resObj.CalcSCRotationMatrixByTargetAngle(0, 0.)
+```
+
+#### 3. GetSCRotationAtomObj
+
 ``` Python
 GetSCRotationAtomObj(self, dihedralIdx)
 ```
 
-获取以给定侧链二面角进行旋转时，所有需要旋转的原子对象。参数同CalcSCDihedralAngle方法。返回值同GetBBRotationAtomObj方法。
+获取以给定侧链二面角进行旋转时，所有需要旋转的原子对象列表。
 
-#### 5. RotateSCDihedralAngleByDeltaAngle
+#### 参数：
+
+- \<int\> dihedralIdx：侧链二面角索引值。索引值从0开始编号，最大允许索引值根据残基种类而不同。索引值表示某个残基从主链到侧链方向上的第N个侧链二面角
+
+#### 返回值：
+
+- \<list\<Atom\>\> 所有需要旋转的原子对象列表
+
+#### 例：
+
+``` Python
+proObj = Load('xxxx.pdb')
+resObj = proObj[0][1]
+rotationAtomObjList = resObj.GetSCRotationAtomObj(0)
+```
+
+#### 4. RotateSCDihedralAngleByDeltaAngle, RotateSCDihedralAngleByTargetAngle
 
 ``` Python
 RotateSCDihedralAngleByDeltaAngle(self, dihedralIdx, deltaAngle)
-```
 
-以旋转角度作为参数直接旋转侧链。参数同CalcSCRotationMatrixByDeltaAngle方法。返回self。
-
-#### 6. RotateSCDihedralAngleByTargetAngle
-
-``` Python
 RotateSCDihedralAngleByTargetAngle(self, dihedralIdx, targetAngle)
 ```
 
-以目标角度作为参数直接旋转侧链。参数同CalcSCRotationMatrixByTargetAngle方法。返回self。
+以旋转角度/目标角度作为参数直接旋转侧链。
+
+#### 参数：
+
+- \<int\> dihedralIdx：侧链二面角索引值。索引值从0开始编号，最大允许索引值根据残基种类而不同。索引值表示某个残基从主链到侧链方向上的第N个侧链二面角
+- \<float\> deltaAngle/targetAngle：旋转角度/目标角度
+
+#### 返回值：
+
+- self
+
+#### 例：
+
+``` Python
+proObj = Load('xxxx.pdb')
+resObj = proObj[0][1]
+resObj.RotateSCDihedralAngleByDeltaAngle(0, 1.)
+resObj.RotateSCDihedralAngleByTargetAngle(0, 0.)
+```
 
 ## 数学函数
 
-#### 1. Dis
+### 1. Dis
 
 ``` Python
 Dis(coordA, coordB)
 ```
 
-计算两个三维坐标之间的欧式距离。
+计算两个三维坐标之间的欧几里得距离。
 
-#### 2. Norm
+#### 参数：
+
+- \<np.ndarray(1 * 3)\> coordA，coordB：两个三维坐标
+
+#### 返回值：
+
+- \<float\> 欧几里得距离
+
+#### 例：
+
+``` Python
+coordDis = Dis(np.array((1., 2., 3.)), np.array((4., 5., 6.)))
+```
+
+### 2. Norm
 
 ``` Python
 Norm(coordArray)
 ```
 
-计算一个三维坐标的二范数。
+计算三维向量的二范数。
 
-#### 3. CalcVectorAngle
+#### 参数：
+
+- \<np.ndarray(1 * 3)\> coordArray：三维坐标
+
+#### 返回值：
+
+- \<float\> 二范数
+
+#### 例：
+
+``` Python
+coordNorm = Norm(np.array((1., 2., 3.)))
+```
+
+### 3. CalcVectorAngle
 
 ``` Python
 CalcVectorAngle(coordA, coordB)
 ```
 
-计算两向量夹角，返回角度（0 ~ pi）。
+计算两向量夹角。
 
-#### 4. CalcRotationMatrix
+#### 参数：
+
+- \<np.ndarray(1 * 3)\> coordA，coordB：两个三维向量
+
+#### 返回值：
+
+- \<float\> 两向量夹角值（0 ~ pi）
+
+#### 例：
+
+``` Python
+vectorAngle = CalcVectorAngle(np.array((1., 2., 3.)), np.array((4., 5., 6.)))
+```
+
+### 4. CalcRotationMatrix
 
 ``` Python
 CalcRotationMatrix(rotationAxis, rotationAngle)
@@ -560,12 +973,22 @@ CalcRotationMatrix(rotationAxis, rotationAngle)
 
 计算轴角旋转矩阵。
 
-参数：
+#### 参数：
 
-- rotationAxis, ndarray(1*3)：旋转轴向量，无需缩放至单位长度
-- rotationAngle, float：旋转角
+- \<np.ndarray(1 * 3)\> rotationAxis：旋转轴向量，无需缩放至单位长度
+- \<float\> rotationAngle：旋转角
 
-#### 5. CalcRotationMatrixByTwoVector
+#### 返回值：
+
+- \<np.ndarray(3 * 3)\> 旋转矩阵
+
+#### 例：
+
+``` Python
+rotationMatrix = CalcRotationMatrix(np.array((1., 2., 3.)), 1.)
+```
+
+### 5. CalcRotationMatrixByTwoVector
 
 ``` Python
 CalcRotationMatrixByTwoVector(coordA, coordB)
@@ -573,27 +996,67 @@ CalcRotationMatrixByTwoVector(coordA, coordB)
 
 计算从向量A旋转至向量B所需要的旋转矩阵。
 
-#### 6. CalcDihedralAngle
+#### 参数：
+
+- \<np.ndarray(1 * 3)\> coordA，coordB：两个三维向量
+
+#### 返回值：
+
+- \<np.ndarray(3 * 3)\> 旋转矩阵
+
+#### 例：
+
+``` Python
+rotationMatrix = CalcRotationMatrixByTwoVector(np.array((1., 2., 3.)), np.array((4., 5., 6.)))
+```
+
+### 6. CalcDihedralAngle
 
 ``` Python
 CalcDihedralAngle(coordA, coordB, coordC, coordD)
 ```
 
-计算二面角。返回有符号角度（-pi ~ pi）。
+计算二面角。
 
-#### 7. CalcRMSD
+#### 参数：
+
+- \<np.ndarray(1 * 3)\> coordA，coordB，coordC，coordD：四个三维向量
+
+#### 返回值：
+
+- \<float\> 有符号二面角值（-pi ~ pi）
+
+#### 例：
+
+``` Python
+dihedralAngle = CalcDihedralAngle(np.array((1., 2., 3.)), np.array((4., 5., 6.)),
+    np.array((7., 8., 9.)), np.array((10., 11., 12.)))
+```
+
+### 7. CalcRMSD
 
 ``` Python
 CalcRMSD(coordArrayA, coordArrayB)
 ```
 
-计算RMSD。
+对两组等长的三维坐标计算RMSD。
 
-参数：
+#### 参数：
 
-- coordArrayA, coordArrayB, ndarray(N*3)：两组由三维坐标组成的等长二维数组
+- \<np.ndarray(N * 3)\> coordArrayA，coordArrayB：两组等长的矩阵
 
-#### 8. CalcSuperimposeRotationMatrix
+#### 返回值：
+
+- \<double\> RMSD值
+
+#### 例：
+
+``` Python
+rmsdValue = CalcRMSD(np.array(((1., 2., 3.), (4., 5., 6.))),
+    np.array(((7., 8., 9.), (10., 11., 12.))))
+```
+
+### 8. CalcSuperimposeRotationMatrix
 
 ``` Python
 CalcSuperimposeRotationMatrix(sourceCoordArray, targetCoordArray)
@@ -601,13 +1064,30 @@ CalcSuperimposeRotationMatrix(sourceCoordArray, targetCoordArray)
 
 计算从sourceCoordArray到targetCoordArray的叠合旋转矩阵。
 
-参数：
+#### 参数：
 
-- sourceCoordArray, targetCoordArray, ndarray(N*3)：两组由三维坐标组成的等长二维数组
+- \<np.ndarray(N * 3)\> sourceCoordArray, targetCoordArray：两组等长的矩阵
 
-返回值为平移向量sourceCenterCoord，旋转矩阵rotationMatrix，以及平移向量targetCenterCoord。使得sourceCoordArray通过(sourceCoordArray - sourceCenterCoord).dot(rotationMatrix) + targetCenterCoord这样的平移->旋转->平移操作后，与targetCoordArray形成叠合。
+#### 返回值：
 
-#### 9. CalcRMSDAfterSuperimpose
+- \<np.ndarray(1 * 3)\> 前平移向量
+- \<np.ndarray(3 * 3)\> 旋转矩阵
+- \<np.ndarray(1 * 3)\> 后平移向量
+
+#### 例：
+
+``` Python
+coordArrayA = np.array(((1., 2., 3.), (4., 5., 6.)))
+coordArrayB = np.array(((7., 8., 9.), (10., 11., 12.)))
+
+sourceCenterCoord, rotationMatrix, targetCenterCoord = CalcSuperimposeRotationMatrix(
+    coordArrayA, coordArrayB)
+
+print((coordArrayA - sourceCenterCoord).dot(rotationMatrix) + targetCenterCoord)
+print(coordArrayB)
+```
+
+### 9. CalcRMSDAfterSuperimpose
 
 ``` Python
 CalcRMSDAfterSuperimpose(coordArrayA, coordArrayB)
@@ -615,46 +1095,158 @@ CalcRMSDAfterSuperimpose(coordArrayA, coordArrayB)
 
 叠合并计算RMSD。
 
-参数同CalcRMSD函数。
-
 此函数会将coordArrayA通过CalcSuperimposeRotationMatrix函数向coordArrayB进行叠合，然后计算两组坐标之间的RMSD。
+
+#### 参数：
+
+- \<np.ndarray(N * 3)\> coordArrayA，coordArrayB：两组等长的矩阵
+
+#### 返回值：
+
+- \<float\> RMSD值
+
+#### 例：
+
+``` Python
+rmsdValue = CalcRMSDAfterSuperimpose(np.array(((1., 2., 3.), (4., 5., 6.))),
+    np.array(((7., 8., 9.), (10., 11., 12.))))
+```
 
 ## 常量
 
-#### 1. DIH
+### 1. \<Enum\> DIH
 
 枚举变量，表示主链二面角种类。DIH.PHI或DIH.L表示Phi，DIH.PSI或DIH.R表示Psi。
 
-#### 2. SIDE
+### 2. \<Enum\> SIDE
 
 枚举变量，表示主链二面角旋转时的转动侧。SIDE.N或SIDE.L表示转动N端，SIDE.C或SIDE.R表示转动C端。
 
-#### 3. RESIDUE\_NAME\_THREE\_TO\_ONE\_DICT, RESIDUE\_NAME\_ONE\_TO\_THREE\_DICT
+### 3. \<dict\<str, str\>\> RESIDUE_NAME_THREE_TO_ONE_DICT, RESIDUE_NAME_ONE_TO_THREE_HASH
 
 三字母，单字母残基名的相互转换哈希表。
 
-## 其他说明
+## 其他函数
+
+### 1. Dumpl
+
+``` Python
+Dumpl(structObjList, dumpFilePath, fileMode = 'w')
+```
+
+将任何对象构成的list输出到PDB文件。
+
+#### 参数：
+
+- \<list\<Obj\>\> structObjList：任何层级对象构成的list
+- \<str\> dumpFilePath：输出PDB文件路径
+- \<str\> fileMode：文件句柄打开模式
+
+#### 返回值：
+
+- void
+
+#### 例：
+
+``` Python
+proObjList = LoadModel('xxxx.pdb')
+Dumpl(proObjList, 'xxxx.pdb')
+```
+
+### 2. Dumpls
+
+``` Python
+Dumpls(structObjList)
+```
+
+得到字符串形式的Dumpl函数输出内容。
+
+#### 参数：
+
+- \<list\<Obj\>\> structObjList：任何层级对象构成的list
+
+#### 返回值：
+
+- \<str\> 字符串形式的Dumpl函数输出内容
+
+#### 例：
+
+``` Python
+proObjList = LoadModel('xxxx.pdb')
+dumpStr = Dumpls(proObjList)
+```
+
+### 3. DumpFastal
+
+``` Python
+DumpFastal(structObjList, dumpFilePath, fileMode = 'w')
+```
+
+将非Atom对象构成的list输出到Fasta文件。
+
+#### 参数：
+
+- \<list\<Obj\>\> structObjList：非Atom对象构成的list
+- \<str\> dumpFilePath：输出Fasta文件路径
+- \<str\> fileMode：文件句柄打开模式
+
+#### 返回值：
+
+- void
+
+#### 例：
+
+``` Python
+proObjList = LoadModel('xxxx.pdb')
+DumpFastal(proObjList, 'xxxx.fasta')
+```
+
+### 4. DumpFastals
+
+``` Python
+DumpFastals(structObjList)
+```
+
+得到字符串形式的DumpFastal函数输出内容。
+
+#### 参数：
+
+- \<list\<Obj\>\> structObjList：非Atom对象构成的list
+
+#### 返回值：
+
+- \<str\> 字符串形式的DumpFastal函数输出内容
+
+#### 例：
+
+``` Python
+proObjList = LoadModel('xxxx.pdb')
+dumpStr = DumpFastals(proObjList)
+```
+
+## 补充说明
 
 ### 解析函数
 
-- 解析函数（Load、LoadModel）将完全按照PDB文件中ATOM行的出现顺序对PDB文件进行解析与存储。不会进行任何排序或重组过程。
-- Load函数在解析时会跳过任何非ATOM开头的行。而LoadModel函数会跳过任何非ATOM或MODEL开头的行。
+- PDB文件解析函数（Load、LoadModel）将完全按照PDB文件内容进行解析，不会对结构进行任何排序、合并或重组操作
+- Load函数在解析时会跳过任何非"ATOM"关键词开头的行（包括"MODEL"）；而LoadModel函数会跳过任何非"ATOM"或"MODEL"关键词开头的行
+- 解析时会去除所有字符串类型属性双端的空格字符
 
-### 对于创建新层级对象的判定
+### 对于创建新对象的判定
 
 #### 1. Load函数：
 
-- Protein：只会在解析开始前创建唯一的一个，并最终返回这个对象。
-- Chain：在解析开始时，以及每次检测到链名发生变化时（从上一个ATOM行到当前行），都会创建新的链对象。
-- Residue：在解析开始时，以及每次检测到残基名、残基编号或残基插入字符三者之一发生变化时（从上一个ATOM行到当前行），都会创建新的残基对象。
-- Atom：每检测到一个新的ATOM行都会创建一个Atom对象。
+- Protein：只会在解析开始前创建唯一的一个，并最终返回这个对象
+- Chain：在解析开始时，以及每次检测到链名发生变化时（从上一个"ATOM"行到当前行），都会创建一个新的链对象
+- Residue：在解析开始时，以及每次检测到残基名、残基编号或残基插入字符三者之一发生变化时（从上一个"ATOM"行到当前行），都会创建一个新的残基对象
+- Atom：每检测到一个新的"ATOM"行都会创建一个新的Atom对象
 
 #### 2. LoadModel函数：
 
-- Protein：解析开始前，以及每次检测到MODEL关键词时，会创建一个新的蛋白对象。如果解析开始前创建的蛋白对象为空，则会在最后的返回值中被删除。
-- Chain：解析开始时，每次检测到链名发生变化时（从上一个ATOM行到当前行），以及一个新的Model出现时，都会创建新的链对象。
-- Residue：解析开始时，每次检测到残基名、残基编号或残基插入字符三者之一发生变化时（从上一个ATOM行到当前行），以及一个新的Model出现时，都会创建新的残基对象。
-- Atom：每检测到一个新的ATOM行都会创建一个Atom对象。
+- Protein：解析开始前，以及每次检测到"MODEL"关键词时，都会创建一个新的蛋白对象。如果解析开始前创建的这个蛋白对象在函数返回前仍然为空，则其将在函数返回前被删除并析构
+- Chain：解析开始时，每次检测到链名发生变化时（从上一个"ATOM"行到当前行），以及一个新的Model出现时，都会创建一个新的链对象
+- Residue：解析开始时，每次检测到残基名、残基编号或残基插入字符三者之一发生变化时（从上一个"ATOM"行到当前行），以及一个新的Model出现时，都会创建一个新的残基对象
+- Atom：每检测到一个新的"ATOM"行都会创建一个新的Atom对象
 
 ### 空字段
 

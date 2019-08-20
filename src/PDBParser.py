@@ -22,16 +22,16 @@ CONST_H_RE = compile(r'\d*H')
 # Parse PDB File
 ################################################################################
 
-def Load(pdbFileName, parseHBool = False):
+def Load(pdbFilePath, parseHBool = False):
 
-    proObj = Protein(splitext(basename(pdbFileName))[0])
+    proObj = Protein(splitext(basename(pdbFilePath))[0])
 
     lastChainName = None
     lastResName   = None
     lastResNum    = None
     lastResIns    = None
 
-    with open(pdbFileName) as f:
+    with open(pdbFilePath) as f:
 
         for line in f:
 
@@ -75,9 +75,9 @@ def Load(pdbFileName, parseHBool = False):
 # Parse PDB File With Model
 ################################################################################
 
-def LoadModel(pdbFileName, parseHBool = False):
+def LoadModel(pdbFilePath, parseHBool = False):
 
-    pdbIdStr   = splitext(basename(pdbFileName))[0]
+    pdbIdStr   = splitext(basename(pdbFilePath))[0]
     proObj     = Protein(pdbIdStr)
     proObjList = [proObj]
 
@@ -86,7 +86,7 @@ def LoadModel(pdbFileName, parseHBool = False):
     lastResNum    = None
     lastResIns    = None
 
-    with open(pdbFileName) as f:
+    with open(pdbFilePath) as f:
 
         for line in f:
 

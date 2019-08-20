@@ -12,28 +12,28 @@ DESCRIPTION
 
 VERSION
 
-    3.4.4
+    3.4.6
 
 LATEST UPDATE
 
-    2019.7.10
+    2019.8.19
 
 '''
 
 # Parser
-from .PDBParser import Load, LoadModel
+from PDBTools.src.PDBParser import Load, LoadModel
 
 # Math Util
-from .MathUtil import Dis, Norm, CalcVectorAngle, CalcRotationMatrix, \
+from PDBTools.src.MathUtil import Dis, Norm, CalcVectorAngle, CalcRotationMatrix, \
     CalcRotationMatrixByTwoVector, CalcDihedralAngle, CalcRMSD, \
     CalcSuperimposeRotationMatrix, CalcRMSDAfterSuperimpose
 
 # Struct Class
-from .StructClass import Protein, Chain, Residue, Atom
+from PDBTools.src.StructClass import Protein, Chain, Residue, Atom
 
 # Const
-from .StructConst import DIH, SIDE, RESIDUE_NAME_THREE_TO_ONE_DICT, \
+from PDBTools.src.StructConst import DIH, SIDE, RESIDUE_NAME_THREE_TO_ONE_DICT, \
     RESIDUE_NAME_ONE_TO_THREE_DICT
 
 # Struct Util
-from .StructUtil import Dumpls, Dumpl, DumpFastals, DumpFastal
+from PDBTools.src.StructUtil import Dumpls, Dumpl, DumpFastals, DumpFastal

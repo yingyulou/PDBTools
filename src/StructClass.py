@@ -38,9 +38,9 @@ if sys.version_info[0] == 3:
             raise NotImplementedError
 
 
-        def Dump(self, dumpFileName, fileMode = 'w'):
+        def Dump(self, dumpFilePath, fileMode = 'w'):
 
-            with open(dumpFileName, fileMode) as fo:
+            with open(dumpFilePath, fileMode) as fo:
                 fo.write(self.Dumps())
 
             return self
@@ -65,9 +65,9 @@ else:
             raise NotImplementedError
 
 
-        def Dump(self, dumpFileName, fileMode = 'w'):
+        def Dump(self, dumpFilePath, fileMode = 'w'):
 
-            with open(dumpFileName, fileMode) as fo:
+            with open(dumpFilePath, fileMode) as fo:
                 fo.write(self.Dumps())
 
             return self
@@ -103,6 +103,55 @@ class __NotAtomStructBase(__StructBase):
         raise NotImplementedError
 
 
+    def FilterAtoms(self, atomName = 'CA', *atomNameTuple):
+
+        atomNameSet = set((atomName,) + atomNameTuple)
+
+        return [atomObj for atomObj in self.IGetAtoms() if atomObj.name in atomNameSet]
+
+
+    def IFilterAtoms(self, atomName = 'CA', *atomNameTuple):
+
+        atomNameSet = set((atomName,) + atomNameTuple)
+
+        for atomObj in self.IGetAtoms():
+            if atomObj.name in atomNameSet:
+                yield atomObj
+
+
+    def GetAtomsCoord(self):
+
+        return array([atomObj.coord for atomObj in self.IGetAtoms()])
+
+
+    def IGetAtomsCoord(self):
+
+        for atomObj in self.IGetAtoms():
+            yield atomObj.coord
+
+
+    def FilterAtomsCoord(self, atomName = 'CA', *atomNameTuple):
+
+        atomNameSet = set((atomName,) + atomNameTuple)
+
+        return array([atomObj.coord for atomObj in self.IGetAtoms()
+            if atomObj.name in atomNameSet])
+
+
+    def IFilterAtomsCoord(self, atomName = 'CA', *atomNameTuple):
+
+        atomNameSet = set((atomName,) + atomNameTuple)
+
+        for atomObj in self.IGetAtoms():
+            if atomObj.name in atomNameSet:
+                yield atomObj.coord
+
+
+    def Dumps(self):
+
+        return ''.join([atomObj.Dumps() for atomObj in self.IGetAtoms()])
+
+
     def __iter__(self):
 
         return iter(self.sub)
@@ -129,6 +178,16 @@ class __NotAtomStructBase(__StructBase):
         return self.GetAtomsCoord().mean(0)
 
 
+    def MoveCenter(self):
+
+        centerCoord = self.center
+
+        for atomObj in self.IGetAtoms():
+            atomObj.coord -= centerCoord
+
+        return self
+
+
     @property
     def seq(self):
 
@@ -142,23 +201,10 @@ class __NotAtomStructBase(__StructBase):
         return '>%s\n%s\n' % (self.name, self.seq)
 
 
-    def Dumps(self):
+    def DumpFasta(self, dumpFilePath, fileMode = 'w'):
 
-        return ''.join([atomObj.Dumps() for atomObj in self.IGetAtoms()])
-
-
-    def DumpFasta(self, dumpFileName, fileMode = 'w'):
-
-        with open(dumpFileName, fileMode) as fo:
+        with open(dumpFilePath, fileMode) as fo:
             fo.write(self.fasta)
-
-
-    def MoveCenter(self):
-
-        centerCoord = self.center
-
-        for atomObj in self.IGetAtoms():
-            atomObj.coord -= centerCoord
 
         return self
 
@@ -181,9 +227,9 @@ class __NotAtomStructBase(__StructBase):
         return self
 
 
-    def Append(self, *appendObjTuple):
+    def Append(self, *subObjTuple):
 
-        for appendObj in appendObjTuple:
+        for appendObj in subObjTuple:
             copyAppendObj = appendObj.Copy()
             copyAppendObj.owner = self
             self.sub.append(copyAppendObj)
@@ -191,47 +237,18 @@ class __NotAtomStructBase(__StructBase):
         return self
 
 
-    def Insert(self, idxNum, *insertObjTuple):
+    def Insert(self, insertIdx, *subObjTuple):
 
         copyInsertObjList = []
 
-        for insertObj in insertObjTuple:
+        for insertObj in subObjTuple:
             copyInsertObj = insertObj.Copy()
             copyInsertObj.owner = self
             copyInsertObjList.append(copyInsertObj)
 
-        self.sub = self.sub[:idxNum] + copyInsertObjList + self.sub[idxNum:]
+        self.sub = self.sub[:insertIdx] + copyInsertObjList + self.sub[insertIdx:]
 
         return self
-
-
-    def FilterAtoms(self, atomName = 'CA', *atomNameTuple):
-
-        atomNameList = set((atomName,) + atomNameTuple)
-
-        return [atomObj for atomObj in self.IGetAtoms() if atomObj.name in atomNameList]
-
-
-    def IFilterAtoms(self, atomName = 'CA', *atomNameTuple):
-
-        atomNameList = set((atomName,) + atomNameTuple)
-
-        for atomObj in self.IGetAtoms():
-            if atomObj.name in atomNameList:
-                yield atomObj
-
-
-    def GetAtomsCoord(self):
-
-        return array([atomObj.coord for atomObj in self.IGetAtoms()])
-
-
-    def FilterAtomsCoord(self, atomName = 'CA', *atomNameTuple):
-
-        atomNameList = set((atomName,) + atomNameTuple)
-
-        return array([atomObj.coord for atomObj in self.IGetAtoms()
-            if atomObj.name in atomNameList])
 
 
     def RemoveAlt(self):
@@ -673,7 +690,7 @@ class Atom(__NotProteinStructBase):
 
     __slots__ = ('name', 'num', 'coord', 'alt', 'occ', 'tempF', 'ele', 'chg', 'owner')
 
-    def __init__(self, atomName = '', atomNum = 0, atomCoord = array([0., 0., 0.]),
+    def __init__(self, atomName = '', atomNum = 0, atomCoord = array((0., 0., 0.)),
         atomAltLoc = '', atomOccupancy = '', atomTempFactor = '', atomElement = '',
         atomCharge = '', owner = None):
 
