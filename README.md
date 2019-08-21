@@ -343,7 +343,7 @@ for chainObj in proObj:
             pass
 ```
 
-#### 2. \_\_len\_\_
+#### 2. \_\_len\_\_（仅限非Atom层级）
 
 ``` Python
 __len__(self)
@@ -358,7 +358,7 @@ proObj = Load('xxxx.pdb')
 subLen = len(proObj)
 ```
 
-#### 3. \_\_getitem\_\_, \_\_setitem\_\_
+#### 3. \_\_getitem\_\_, \_\_setitem\_\_（仅限非Atom层级）
 
 ``` Python
 __getitem__(self, sliceObj)
@@ -374,6 +374,21 @@ __setitem__(self, sliceObj, setValue)
 proObj = Load('xxxx.pdb')
 atomObj = proObj[0][0][0]
 proObj[0] = proObj[1].Copy()
+```
+
+#### 4. \_\_sub\_\_（仅限Atom层级）
+
+``` Python
+__sub__(self, subAtomObj)
+```
+
+获取两原子间的欧几里得距离。
+
+#### 例：
+
+``` Python
+proObj = Load('xxxx.pdb')
+atomDis = proObj[0][0][0] - proObj[0][0][1]
 ```
 
 ### 所有层级公有成员函数
