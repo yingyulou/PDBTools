@@ -12,6 +12,7 @@ from numpy import array
 
 # Import PDBTools
 from .NotProteinStructInterface import __NotProteinStructInterface
+from .MathUtil import Dis
 
 ################################################################################
 # Class Atom
