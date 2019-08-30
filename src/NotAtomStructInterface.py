@@ -12,8 +12,8 @@ from abc import abstractmethod
 from numpy import array
 
 # Import PDBTools
-from StructBaseInterface import __StructBaseInterface
-from StructConst import RESIDUE_NAME_THREE_TO_ONE_DICT
+from .StructBaseInterface import __StructBaseInterface
+from .StructConst import RESIDUE_NAME_THREE_TO_ONE_DICT
 
 ################################################################################
 # Not Atom Struct Interface

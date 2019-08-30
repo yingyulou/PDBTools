@@ -1,3 +1,4 @@
+
 #!/bin/env python
 # coding=UTF-8
 
@@ -8,10 +9,10 @@
 '''
 
 # Import PDBTools
-from NotAtomStructInterface import __NotAtomStructInterface
-from NotProteinStructInterface import __NotProteinStructInterface
-from StructConst import DIH, SIDE, _RESIDUE_SIDECHAIN_ROTATION_ATOMS_NAME_DICT
-from MathUtil import CalcVectorAngle, CalcRotationMatrix, CalcDihedralAngle
+from .NotAtomStructInterface import __NotAtomStructInterface
+from .NotProteinStructInterface import __NotProteinStructInterface
+from .StructConst import DIH, SIDE, _RESIDUE_SIDECHAIN_ROTATION_ATOMS_NAME_DICT
+from .MathUtil import CalcVectorAngle, CalcRotationMatrix, CalcDihedralAngle
 
 ################################################################################
 # Residue Struct Class

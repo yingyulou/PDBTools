@@ -12,11 +12,11 @@ from os.path import splitext, basename
 from numpy import array
 
 # Import PDBTools
-from ProteinClass import Protein
-from ChainClass import Chain
-from ResidueClass import Residue
-from AtomClass import Atom
-from StructConst import __H_RE
+from .ProteinClass import Protein
+from .ChainClass import Chain
+from .ResidueClass import Residue
+from .AtomClass import Atom
+from .StructConst import __H_RE
 
 ################################################################################
 # Parse PDB File

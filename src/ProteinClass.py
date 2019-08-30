@@ -8,7 +8,7 @@
 '''
 
 # Import PDBTools
-from NotAtomStructInterface import __NotAtomStructInterface
+from .NotAtomStructInterface import __NotAtomStructInterface
 
 ################################################################################
 # Protein Struct Class

@@ -8,7 +8,7 @@
 '''
 
 # Import PDBTools
-from StructBaseInterface import __StructBaseInterface
+from .StructBaseInterface import __StructBaseInterface
 
 ################################################################################
 # Not Protein Struct Interface

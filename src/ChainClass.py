@@ -8,8 +8,8 @@
 '''
 
 # Import PDBTools
-from NotAtomStructInterface import __NotAtomStructInterface
-from NotProteinStructInterface import __NotProteinStructInterface
+from .NotAtomStructInterface import __NotAtomStructInterface
+from .NotProteinStructInterface import __NotProteinStructInterface
 
 ################################################################################
 # Chain Struct Class
