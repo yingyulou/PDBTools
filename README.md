@@ -49,9 +49,7 @@ proObj = Load('xxxx.pdb')
 LoadModel(pdbFilePath, parseHBool = False)
 ```
 
-将含有"MODEL"关键词的PDB文件解析为Protein对象list，这些Protein对象的name属性将被设置为：PDB文件名（不包含".pdb"）+ "\_MODEL\_" + MODEL编号。
-
-如果PDB中不含"MODEL"关键词，或第一个"MODEL"关键词之前仍具有"ATOM"行，则这部分数据将被解析至返回值list的第一个元素中，此Protein对象的name属性将被设置为PDB文件名（不包含".pdb"）。
+将含有"MODEL"关键词的PDB文件解析为Protein对象list。
 
 #### 参数：
 

@@ -1,4 +1,4 @@
-#!/bin/env python
+#!/usr/bin/env python3
 # coding=UTF-8
 
 '''
@@ -92,7 +92,7 @@ def LoadModel(pdbFilePath, parseHBool = False):
 
             if line[:5] == 'MODEL':
 
-                proObj = Protein('%s_MODEL_%s' % (pdbIdStr, line.split()[1]))
+                proObj = Protein(pdbIdStr)
                 proObjList.append(proObj)
 
                 lastChainName = None

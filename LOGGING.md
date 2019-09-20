@@ -1,5 +1,9 @@
 # PDBTools更新日志
 
+### Version 3.5.0
+
+1. [PDBParser] 修改LoadModel函数对于Protein对象的name属性的创建规则
+
 ### Version 3.4.6
 
 1. 重新组织项目代码分布

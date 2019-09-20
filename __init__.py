@@ -1,4 +1,4 @@
-#!/bin/env python
+#!/usr/bin/env python3
 # coding=UTF-8
 
 '''
@@ -12,11 +12,11 @@ DESCRIPTION
 
 VERSION
 
-    3.4.6
+    3.5.0
 
 LATEST UPDATE
 
-    2019.8.19
+    2019.9.20
 
 '''
 
