@@ -8,6 +8,7 @@ DESCRIPTION
 
     Collection of modules for PDB file parsing, linear algebra calculations and
     structure modify.
+
     See README file for full description and examples.
 
 VERSION
