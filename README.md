@@ -270,7 +270,7 @@ __init__(self, chainName = '', owner = None)
 #### 参数：
 
 - \<str\> chainName, ：链名，用于初始化name属性
-- \<Protein\> \_\_owner：self的所属Protein，用于初始化owner属性。如果owner不为None，则构造函数将自动在owner与self之间建立从属关系
+- \<Protein\> owner：self的所属Protein，用于初始化owner属性。如果owner不为None，则构造函数将自动在owner与self之间建立从属关系
 
 #### 例：
 
@@ -290,7 +290,7 @@ __init__(self, resName = '', resNum = 0, resIns = '', owner = None)
 - \<str\> resName：残基名，用于初始化name属性
 - \<int\> resNum：残基编号，用于初始化num属性
 - \<str\> resIns：残基插入字符，用于初始化ins属性
-- \<Chain\> \_\_owner：self的所属Chain，用于初始化owner属性。如果owner不为None，则构造函数将自动在owner与self之间建立从属关系
+- \<Chain\> owner：self的所属Chain，用于初始化owner属性。如果owner不为None，则构造函数将自动在owner与self之间建立从属关系
 
 #### 例：
 
@@ -317,7 +317,7 @@ __init__(self, atomName = '', atomNum = 0, atomCoord = array([0., 0., 0.]),
 - \<str\> atomTempFactor：温度因子，用于初始化tempF属性
 - \<str\> atomElement：元素符号，用于初始化ele属性
 - \<str\> atomCharge：电荷，用于初始化chg属性
-- \<Residue\> \_\_owner：self的所属Residue，用于初始化owner属性。如果owner不为None，则构造函数将自动在owner与self之间建立从属关系
+- \<Residue\> owner：self的所属Residue，用于初始化owner属性。如果owner不为None，则构造函数将自动在owner与self之间建立从属关系
 
 #### 例：
 
