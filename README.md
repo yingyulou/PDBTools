@@ -269,7 +269,7 @@ __init__(self, chainName = '', owner = None)
 
 #### 参数：
 
-- \<str\> chainName, ：链名，用于初始化name属性
+- \<str\> chainName：链名，用于初始化name属性
 - \<Protein\> owner：self的所属Protein，用于初始化owner属性。如果owner不为None，则构造函数将自动在owner与self之间建立从属关系
 
 #### 例：
