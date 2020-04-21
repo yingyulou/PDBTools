@@ -49,7 +49,7 @@ def CalcVectorAngle(coordA, coordB):
 
 def CalcRotationMatrix(rotationAxis, rotationAngle):
 
-    x, y, z  = rotationAxis / Norm(rotationAxis)
+    x, y, z = rotationAxis / Norm(rotationAxis)
     s, c = sin(rotationAngle), cos(rotationAngle)
     one_c = 1 - c
 
