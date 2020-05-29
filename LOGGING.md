@@ -1,5 +1,11 @@
 # PDBTools更新日志
 
+### Version 3.6.0
+
+1. [Chain] 为Chain类增加subDict函数
+
+2. [StructUtil] 增加SplitCompNum函数
+
 ### Version 3.5.0
 
 1. [PDBParser] 修改LoadModel函数对于Protein对象的name属性的创建规则

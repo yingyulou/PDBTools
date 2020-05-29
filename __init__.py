@@ -13,11 +13,11 @@ DESCRIPTION
 
 VERSION
 
-    3.5.0
+    3.6.0
 
 LATEST UPDATE
 
-    2020.4.21
+    2020.5.29
 
 '''
 
@@ -40,4 +40,4 @@ from .src.Constants import DIH, SIDE, RESIDUE_NAME_THREE_TO_ONE_DICT, \
     RESIDUE_NAME_ONE_TO_THREE_DICT
 
 # Struct Util
-from .src.StructUtil import Dumpls, Dumpl, DumpFastals, DumpFastal
+from .src.StructUtil import SplitCompNum, Dumpls, Dumpl, DumpFastals, DumpFastal

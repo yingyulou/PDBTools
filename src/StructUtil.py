@@ -7,6 +7,20 @@
         Utils define.
 '''
 
+# Import PDBTools
+from .Constants import __COMP_NUM_RE
+
+################################################################################
+# Split CompNum To (ResNum, ResIns)
+################################################################################
+
+def SplitCompNum(compNumStr):
+
+    resNum, resIns = __COMP_NUM_RE.match(compNumStr).groups()
+
+    return int(resNum), resIns
+
+
 ################################################################################
 # Get Dump String Of Struct Object List
 ################################################################################

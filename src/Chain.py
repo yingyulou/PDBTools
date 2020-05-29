@@ -37,6 +37,12 @@ class Chain(__NotAtom, __NotProtein):
     __str__ = __repr__
 
 
+    @property
+    def subDict(self):
+
+        return {resObj.compNum: resObj for resObj in self}
+
+
     def Copy(self):
 
         copyChainObj = Chain(self.name)

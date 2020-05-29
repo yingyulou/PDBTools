@@ -110,23 +110,29 @@ self所属的Protein。
 
 self包含的所有残基对象。
 
-#### 4. \<np.ndarray(1 * 3)\> center, 只读
+#### 4. \<dict\<str, Residue\>\> subDict, 只读
+
+self包含的所有{完整残基名：残基对象}哈希表。
+
+**请注意：如果self包含多个完整残基名一致的残基，则此属性的数据不正确（先出现的残基将被后出现的残基覆盖）。**
+
+#### 5. \<np.ndarray(1 * 3)\> center, 只读
 
 self包含的所有原子的几何中心。
 
-#### 5. \<str\> seq, 只读
+#### 6. \<str\> seq, 只读
 
 self的残基序列。
 
-#### 6. \<str\> fasta, 只读
+#### 7. \<str\> fasta, 只读
 
 self的字符串形式的Fasta文件内容，title为self.name。
 
-#### 7. \<int\> idx, 只读
+#### 8. \<int\> idx, 只读
 
 self在self.owner.sub中的索引值。
 
-#### 8. \<Chain\> pre, next, 只读
+#### 9. \<Chain\> pre, next, 只读
 
 self在self.owner.sub中的前/后一个同级对象，如果不存在这样的对象（self是self.owner.sub中的第一个或最后一个元素），则将抛出IndexError异常。
 
@@ -1147,7 +1153,30 @@ rmsdValue = CalcRMSDAfterSuperimpose(np.array(((1., 2., 3.), (4., 5., 6.))),
 
 ## 其他函数
 
-### 1. Dumpl
+### 1. SplitCompNum
+
+``` Python
+SplitCompNum(compNumStr)
+```
+
+将完整残基编号分割为残基编号和残基插入编号。
+
+#### 参数：
+
+- \<str\> compNumStr：完整残基编号
+
+#### 返回值：
+
+- \<int\> 残基编号
+- \<str\> 残基插入编号
+
+#### 例：
+
+``` Python
+resNum, resIns = SplitCompNum('1A')
+```
+
+### 2. Dumpl
 
 ``` Python
 Dumpl(structObjList, dumpFilePath, fileMode = 'w')
@@ -1172,7 +1201,7 @@ proObjList = LoadModel('xxxx.pdb')
 Dumpl(proObjList, 'xxxx.pdb')
 ```
 
-### 2. Dumpls
+### 3. Dumpls
 
 ``` Python
 Dumpls(structObjList)
@@ -1195,7 +1224,7 @@ proObjList = LoadModel('xxxx.pdb')
 dumpStr = Dumpls(proObjList)
 ```
 
-### 3. DumpFastal
+### 4. DumpFastal
 
 ``` Python
 DumpFastal(structObjList, dumpFilePath, fileMode = 'w')
@@ -1220,7 +1249,7 @@ proObjList = LoadModel('xxxx.pdb')
 DumpFastal(proObjList, 'xxxx.fasta')
 ```
 
-### 4. DumpFastals
+### 5. DumpFastals
 
 ``` Python
 DumpFastals(structObjList)
