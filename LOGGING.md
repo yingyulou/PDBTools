@@ -1,5 +1,9 @@
 # PDBTools更新日志
 
+### Version 3.8.0
+
+1. [StructUtil] 增加IsH函数
+
 ### Version 3.6.0
 
 1. [Chain] 为Chain类增加subDict函数

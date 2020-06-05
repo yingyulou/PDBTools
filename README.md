@@ -1153,7 +1153,29 @@ rmsdValue = CalcRMSDAfterSuperimpose(np.array(((1., 2., 3.), (4., 5., 6.))),
 
 ## 其他函数
 
-### 1. SplitCompNum
+### 1. IsH
+
+``` Python
+IsH(atomName)
+```
+
+判断一个原子名是否为氢原子。
+
+#### 参数：
+
+- \<str\> atomName：原子名
+
+#### 返回值：
+
+- \<bool\> 原子名是否为氢原子
+
+#### 例：
+
+``` Python
+isHBool = IsH('1H')
+```
+
+### 2. SplitCompNum
 
 ``` Python
 SplitCompNum(compNumStr)
@@ -1176,7 +1198,7 @@ SplitCompNum(compNumStr)
 resNum, resIns = SplitCompNum('1A')
 ```
 
-### 2. Dumpl
+### 3. Dumpl
 
 ``` Python
 Dumpl(structObjList, dumpFilePath, fileMode = 'w')
@@ -1201,7 +1223,7 @@ proObjList = LoadModel('xxxx.pdb')
 Dumpl(proObjList, 'xxxx.pdb')
 ```
 
-### 3. Dumpls
+### 4. Dumpls
 
 ``` Python
 Dumpls(structObjList)
@@ -1224,7 +1246,7 @@ proObjList = LoadModel('xxxx.pdb')
 dumpStr = Dumpls(proObjList)
 ```
 
-### 4. DumpFastal
+### 5. DumpFastal
 
 ``` Python
 DumpFastal(structObjList, dumpFilePath, fileMode = 'w')
@@ -1249,7 +1271,7 @@ proObjList = LoadModel('xxxx.pdb')
 DumpFastal(proObjList, 'xxxx.fasta')
 ```
 
-### 5. DumpFastals
+### 6. DumpFastals
 
 ``` Python
 DumpFastals(structObjList)

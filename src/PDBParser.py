@@ -16,7 +16,7 @@ from .Protein import Protein
 from .Chain import Chain
 from .Residue import Residue
 from .Atom import Atom
-from .Constants import __H_RE
+from .StructUtil import IsH
 
 ################################################################################
 # Parse PDB File
@@ -40,7 +40,7 @@ def Load(pdbFilePath, parseHBool = False):
 
             atomName = line[12:16].strip()
 
-            if __H_RE.match(atomName) and not parseHBool:
+            if IsH(atomName) and not parseHBool:
                 continue
 
             atomNum        = int(line[6:11])

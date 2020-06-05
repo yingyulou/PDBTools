@@ -8,7 +8,16 @@
 '''
 
 # Import PDBTools
-from .Constants import __COMP_NUM_RE
+from .Constants import __H_RE, __COMP_NUM_RE
+
+################################################################################
+# If An Atom Name is H
+################################################################################
+
+def IsH(atomName):
+
+    return __H_RE.match(atomName)
+
 
 ################################################################################
 # Split CompNum To (ResNum, ResIns)
