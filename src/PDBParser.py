@@ -107,7 +107,7 @@ def LoadModel(pdbFilePath, parseHBool = False):
 
             atomName = line[12:16].strip()
 
-            if __H_RE.match(atomName) and not parseHBool:
+            if IsH(atomName) and not parseHBool:
                 continue
 
             atomNum        = int(line[6:11])
