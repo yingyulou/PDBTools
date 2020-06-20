@@ -649,7 +649,33 @@ proObj = Load('xxxx.pdb')
 proObj.Append(proObj.sub[0]).Insert(0, proObj.sub[0])
 ```
 
-#### 7. RemoveAlt
+#### 7. Move, MoveInsert
+
+``` Python
+Move(self, *subObjTuple)
+
+MoveInsert(self, insertIdx, *subObjTuple)
+```
+
+为self移动并追加/移动并插入子结构。所有移动至self的子结构都会断开其原从属关系（如果有），并与self建立新的从属关系。
+
+#### 参数：
+
+- \<*SubObj\> subObjTuple：self对应的子结构对象列表
+- \<int\> insertIdx：插入位置索引值
+
+#### 返回值：
+
+- self
+
+#### 例：
+
+``` Python
+proObj = Load('xxxx.pdb')
+proObj.Move(proObj[0]).MoveInsert(0, proObj[0])
+```
+
+#### 8. RemoveAlt
 
 ``` Python
 RemoveAlt(self)
@@ -1306,17 +1332,17 @@ dumpStr = DumpFastals(proObjList)
 
 #### 1. Load函数：
 
-- Protein：只会在解析开始前创建唯一的一个，并最终返回这个对象
-- Chain：在解析开始时，以及每次检测到链名发生变化时（从上一个"ATOM"行到当前行），都会创建一个新的链对象
-- Residue：在解析开始时，以及每次检测到残基名、残基编号或残基插入字符三者之一发生变化时（从上一个"ATOM"行到当前行），都会创建一个新的残基对象
-- Atom：每检测到一个新的"ATOM"行都会创建一个新的Atom对象
+- Protein：只会在解析开始前创建唯一的一个，并最终返回这个对象指针
+- Chain：解析开始时，以及每次检测到链名发生变化时（从上一个"ATOM"行到当前行），都会创建一个新的链对象指针
+- Residue：解析开始时，创建新链时，以及每次检测到残基名、残基编号或残基插入字符三者之一发生变化时（从上一个"ATOM"行到当前行），都会创建一个新的残基对象指针
+- Atom：每检测到一个新的"ATOM"行都会创建一个新的Atom对象指针
 
 #### 2. LoadModel函数：
 
-- Protein：解析开始前，以及每次检测到"MODEL"关键词时，都会创建一个新的蛋白对象。如果解析开始前创建的这个蛋白对象在函数返回前仍然为空，则其将在函数返回前被删除并析构
-- Chain：解析开始时，每次检测到链名发生变化时（从上一个"ATOM"行到当前行），以及一个新的Model出现时，都会创建一个新的链对象
-- Residue：解析开始时，每次检测到残基名、残基编号或残基插入字符三者之一发生变化时（从上一个"ATOM"行到当前行），以及一个新的Model出现时，都会创建一个新的残基对象
-- Atom：每检测到一个新的"ATOM"行都会创建一个新的Atom对象
+- Protein：解析开始前，以及每次检测到"MODEL"关键词时，都会创建一个新的蛋白对象指针。如果解析开始前创建的这个蛋白对象指针在函数返回前仍然为空，则其将在函数返回前被删除并析构
+- Chain：解析开始时，创建新Model时，以及每次检测到链名发生变化时（从上一个"ATOM"行到当前行），都会创建一个新的链对象指针
+- Residue：解析开始时，创建新Model时，创建新链时，以及每次检测到残基名、残基编号或残基插入字符三者之一发生变化时（从上一个"ATOM"行到当前行），都会创建一个新的残基对象指针
+- Atom：每检测到一个新的"ATOM"行都会创建一个新的Atom对象指针
 
 ### 空字段
 

@@ -193,6 +193,36 @@ class __NotAtom(__StructBase):
         return self
 
 
+    def Move(self, *subObjTuple):
+
+        for appendObj in subObjTuple:
+
+            if appendObj.owner:
+                appendObj.Remove()
+
+            appendObj.owner = self
+            self.sub.append(appendObj)
+
+        return self
+
+
+    def MoveInsert(self, insertIdx, *subObjTuple):
+
+        insertObjList = []
+
+        for insertObj in subObjTuple:
+
+            if insertObj.owner:
+                insertObj.Remove()
+
+            insertObj.owner = self
+            insertObjList.append(insertObj)
+
+        self.sub = self.sub[:insertIdx] + insertObjList + self.sub[insertIdx:]
+
+        return self
+
+
     def RemoveAlt(self):
 
         for atomObj in self.GetAtoms():

@@ -1,5 +1,11 @@
 # PDBTools更新日志
 
+### Version 3.9.0
+
+1. [PDBParser] 修复Load与LoadModel函数在某些情况下产生的解析错误
+
+2. [StructClass] 增加Move与MoveInsert函数
+
 ### Version 3.8.0
 
 1. [StructUtil] 增加IsH函数

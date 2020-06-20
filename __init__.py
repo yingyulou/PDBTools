@@ -13,11 +13,11 @@ DESCRIPTION
 
 VERSION
 
-    3.8.0
+    3.9.0
 
 LATEST UPDATE
 
-    2020.6.5
+    2020.6.20
 
 '''
 

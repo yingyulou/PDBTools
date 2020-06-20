@@ -57,10 +57,11 @@ def Load(pdbFilePath, parseHBool = False):
 
             if chainName != lastChainName:
 
-                lastChainName = chainName
+                lastChainName, lastResNum, lastResName, lastResIns = chainName, resNum, resName, resIns
                 chainObj = Chain(chainName, proObj)
+                resObj = Residue(resName, resNum, resIns, chainObj)
 
-            if lastResNum != resNum or lastResName != resName or lastResIns != resIns:
+            elif lastResNum != resNum or lastResName != resName or lastResIns != resIns:
 
                 lastResNum, lastResName, lastResIns = resNum, resName, resIns
                 resObj = Residue(resName, resNum, resIns, chainObj)
@@ -124,10 +125,11 @@ def LoadModel(pdbFilePath, parseHBool = False):
 
             if chainName != lastChainName:
 
-                lastChainName = chainName
+                lastChainName, lastResNum, lastResName, lastResIns = chainName, resNum, resName, resIns
                 chainObj = Chain(chainName, proObj)
+                resObj = Residue(resName, resNum, resIns, chainObj)
 
-            if lastResNum != resNum or lastResName != resName or lastResIns != resIns:
+            elif lastResNum != resNum or lastResName != resName or lastResIns != resIns:
 
                 lastResNum, lastResName, lastResIns = resNum, resName, resIns
                 resObj = Residue(resName, resNum, resIns, chainObj)
