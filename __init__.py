@@ -13,11 +13,15 @@ DESCRIPTION
 
 VERSION
 
-    3.9.0
+    3.10.0
 
 LATEST UPDATE
 
+<<<<<<< HEAD
     2020.8.24
+=======
+    2020.8.9
+>>>>>>> 66e2b24287e874b0345ac72c0549adc9213cc10f
 
 '''
 

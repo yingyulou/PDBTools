@@ -649,33 +649,7 @@ proObj = Load('xxxx.pdb')
 proObj.Append(proObj.sub[0]).Insert(0, proObj.sub[0])
 ```
 
-#### 7. Move, MoveInsert
-
-``` Python
-Move(self, *subObjTuple)
-
-MoveInsert(self, insertIdx, *subObjTuple)
-```
-
-为self移动并追加/移动并插入子结构。所有移动至self的子结构都会断开其原从属关系（如果有），并与self建立新的从属关系。
-
-#### 参数：
-
-- \<*SubObj\> subObjTuple：self对应的子结构对象列表
-- \<int\> insertIdx：插入位置索引值
-
-#### 返回值：
-
-- self
-
-#### 例：
-
-``` Python
-proObj = Load('xxxx.pdb')
-proObj.Move(proObj[0]).MoveInsert(0, proObj[0])
-```
-
-#### 8. RemoveAlt
+#### 7. RemoveAlt
 
 ``` Python
 RemoveAlt(self)
