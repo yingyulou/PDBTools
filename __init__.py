@@ -17,7 +17,7 @@ VERSION
 
 LATEST UPDATE
 
-    2020.6.20
+    2020.8.24
 
 '''
 
