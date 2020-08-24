@@ -13,7 +13,7 @@ DESCRIPTION
 
 VERSION
 
-    3.9.0 
+    3.9.0
 
 LATEST UPDATE
 
