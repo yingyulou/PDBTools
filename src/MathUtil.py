@@ -18,9 +18,10 @@ from numpy.linalg import svd, det
 
 def Dis(coordA, coordB):
 
-    x, y, z = coordA[0] - coordB[0], coordA[1] - coordB[1], coordA[2] - coordB[2]
-
-    return sqrt(x * x + y * y + z * z)
+    return sqrt(
+        (coordA[0] - coordB[0])**2 +
+        (coordA[1] - coordB[1])**2 +
+        (coordA[2] - coordB[2])**2)
 
 
 ################################################################################
@@ -29,9 +30,7 @@ def Dis(coordA, coordB):
 
 def Norm(coordArray):
 
-    x, y, z = coordArray
-
-    return sqrt(x * x + y * y + z * z)
+    return sqrt(coordArray[0]**2 + coordArray[1]**2 + coordArray[2]**2)
 
 
 ################################################################################
