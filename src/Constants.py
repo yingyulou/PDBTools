@@ -179,7 +179,6 @@ _RESIDUE_SIDECHAIN_ROTATION_ATOMS_NAME_DICT = {
     'TYR': (
         ('N', 'CA', 'CB', 'CG', 'CD1', 'CD2', 'CE1', 'CE2', 'CZ', 'OH'),
         ('CA', 'CB', 'CG', 'CD1', 'CD2', 'CE1', 'CE2', 'CZ', 'OH'),
-        ('N', 'CA', 'CB', 'OG1', 'CG2'),
     ),
 
     'ILE': (
