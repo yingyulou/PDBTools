@@ -111,15 +111,7 @@ RESIDUE_NAME_ONE_TO_THREE_DICT = {
 
 _RESIDUE_SIDECHAIN_ROTATION_ATOMS_NAME_DICT = {
 
-    'HIS': (
-        ('N', 'CA', 'CB', 'CG', 'ND1', 'CD2', 'CE1', 'NE2'),
-        ('CA', 'CB', 'CG', 'ND1', 'CD2', 'CE1', 'NE2'),
-    ),
-
-    'ASP': (
-        ('N', 'CA', 'CB', 'CG', 'OD1', 'OD2'),
-        ('CA', 'CB', 'CG', 'OD1', 'OD2'),
-    ),
+    'ALA': (),
 
     'ARG': (
         ('N', 'CA', 'CB', 'CG', 'CD', 'NE', 'CZ', 'NH1', 'NH2'),
@@ -128,9 +120,14 @@ _RESIDUE_SIDECHAIN_ROTATION_ATOMS_NAME_DICT = {
         ('CG', 'CD', 'NE', 'CZ', 'NH1', 'NH2'),
     ),
 
-    'PHE': (
-        ('N', 'CA', 'CB', 'CG', 'CD1', 'CD2', 'CE1', 'CE2', 'CZ'),
-        ('CA', 'CB', 'CG', 'CD1', 'CD2', 'CE1', 'CE2', 'CZ'),
+    'ASN': (
+        ('N', 'CA', 'CB', 'CG', 'OD1', 'ND2'),
+        ('CA', 'CB', 'CG', 'OD1', 'ND2'),
+    ),
+
+    'ASP': (
+        ('N', 'CA', 'CB', 'CG', 'OD1', 'OD2'),
+        ('CA', 'CB', 'CG', 'OD1', 'OD2'),
     ),
 
     'CYS': (
@@ -149,16 +146,28 @@ _RESIDUE_SIDECHAIN_ROTATION_ATOMS_NAME_DICT = {
         ('CB', 'CG', 'CD', 'OE1', 'OE2'),
     ),
 
-    'LYS': (
-        ('N', 'CA', 'CB', 'CG', 'CD', 'CE', 'NZ'),
-        ('CA', 'CB', 'CG', 'CD', 'CE', 'NZ'),
-        ('CB', 'CG', 'CD', 'CE', 'NZ'),
-        ('CG', 'CD', 'CE', 'NZ'),
+    'GLY': (),
+
+    'HIS': (
+        ('N', 'CA', 'CB', 'CG', 'ND1', 'CD2', 'CE1', 'NE2'),
+        ('CA', 'CB', 'CG', 'ND1', 'CD2', 'CE1', 'NE2'),
+    ),
+
+    'ILE': (
+        ('N', 'CA', 'CB', 'CG1', 'CG2', 'CD1'),
+        ('CA', 'CB', 'CG1', 'CD1'),
     ),
 
     'LEU': (
         ('N', 'CA', 'CB', 'CG', 'CD1', 'CD2'),
         ('CA', 'CB', 'CG', 'CD1', 'CD2'),
+    ),
+
+    'LYS': (
+        ('N', 'CA', 'CB', 'CG', 'CD', 'CE', 'NZ'),
+        ('CA', 'CB', 'CG', 'CD', 'CE', 'NZ'),
+        ('CB', 'CG', 'CD', 'CE', 'NZ'),
+        ('CG', 'CD', 'CE', 'NZ'),
     ),
 
     'MET': (
@@ -167,27 +176,22 @@ _RESIDUE_SIDECHAIN_ROTATION_ATOMS_NAME_DICT = {
         ('CB', 'CG', 'SD', 'CE'),
     ),
 
-    'ASN': (
-        ('N', 'CA', 'CB', 'CG', 'OD1', 'ND2'),
-        ('CA', 'CB', 'CG', 'OD1', 'ND2'),
+    'PHE': (
+        ('N', 'CA', 'CB', 'CG', 'CD1', 'CD2', 'CE1', 'CE2', 'CZ'),
+        ('CA', 'CB', 'CG', 'CD1', 'CD2', 'CE1', 'CE2', 'CZ'),
+    ),
+
+    'PRO': (
+        ('N', 'CA', 'CB', 'CG', 'CD'),
+        ('CA', 'CB', 'CG', 'CD'),
     ),
 
     'SER': (
         ('N', 'CA', 'CB', 'OG'),
     ),
 
-    'TYR': (
-        ('N', 'CA', 'CB', 'CG', 'CD1', 'CD2', 'CE1', 'CE2', 'CZ', 'OH'),
-        ('CA', 'CB', 'CG', 'CD1', 'CD2', 'CE1', 'CE2', 'CZ', 'OH'),
-    ),
-
     'THR': (
         ('N', 'CA', 'CB', 'OG1', 'CG2'),
-    ),
-
-    'ILE': (
-        ('N', 'CA', 'CB', 'CG1', 'CG2', 'CD1'),
-        ('CA', 'CB', 'CG1', 'CD1'),
     ),
 
     'TRP': (
@@ -195,9 +199,9 @@ _RESIDUE_SIDECHAIN_ROTATION_ATOMS_NAME_DICT = {
         ('CA', 'CB', 'CG', 'CD1', 'CD2', 'NE1', 'CE2', 'CE3', 'CZ2', 'CZ3', 'CH2'),
     ),
 
-    'PRO': (
-        ('N', 'CA', 'CB', 'CG', 'CD'),
-        ('CA', 'CB', 'CG', 'CD'),
+    'TYR': (
+        ('N', 'CA', 'CB', 'CG', 'CD1', 'CD2', 'CE1', 'CE2', 'CZ', 'OH'),
+        ('CA', 'CB', 'CG', 'CD1', 'CD2', 'CE1', 'CE2', 'CZ', 'OH'),
     ),
 
     'VAL': (
