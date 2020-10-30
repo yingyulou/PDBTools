@@ -1,5 +1,9 @@
 # PDBTools更新日志
 
+### Version 3.12.0
+
+1. 为Protein增加model属性
+
 ### Version 3.10.0
 
 1. [NotAtom] 删除Move与MoveInsert函数

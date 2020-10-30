@@ -16,17 +16,19 @@ from .NotAtom import __NotAtom
 
 class Protein(__NotAtom):
 
-    __slots__ = ('name', 'sub')
+    __slots__ = ('name', 'model', 'sub')
 
-    def __init__(self, proteinID = ''):
+    def __init__(self, proteinID = '', modelNum = 0):
 
-        self.name = proteinID
-        self.sub  = []
+        self.name  = proteinID
+        self.model = modelNum
+        self.sub   = []
 
 
     def __repr__(self):
 
-        return '<Protein object: %s, at 0x%X>' % (self.name, id(self))
+        return '<Protein object: %s (Model: %d), at 0x%X>' % (
+            self.name, self.model, id(self))
 
 
     __str__ = __repr__

@@ -93,7 +93,7 @@ def LoadModel(pdbFilePath, parseHBool = False):
 
             if line[:5] == 'MODEL':
 
-                proObj = Protein(pdbIdStr)
+                proObj = Protein(pdbIdStr, int(line[10:14]))
                 proObjList.append(proObj)
 
                 lastChainName = None

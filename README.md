@@ -74,25 +74,31 @@ proObjList = LoadModel('xxxx.pdb')
 
 PDB文件名（不包含".pdb"）。
 
-#### 2. \<list\<Chain\>\> sub
+#### 2. \<int\> model
+
+Model编号。
+
+如果当前Protein对象由Load函数解析得到，或由LoadModel函数解析得到，但其不属于一个Model，则此值为0。
+
+#### 3. \<list\<Chain\>\> sub
 
 self包含的所有链对象。
 
-#### 3. \<dict\<str, Chain\>\> subDict
+#### 4. \<dict\<str, Chain\>\> subDict
 
 self包含的所有{链名：链对象}哈希表。
 
 **请注意：如果self包含多条链名一致的链，则此属性的数据不正确（先出现的链将被后出现的链覆盖）。**
 
-#### 4. \<np.ndarray(1 * 3)\> center, 只读
+#### 5. \<np.ndarray(1 * 3)\> center, 只读
 
 self包含的所有原子的几何中心。
 
-#### 5. \<str\> seq, 只读
+#### 6. \<str\> seq, 只读
 
 self的残基序列。
 
-#### 6. \<str\> fasta, 只读
+#### 7. \<str\> fasta, 只读
 
 self的字符串形式的Fasta文件内容，title为self.name。
 
@@ -254,12 +260,13 @@ self在self.owner.sub中的前/后一个同级对象，如果不存在这样的�
 #### 1. Protein构造函数
 
 ``` Python
-__init__(self, proteinID = '')
+__init__(self, proteinID = '', modelNum = 0)
 ```
 
 #### 参数：
 
 - \<str\> proteinID：蛋白名，用于初始化name属性
+- \<int\> modelNum：Model编号，用于初始化model属性
 
 #### 例：
 
