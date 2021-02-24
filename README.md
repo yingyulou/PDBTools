@@ -633,17 +633,18 @@ proObj.RenumResidues().RenumAtoms()
 #### 6. Append, Insert
 
 ``` Python
-Append(self, *subObjTuple)
+Append(self, subObj, copyBool = True)
 
-Insert(self, insertIdx, *subObjTuple)
+Insert(self, insertIdx, subObj, copyBool = True)
 ```
 
-为self追加/插入子结构。所有添加至self的子结构都是原结构对象调用Copy成员函数得到的拷贝，且会与self自动建立从属关系。
+为self追加/插入子结构。所有添加至self的子结构都是原结构对象调用Copy成员函数得到的拷贝，且会与self自动建立从属关系。如果copyBool被设定为False，则拷贝不会发生。
 
 #### 参数：
 
 - \<*SubObj\> subObjTuple：self对应的子结构对象列表
 - \<int\> insertIdx：插入位置索引值
+- \<bool\> copyBool：是否拷贝subObj
 
 #### 返回值：
 

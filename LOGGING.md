@@ -1,5 +1,9 @@
 # PDBTools更新日志
 
+### Version 3.14.0
+
+1. 修改Append与Insert接口
+
 ### Version 3.12.0
 
 1. 为Protein增加model属性

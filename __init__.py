@@ -2,19 +2,12 @@
 # coding=UTF-8
 
 '''
-DESCRIPTION
-
     PDBTools
 
     Collection of modules for PDB file parsing, linear algebra calculations and
     structure modify.
 
     See README file for full description and examples.
-
-VERSION
-
-    3.12.0
-
 '''
 
 # Parser

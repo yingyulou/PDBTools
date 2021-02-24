@@ -169,26 +169,24 @@ class __NotAtom(__StructBase):
         return self
 
 
-    def Append(self, *subObjTuple):
+    def Append(self, subObj, copyBool = True):
 
-        for appendObj in subObjTuple:
-            copyAppendObj = appendObj.Copy()
-            copyAppendObj.owner = self
-            self.sub.append(copyAppendObj)
+        if copyBool:
+            subObj = subObj.Copy()
+
+        subObj.owner = self
+        self.sub.append(subObj)
 
         return self
 
 
-    def Insert(self, insertIdx, *subObjTuple):
+    def Insert(self, insertIdx, subObj, copyBool = True):
 
-        copyInsertObjList = []
+        if copyBool:
+            subObj = subObj.Copy()
 
-        for insertObj in subObjTuple:
-            copyInsertObj = insertObj.Copy()
-            copyInsertObj.owner = self
-            copyInsertObjList.append(copyInsertObj)
-
-        self.sub = self.sub[:insertIdx] + copyInsertObjList + self.sub[insertIdx:]
+        subObj.owner = self
+        self.sub.insert(insertIdx, subObj)
 
         return self
 
