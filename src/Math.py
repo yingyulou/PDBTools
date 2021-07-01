@@ -2,8 +2,8 @@
 # coding=UTF-8
 
 '''
-    MathUtil
-    ========
+    Math
+    ====
         Math functions define.
 '''
 

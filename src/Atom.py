@@ -12,7 +12,7 @@ from numpy import array
 
 # Import PDBTools
 from .NotProtein import __NotProtein
-from .MathUtil import Dis
+from .Math import Dis
 
 ################################################################################
 # Class Atom

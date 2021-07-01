@@ -16,7 +16,7 @@ from .Protein import Protein
 from .Chain import Chain
 from .Residue import Residue
 from .Atom import Atom
-from .StructUtil import IsH
+from .Util import IsH
 
 ################################################################################
 # Parse PDB File

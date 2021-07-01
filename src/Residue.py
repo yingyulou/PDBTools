@@ -11,7 +11,7 @@
 from .NotAtom import __NotAtom
 from .NotProtein import __NotProtein
 from .Constants import DIH, SIDE, _RESIDUE_SIDECHAIN_ROTATION_ATOMS_NAME_DICT
-from .MathUtil import CalcVectorAngle, CalcRotationMatrix, CalcDihedralAngle
+from .Math import CalcVectorAngle, CalcRotationMatrix, CalcDihedralAngle
 
 ################################################################################
 # Class Residue

@@ -13,8 +13,8 @@
 # Parser
 from .src.PDBParser import Load, LoadModel
 
-# Math Util
-from .src.MathUtil import Dis, Norm, CalcVectorAngle, CalcRotationMatrix, \
+# Math
+from .src.Math import Dis, Norm, CalcVectorAngle, CalcRotationMatrix, \
     CalcRotationMatrixByTwoVector, CalcDihedralAngle, CalcRMSD, \
     CalcSuperimposeRotationMatrix, CalcRMSDAfterSuperimpose
 
@@ -28,6 +28,6 @@ from .src.Atom import Atom
 from .src.Constants import DIH, SIDE, RESIDUE_NAME_THREE_TO_ONE_DICT, \
     RESIDUE_NAME_ONE_TO_THREE_DICT
 
-# Struct Util
-from .src.StructUtil import IsH, SplitCompNum, Dumpls, Dumpl, DumpFastals, \
+# Util
+from .src.Util import IsH, SplitCompNum, Dumpls, Dumpl, DumpFastals, \
     DumpFastal

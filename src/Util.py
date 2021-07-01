@@ -2,9 +2,9 @@
 # coding=UTF-8
 
 '''
-    StructUtil
-    ==========
-        Utils define.
+    Util
+    ====
+        Utility functions define.
 '''
 
 # Import PDBTools
