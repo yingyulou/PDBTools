@@ -39,7 +39,7 @@ def Norm(coordArray):
 
 def CalcVectorAngle(coordA, coordB):
 
-    return acos(coordA.dot(coordB) / (Norm(coordA) * Norm(coordB)))
+    return acos(min(max(coordA.dot(coordB) / (Norm(coordA) * Norm(coordB)), -1.), 1.))
 
 
 ################################################################################
@@ -50,12 +50,12 @@ def CalcRotationMatrix(rotationAxis, rotationAngle):
 
     x, y, z = rotationAxis / Norm(rotationAxis)
     s, c = sin(rotationAngle), cos(rotationAngle)
-    one_c = 1 - c
+    _1c = 1. - c
 
     rotationMatrix = array([
-        [c + x**2 * one_c, x * y * one_c + z * s, x * z * one_c - y * s],
-        [x * y * one_c - z * s, c + y**2 * one_c, y * z * one_c + x * s],
-        [x * z * one_c + y * s, y * z * one_c - x * s, c + z**2 * one_c],
+        [c + x**2 * _1c, x * y * _1c + z * s, x * z * _1c - y * s],
+        [x * y * _1c - z * s, c + y**2 * _1c, y * z * _1c + x * s],
+        [x * z * _1c + y * s, y * z * _1c - x * s, c + z**2 * _1c],
     ])
 
     return rotationMatrix
@@ -95,25 +95,23 @@ def CalcDihedralAngle(coordA, coordB, coordC, coordD):
     OC = coordC - coordB
     OD = coordD - coordB
 
-    rotationAngle = CalcVectorAngle(OC, array([1, 0, 0]))
+    rotationAngle  = CalcVectorAngle(OC, array([1., 0., 0.]))
+    rotationAxis   = cross(OC, array([1., 0., 0.]))
+    rotationMatrix = CalcRotationMatrix(rotationAxis, rotationAngle)
 
-    if rotationAngle != 0:
-        rotationAxis   = cross(OC, array([1, 0, 0]))
-        rotationMatrix = CalcRotationMatrix(rotationAxis, rotationAngle)
-        OA = OA.dot(rotationMatrix)
-        OD = OD.dot(rotationMatrix)
+    OA = OA.dot(rotationMatrix)
+    OD = OD.dot(rotationMatrix)
 
-    OA[0] = 0
-    OD[0] = 0
+    OA[0] = 0.
+    OD[0] = 0.
 
-    rotationAngle = CalcVectorAngle(OA, array([0, 0, 1]))
+    rotationAngle  = CalcVectorAngle(OA, array([0., 0., 1.]))
+    rotationAxis   = cross(OA, array([0., 0., 1.]))
+    rotationMatrix = CalcRotationMatrix(rotationAxis, rotationAngle)
 
-    if rotationAngle != 0:
-        rotationAxis   = cross(OA, array([0, 0, 1]))
-        rotationMatrix = CalcRotationMatrix(rotationAxis, rotationAngle)
-        OD = OD.dot(rotationMatrix)
+    OD = OD.dot(rotationMatrix)
 
-    if OD[1] > 0:
+    if OD[1] > 0.:
         dihedralAngle = -dihedralAngle
 
     return dihedralAngle
@@ -140,7 +138,7 @@ def CalcSuperimposeRotationMatrix(sourceCoordArray, targetCoordArray):
     U, E, V = svd((sourceCoordArray - sourceCenterCoord).transpose().dot(
         targetCoordArray - targetCenterCoord))
 
-    if det(U) * det(V) < 0:
+    if det(U) * det(V) < 0.:
         U[:,-1] = -U[:,-1]
 
     rotationMatrix = U.dot(V)
