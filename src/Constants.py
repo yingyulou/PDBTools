@@ -74,6 +74,7 @@ RESIDUE_NAME_THREE_TO_ONE_DICT = {
     'TRP': 'W',
     'TYR': 'Y',
     'VAL': 'V',
+    'UNK': 'X',
 }
 
 
@@ -102,6 +103,7 @@ RESIDUE_NAME_ONE_TO_THREE_DICT = {
     'W': 'TRP',
     'Y': 'TYR',
     'V': 'VAL',
+    'X': 'UNK',
 }
 
 
