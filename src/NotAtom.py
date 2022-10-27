@@ -15,9 +15,9 @@ from numpy import array
 from .StructBase import __StructBase
 from .Constants import RESIDUE_NAME_THREE_TO_ONE_DICT
 
-################################################################################
+########################################################################################################################
 # Class __NotAtom
-################################################################################
+########################################################################################################################
 
 class __NotAtom(__StructBase):
 
@@ -76,8 +76,7 @@ class __NotAtom(__StructBase):
 
         atomNameSet = set((atomName,) + atomNameTuple)
 
-        return array([atomObj.coord for atomObj in self.IGetAtoms()
-            if atomObj.name in atomNameSet])
+        return array([atomObj.coord for atomObj in self.IGetAtoms() if atomObj.name in atomNameSet])
 
 
     def IFilterAtomsCoord(self, atomName = 'CA', *atomNameTuple):
@@ -133,8 +132,7 @@ class __NotAtom(__StructBase):
     @property
     def seq(self):
 
-        return ''.join([RESIDUE_NAME_THREE_TO_ONE_DICT[resObj.name]
-            for resObj in self.IGetResidues()])
+        return ''.join([RESIDUE_NAME_THREE_TO_ONE_DICT[resObj.name] for resObj in self.IGetResidues()])
 
 
     @property

@@ -18,9 +18,9 @@ from .Residue import Residue
 from .Atom import Atom
 from .Util import IsH
 
-################################################################################
+########################################################################################################################
 # Parse PDB File
-################################################################################
+########################################################################################################################
 
 def Load(pdbFilePath, parseHBool = False):
 
@@ -66,15 +66,14 @@ def Load(pdbFilePath, parseHBool = False):
                 lastResNum, lastResName, lastResIns = resNum, resName, resIns
                 resObj = Residue(resName, resNum, resIns, chainObj)
 
-            Atom(atomName, atomNum, atomCoord, atomAltLoc, atomOccupancy,
-                atomTempFactor, atomElement, atomCharge, resObj)
+            Atom(atomName, atomNum, atomCoord, atomAltLoc, atomOccupancy, atomTempFactor, atomElement, atomCharge, resObj)
 
     return proObj
 
 
-################################################################################
+########################################################################################################################
 # Parse PDB File With Model
-################################################################################
+########################################################################################################################
 
 def LoadModel(pdbFilePath, parseHBool = False):
 
@@ -134,8 +133,7 @@ def LoadModel(pdbFilePath, parseHBool = False):
                 lastResNum, lastResName, lastResIns = resNum, resName, resIns
                 resObj = Residue(resName, resNum, resIns, chainObj)
 
-            Atom(atomName, atomNum, atomCoord, atomAltLoc, atomOccupancy,
-                atomTempFactor, atomElement, atomCharge, resObj)
+            Atom(atomName, atomNum, atomCoord, atomAltLoc, atomOccupancy, atomTempFactor, atomElement, atomCharge, resObj)
 
     if not proObjList[0]:
         proObjList.pop(0)

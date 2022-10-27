@@ -13,9 +13,9 @@ from .NotProtein import __NotProtein
 from .Constants import DIH, SIDE, _RESIDUE_SIDECHAIN_ROTATION_ATOMS_NAME_DICT
 from .Math import CalcVectorAngle, CalcRotationMatrix, CalcDihedralAngle
 
-################################################################################
+########################################################################################################################
 # Class Residue
-################################################################################
+########################################################################################################################
 
 class Residue(__NotAtom, __NotProtein):
 
@@ -103,11 +103,9 @@ class Residue(__NotAtom, __NotProtein):
         coordDict = self.coordDict
 
         if dihedralEnum == DIH.L:
-            dihedralAngle = CalcDihedralAngle(
-                self.pre.coordDict['C'], coordDict['N'], coordDict['CA'], coordDict['C'])
+            dihedralAngle = CalcDihedralAngle(self.pre.coordDict['C'], coordDict['N'], coordDict['CA'], coordDict['C'])
         elif dihedralEnum == DIH.R:
-            dihedralAngle = CalcDihedralAngle(
-                coordDict['N'], coordDict['CA'], coordDict['C'], self.next.coordDict['N'])
+            dihedralAngle = CalcDihedralAngle(coordDict['N'], coordDict['CA'], coordDict['C'], self.next.coordDict['N'])
         else:
             raise ValueError("Argument 'dihedralEnum' must be DIH.(PHI/PSI/L/R)")
 
@@ -139,8 +137,8 @@ class Residue(__NotAtom, __NotProtein):
 
     def CalcBBRotationMatrixByTargetAngle(self, dihedralEnum, sideEnum, targetAngle):
 
-        moveCoord, rotationMatrix = self.CalcBBRotationMatrixByDeltaAngle(
-            dihedralEnum, sideEnum, targetAngle - self.CalcBBDihedralAngle(dihedralEnum))
+        moveCoord, rotationMatrix = self.CalcBBRotationMatrixByDeltaAngle(dihedralEnum, sideEnum,
+            targetAngle - self.CalcBBDihedralAngle(dihedralEnum))
 
         return moveCoord, rotationMatrix
 
@@ -155,19 +153,16 @@ class Residue(__NotAtom, __NotProtein):
                 rotationAtomObjList.extend(resObj.sub)
 
             if dihedralEnum == DIH.R:
-                rotationAtomObjList.extend([atomObj for atomObj in self
-                    if atomObj.name not in {'CA', 'C', 'O', 'OXT'}])
+                rotationAtomObjList.extend([atomObj for atomObj in self if atomObj.name not in {'CA', 'C', 'O', 'OXT'}])
             elif dihedralEnum != DIH.L:
                 raise ValueError("Argument 'dihedralEnum' must be DIH.(PHI/PSI/L/R)")
 
         elif sideEnum == SIDE.R:
 
             if dihedralEnum == DIH.L:
-                rotationAtomObjList.extend([atomObj for atomObj in self
-                    if atomObj.name not in {'N', 'CA'}])
+                rotationAtomObjList.extend([atomObj for atomObj in self if atomObj.name not in {'N', 'CA'}])
             elif dihedralEnum == DIH.R:
-                rotationAtomObjList.extend([atomObj for atomObj in self
-                    if atomObj.name in {'O', 'OXT'}])
+                rotationAtomObjList.extend([atomObj for atomObj in self if atomObj.name in {'O', 'OXT'}])
             else:
                 raise ValueError("Argument 'dihedralEnum' must be DIH.(PHI/PSI/L/R)")
 
@@ -182,8 +177,7 @@ class Residue(__NotAtom, __NotProtein):
 
     def RotateBBDihedralAngleByDeltaAngle(self, dihedralEnum, sideEnum, deltaAngle):
 
-        moveCoord, rotationMatrix = self.CalcBBRotationMatrixByDeltaAngle(
-            dihedralEnum, sideEnum, deltaAngle)
+        moveCoord, rotationMatrix = self.CalcBBRotationMatrixByDeltaAngle(dihedralEnum, sideEnum, deltaAngle)
 
         rotationAtomObjList = self.GetBBRotationAtomObj(dihedralEnum, sideEnum)
 
@@ -195,8 +189,7 @@ class Residue(__NotAtom, __NotProtein):
 
     def RotateBBDihedralAngleByTargetAngle(self, dihedralEnum, sideEnum, targetAngle):
 
-        moveCoord, rotationMatrix = self.CalcBBRotationMatrixByTargetAngle(
-            dihedralEnum, sideEnum, targetAngle)
+        moveCoord, rotationMatrix = self.CalcBBRotationMatrixByTargetAngle(dihedralEnum, sideEnum, targetAngle)
 
         rotationAtomObjList = self.GetBBRotationAtomObj(dihedralEnum, sideEnum)
 
@@ -209,13 +202,10 @@ class Residue(__NotAtom, __NotProtein):
     def CalcSCDihedralAngle(self, dihedralIdx):
 
         coordDict = self.coordDict
-        atomNameA, atomNameB, atomNameC, atomNameD = \
-            _RESIDUE_SIDECHAIN_ROTATION_ATOMS_NAME_DICT[self.name][dihedralIdx][:4]
 
-        scDihedralAngle = CalcDihedralAngle(
-            coordDict[atomNameA], coordDict[atomNameB],
-            coordDict[atomNameC], coordDict[atomNameD],
-        )
+        atomNameA, atomNameB, atomNameC, atomNameD = _RESIDUE_SIDECHAIN_ROTATION_ATOMS_NAME_DICT[self.name][dihedralIdx][:4]
+
+        scDihedralAngle = CalcDihedralAngle(coordDict[atomNameA], coordDict[atomNameB], coordDict[atomNameC], coordDict[atomNameD])
 
         return scDihedralAngle
 
@@ -223,8 +213,8 @@ class Residue(__NotAtom, __NotProtein):
     def CalcSCRotationMatrixByDeltaAngle(self, dihedralIdx, deltaAngle):
 
         coordDict = self.coordDict
-        atomNameA, atomNameB = \
-            _RESIDUE_SIDECHAIN_ROTATION_ATOMS_NAME_DICT[self.name][dihedralIdx][1:3]
+
+        atomNameA, atomNameB = _RESIDUE_SIDECHAIN_ROTATION_ATOMS_NAME_DICT[self.name][dihedralIdx][1:3]
 
         moveCoord = coordDict[atomNameA]
         rotationAxis = coordDict[atomNameB] - coordDict[atomNameA]

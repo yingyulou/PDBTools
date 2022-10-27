@@ -12,39 +12,36 @@ from math import sqrt, sin, cos, acos
 from numpy import array, cross
 from numpy.linalg import svd, det
 
-################################################################################
+########################################################################################################################
 # Calc Distance Between Two 3D-Coord (Instead of np.linalg.norm)
-################################################################################
+########################################################################################################################
 
 def Dis(coordA, coordB):
 
-    return sqrt(
-        (coordA[0] - coordB[0])**2 +
-        (coordA[1] - coordB[1])**2 +
-        (coordA[2] - coordB[2])**2)
+    return sqrt((coordA[0] - coordB[0])**2 + (coordA[1] - coordB[1])**2 + (coordA[2] - coordB[2])**2)
 
 
-################################################################################
+########################################################################################################################
 # Calc Norm of A 3D-Coord (Instead of np.linalg.norm)
-################################################################################
+########################################################################################################################
 
 def Norm(coordArray):
 
     return sqrt(coordArray[0]**2 + coordArray[1]**2 + coordArray[2]**2)
 
 
-################################################################################
+########################################################################################################################
 # Calc Vector Angle
-################################################################################
+########################################################################################################################
 
 def CalcVectorAngle(coordA, coordB):
 
     return acos(min(max(coordA.dot(coordB) / (Norm(coordA) * Norm(coordB)), -1.), 1.))
 
 
-################################################################################
+########################################################################################################################
 # Calc Rotation Matrix (Right Multiply Matrix)
-################################################################################
+########################################################################################################################
 
 def CalcRotationMatrix(rotationAxis, rotationAngle):
 
@@ -61,9 +58,9 @@ def CalcRotationMatrix(rotationAxis, rotationAngle):
     return rotationMatrix
 
 
-################################################################################
+########################################################################################################################
 # Calc Rotation Matrix By Two Vector (From A To B, Right Multiply Matrix)
-################################################################################
+########################################################################################################################
 
 def CalcRotationMatrixByTwoVector(coordA, coordB):
 
@@ -74,9 +71,9 @@ def CalcRotationMatrixByTwoVector(coordA, coordB):
     return rotationMatrix
 
 
-################################################################################
+########################################################################################################################
 # Calc Dihedral Angle
-################################################################################
+########################################################################################################################
 
 def CalcDihedralAngle(coordA, coordB, coordC, coordD):
 
@@ -117,26 +114,25 @@ def CalcDihedralAngle(coordA, coordB, coordC, coordD):
     return dihedralAngle
 
 
-################################################################################
+########################################################################################################################
 # Calc RMSD (Root-mean-square Deviation)
-################################################################################
+########################################################################################################################
 
 def CalcRMSD(coordArrayA, coordArrayB):
 
     return sqrt(((coordArrayA - coordArrayB)**2).sum() / len(coordArrayA))
 
 
-################################################################################
+########################################################################################################################
 # Calc Superimpose Rotation Matrix (Kabsch Algorithm)
-################################################################################
+########################################################################################################################
 
 def CalcSuperimposeRotationMatrix(sourceCoordArray, targetCoordArray):
 
     sourceCenterCoord = sourceCoordArray.mean(0)
     targetCenterCoord = targetCoordArray.mean(0)
 
-    U, E, V = svd((sourceCoordArray - sourceCenterCoord).transpose().dot(
-        targetCoordArray - targetCenterCoord))
+    U, E, V = svd((sourceCoordArray - sourceCenterCoord).transpose().dot(targetCoordArray - targetCenterCoord))
 
     if det(U) * det(V) < 0.:
         U[:,-1] = -U[:,-1]
@@ -146,14 +142,12 @@ def CalcSuperimposeRotationMatrix(sourceCoordArray, targetCoordArray):
     return sourceCenterCoord, rotationMatrix, targetCenterCoord
 
 
-################################################################################
+########################################################################################################################
 # Calc RMSD After Superimpose A => B
-################################################################################
+########################################################################################################################
 
 def CalcRMSDAfterSuperimpose(coordArrayA, coordArrayB):
 
-    sourceCenterCoord, rotationMatrix, targetCenterCoord = CalcSuperimposeRotationMatrix(
-        coordArrayA, coordArrayB)
+    sourceCenterCoord, rotationMatrix, targetCenterCoord = CalcSuperimposeRotationMatrix(coordArrayA, coordArrayB)
 
-    return CalcRMSD((coordArrayA - sourceCenterCoord).dot(rotationMatrix) +
-        targetCenterCoord, coordArrayB)
+    return CalcRMSD((coordArrayA - sourceCenterCoord).dot(rotationMatrix) + targetCenterCoord, coordArrayB)

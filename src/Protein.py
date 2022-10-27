@@ -10,9 +10,9 @@
 # Import PDBTools
 from .NotAtom import __NotAtom
 
-################################################################################
+########################################################################################################################
 # Class Protein
-################################################################################
+########################################################################################################################
 
 class Protein(__NotAtom):
 
@@ -27,8 +27,7 @@ class Protein(__NotAtom):
 
     def __repr__(self):
 
-        return '<Protein object: %s (Model: %d), at 0x%X>' % (
-            self.name, self.model, id(self))
+        return '<Protein object: %s (Model: %d), at 0x%X>' % (self.name, self.model, id(self))
 
 
     __str__ = __repr__
@@ -59,8 +58,7 @@ class Protein(__NotAtom):
 
     def GetAtoms(self):
 
-        return [atomObj for chainObj in self for resObj in chainObj
-            for atomObj in resObj]
+        return [atomObj for chainObj in self for resObj in chainObj for atomObj in resObj]
 
 
     def IGetResidues(self):

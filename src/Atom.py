@@ -14,17 +14,16 @@ from numpy import array
 from .NotProtein import __NotProtein
 from .Math import Dis
 
-################################################################################
+########################################################################################################################
 # Class Atom
-################################################################################
+########################################################################################################################
 
 class Atom(__NotProtein):
 
     __slots__ = ('name', 'num', 'coord', 'alt', 'occ', 'tempF', 'ele', 'chg', 'owner')
 
-    def __init__(self, atomName = '', atomNum = 0, atomCoord = array((0., 0., 0.)),
-        atomAltLoc = '', atomOccupancy = '', atomTempFactor = '', atomElement = '',
-        atomCharge = '', owner = None):
+    def __init__(self, atomName = '', atomNum = 0, atomCoord = array((0., 0., 0.)), atomAltLoc = '', atomOccupancy = '',
+        atomTempFactor = '', atomElement = '', atomCharge = '', owner = None):
 
         self.name  = atomName
         self.num   = atomNum
@@ -42,8 +41,7 @@ class Atom(__NotProtein):
 
     def __repr__(self):
 
-        return '<Atom object: %d %s %s, at 0x%X>' % (
-            self.num, self.name, str(self.coord), id(self))
+        return '<Atom object: %d %s %s, at 0x%X>' % (self.num, self.name, str(self.coord), id(self))
 
 
     __str__ = __repr__
@@ -56,8 +54,7 @@ class Atom(__NotProtein):
 
     def Copy(self):
 
-        return Atom(self.name, self.num, self.coord.copy(), self.alt, self.occ,
-            self.tempF, self.ele, self.chg)
+        return Atom(self.name, self.num, self.coord.copy(), self.alt, self.occ, self.tempF, self.ele, self.chg)
 
 
     def Dumps(self):
@@ -82,6 +79,5 @@ class Atom(__NotProtein):
             atomName = ' %-3s' % self.name
 
         return 'ATOM  %5d %s%1s%3s %1s%4d%1s   %8.3f%8.3f%8.3f%6s%6s          %2s%2s\n' % (
-            self.num, atomName, self.alt, resName, chainName, resNum, resIns,
-            self.coord[0], self.coord[1], self.coord[2], self.occ, self.tempF,
-            self.ele, self.chg)
+            self.num, atomName, self.alt, resName, chainName, resNum, resIns, self.coord[0], self.coord[1], self.coord[2],
+            self.occ, self.tempF, self.ele, self.chg)
