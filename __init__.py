@@ -14,7 +14,7 @@
 from .src.PDBParser import Load, LoadModel
 
 # Math
-from .src.Math import Dis, Norm, CalcVectorAngle, CalcRotationMatrix, CalcRotationMatrixByTwoVector, CalcDihedralAngle,
+from .src.Math import Dis, Norm, CalcVectorAngle, CalcRotationMatrix, CalcRotationMatrixByTwoVector, CalcDihedralAngle, \
     CalcRMSD, CalcSuperimposeRotationMatrix, CalcRMSDAfterSuperimpose
 
 # Struct Class
