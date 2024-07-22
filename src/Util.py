@@ -7,16 +7,13 @@
         Utility functions define.
 '''
 
-# Import PDBTools
-from .Constants import __H_RE, __COMP_NUM_RE
-
 ########################################################################################################################
 # If An Atom Name is H
 ########################################################################################################################
 
 def IsH(atomName):
 
-    return __H_RE.match(atomName)
+    return (0x100000e000000000000 >> ord(atomName[0])) & 0x1
 
 
 ########################################################################################################################
@@ -25,9 +22,10 @@ def IsH(atomName):
 
 def SplitCompNum(compNumStr):
 
-    resNum, resIns = __COMP_NUM_RE.match(compNumStr).groups()
-
-    return int(resNum), resIns
+    if compNumStr[-1].isalpha():
+        return int(compNumStr[:-1]), compNumStr[-1]
+    else:
+        return int(compNumStr), ''
 
 
 ########################################################################################################################
